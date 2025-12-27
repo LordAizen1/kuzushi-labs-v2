@@ -11,7 +11,7 @@ export default function Home() {
       <div className="absolute inset-0 z-0 h-full w-full">
         <Particles
           className="absolute inset-0 z-0"
-          particleCount={200}
+          particleCount={350}
           particleSpread={10}
           speed={0.1}
           particleColors={["#ffffff", "#ffffff", "#ffffff"]}

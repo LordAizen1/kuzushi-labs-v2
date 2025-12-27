@@ -62,40 +62,76 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
     };
 
     // If already complete, just render children
-    if (isMounted && hasIntroRun) return <>{children}</>;
+    // DEV: Disable persistence for user testing
+    // if (isMounted && hasIntroRun) return <>{children}</>;
     // Prevent flash content before hydration/check
     if (!isMounted) return null;
+
+    // ... (rest of file)
+
+    {/* Arrow (Right) */ }
+    <motion.div
+        className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center"
+        variants={{
+            initial: { opacity: 1, x: 0 },
+            hover: { opacity: 0, x: 10 }
+        }}
+        transition={{ duration: 0.3 }}
+    >
+        <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 5V1M5 1H1M5 1L1 5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    </motion.div>
 
     // --- VARIANTS --- //
 
     const smoothEase: [number, number, number, number] = [0.19, 1, 0.22, 1];
 
-    const flickerText = {
+    // Parent container for text (handles staggering)
+    const textContainer = {
         flicker: {
-            opacity: [0, 1, 0.2, 1, 0.1, 1, 0.1, 1, 0.5, 1],
-            transition: { duration: 1.5, times: [0, 0.1, 0.3, 0.4, 0.6, 0.7, 0.8, 0.85, 0.9, 1] }
+            transition: { staggerChildren: 0.08, delayChildren: 0.2 }
+        },
+        split: { transition: { staggerChildren: 0 } }, // No stagger during split
+        waiting: {},
+        undo: {
+            transition: { staggerChildren: 0.05, staggerDirection: -1 } // Reverse stagger for exit
+        }
+    };
+
+    // Individual character flicker
+    const charVariants = {
+        flicker: {
+            opacity: [0, 1, 0, 1, 1],
+            transition: { duration: 0.8, times: [0, 0.2, 0.5, 0.8, 1] }
         },
         split: { opacity: 1 },
         waiting: { opacity: 1 },
-        undo: { opacity: 1 }
+        undo: {
+            opacity: [1, 0, 1, 0, 0], // Flicker out
+            transition: { duration: 0.6 }
+        }
     };
 
-    // Center container expands to push text apart
+    // Center container expands to push text apart - SLOWER
     const centerContainer = {
         closed: { width: 0, opacity: 0, overflow: "hidden" },
         open: {
             width: "auto",
             opacity: 1,
             transition: {
-                width: { duration: 1.2, ease: smoothEase },
-                opacity: { duration: 0.8, delay: 0.2 } // Fade in slightly after width starts
+                width: { duration: 2.5, ease: smoothEase }, // Increased to 2.5s
+                opacity: { duration: 1.0, delay: 0.5 }
             }
         }
     };
 
     const gateContainer = {
         visible: { opacity: 1 },
-        exit: { opacity: 0, transition: { duration: 1.5, ease: "easeInOut" as const } }
+        exit: {
+            opacity: 0,
+            transition: { duration: 2.0, ease: "easeInOut" as const } // Slower exit for smoothness
+        }
     };
 
     return (
@@ -110,14 +146,17 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                         variants={gateContainer}
                     >
                         {/* TEXT CONTAINER - Flexbox for automatic centering */}
-                        <div className="relative flex items-center justify-center gap-6"> {/* Gap-6 represents the natural space between words */}
+                        <div className="relative flex items-center justify-center gap-6">
 
                             {/* KUZUSHI */}
                             <motion.h1
-                                className="text-[clamp(2rem,5vw,4rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
+                                className="flex text-[clamp(2rem,5vw,4rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
                                 animate={phase}
+                                variants={textContainer}
                             >
-                                <motion.span animate={phase} variants={flickerText}>KUZUSHI</motion.span>
+                                {Array.from("KUZUSHI").map((char, i) => (
+                                    <motion.span key={i} variants={charVariants}>{char}</motion.span>
+                                ))}
                             </motion.h1>
 
                             {/* BUTTONS - Expands to separate */}
@@ -130,7 +169,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                 <div className="flex items-center gap-6 px-4 py-2 mx-4 border border-white/10 bg-[#0a0a0a] min-w-max justify-between shadow-2xl whitespace-nowrap">
                                     <motion.button
                                         onClick={handleInteraction}
-                                        className="relative flex items-center justify-center px-6 py-2.5 min-w-[180px] h-[40px] text-black text-[12px] uppercase font-bold overflow-hidden group"
+                                        className="relative flex items-center justify-center px-6 py-2.5 min-w-[220px] h-[40px] text-black text-[12px] uppercase font-bold overflow-hidden group"
                                         initial="initial"
                                         whileHover="hover"
                                     >
@@ -146,12 +185,12 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
 
                                         {/* Content Container */}
                                         <div className="relative z-10 flex items-center justify-center w-full h-full gap-2">
-                                            {/* Sparkle Icon - Absolute Left. Pure Motion. */}
+                                            {/* Sparkle Icon */}
                                             <motion.div
                                                 className="absolute left-[-16px] top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none"
                                                 variants={{
                                                     initial: { opacity: 0, x: -8, left: -20 },
-                                                    hover: { opacity: 1, x: 0, left: 16 } // Popping in on the left padding
+                                                    hover: { opacity: 1, x: 0, left: 16 }
                                                 }}
                                                 transition={{ duration: 0.3 }}
                                             >
@@ -166,7 +205,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                                 className="text-black block flex items-center justify-center h-full pt-[1px]"
                                                 variants={{
                                                     initial: { x: -6 },
-                                                    hover: { x: 6 } // Shift right to make room for sparkle
+                                                    hover: { x: 6 }
                                                 }}
                                                 transition={{ duration: 0.3 }}
                                             >
@@ -175,7 +214,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
 
                                             {/* Arrow (Right) */}
                                             <motion.div
-                                                className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center"
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center"
                                                 variants={{
                                                     initial: { opacity: 1, x: 0 },
                                                     hover: { opacity: 0, x: 10 }
@@ -199,19 +238,23 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
 
                             {/* LABS */}
                             <motion.h1
-                                className="text-[clamp(2rem,5vw,4rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
+                                className="flex text-[clamp(2rem,5vw,4rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
                                 animate={phase}
+                                variants={textContainer}
                                 onAnimationComplete={(definition) => {
                                     if (phase === "undo") handleUndoComplete();
                                 }}
                             >
-                                <motion.span animate={phase} variants={flickerText}>LABS</motion.span>
+                                {Array.from("LABS").map((char, i) => (
+                                    <motion.span key={i} variants={charVariants}>{char}</motion.span>
+                                ))}
                             </motion.h1>
 
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
+
 
             {/* Main Content (Hidden/Revealed underneath, or rendered always) 
           If we want to "reveal" the homepage, it should be rendered behind the gate.

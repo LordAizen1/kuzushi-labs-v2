@@ -14,7 +14,7 @@ export default function Hero() {
             {/* 1. Center - Main Title */}
             <div className="flex-grow flex items-center justify-center z-10">
                 <div className="flex flex-col items-center">
-                    <h1 className="flex flex-wrap justify-center gap-x-[2vw] text-[clamp(4rem,13vw,16rem)] font-bold uppercase leading-[0.85] tracking-tight text-center">
+                    <h1 className="flex flex-wrap justify-center gap-x-[2vw] text-[clamp(3rem,10vw,12rem)] font-bold uppercase leading-[0.85] tracking-tight text-center">
                         <motion.div
                             initial={{ y: "100%", opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
