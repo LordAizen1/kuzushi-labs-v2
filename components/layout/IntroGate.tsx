@@ -95,7 +95,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
 
     const gateContainer = {
         visible: { opacity: 1 },
-        exit: { opacity: 0, transition: { duration: 1.5, ease: "easeInOut" } }
+        exit: { opacity: 0, transition: { duration: 1.5, ease: "easeInOut" as const } }
     };
 
     return (
