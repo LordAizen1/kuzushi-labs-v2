@@ -116,7 +116,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
         }
     };
 
-    // Center container expands to push text apart - SLOWER
+    // Center container expands to push text apart - SLOWER (Desktop)
     const centerContainer = {
         closed: {
             width: 0,
@@ -131,9 +131,21 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
             width: "auto",
             opacity: 1,
             transition: {
-                width: { duration: 2.5, ease: smoothEase }, // Increased to 2.5s
+                width: { duration: 2.5, ease: smoothEase },
                 opacity: { duration: 1.0 }
             }
+        }
+    };
+
+    // Mobile container - just fade in fast (no width animation)
+    const mobileCenterContainer = {
+        closed: {
+            opacity: 0,
+            transition: { duration: 0.2 }
+        },
+        open: {
+            opacity: 1,
+            transition: { duration: 0.3 }
         }
     };
 
@@ -156,12 +168,89 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                         exit="exit"
                         variants={gateContainer}
                     >
-                        {/* TEXT CONTAINER - Flexbox for automatic centering */}
-                        <div className="relative flex items-center justify-center gap-6">
+                        {/* TEXT + BUTTONS CONTAINER - Column on mobile, Row on desktop */}
+                        <div className="relative flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
 
-                            {/* KUZUSHI */}
+                            {/* === MOBILE LAYOUT === */}
+                            {/* TEXT ROW: KUZUSHI + LABS together on mobile */}
+                            <div className="flex items-center justify-center gap-3 md:hidden">
+                                <motion.h1
+                                    className="flex text-[clamp(2.5rem,14vw,7rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
+                                    animate={phase}
+                                    variants={textContainer}
+                                >
+                                    {Array.from("KUZUSHI").map((char, i) => (
+                                        <motion.span key={i} variants={charVariants}>{char}</motion.span>
+                                    ))}
+                                </motion.h1>
+                                <motion.h1
+                                    className="flex text-[clamp(2.5rem,14vw,7rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
+                                    animate={phase}
+                                    variants={textContainer}
+                                    onAnimationComplete={(definition) => {
+                                        if (phase === "undo") handleUndoComplete();
+                                    }}
+                                >
+                                    {Array.from("LABS").map((char, i) => (
+                                        <motion.span key={i} variants={charVariants}>{char}</motion.span>
+                                    ))}
+                                </motion.h1>
+                            </div>
+
+                            {/* MOBILE BUTTONS - Below text, horizontal row */}
+                            <motion.div
+                                className="md:hidden z-10 flex flex-col justify-center"
+                                initial="closed"
+                                animate={phase === "split" || phase === "waiting" ? "open" : "closed"}
+                                variants={mobileCenterContainer}
+                            >
+                                <div className="flex flex-row items-center justify-center gap-4 px-4 py-3 border border-white/10 bg-[#0a0a0a] shadow-2xl whitespace-nowrap">
+                                    {/* Enter with sound - Navbar-style hover animations */}
+                                    <motion.button
+                                        onClick={() => handleInteraction(true)}
+                                        className="group relative flex items-center justify-center px-5 py-2.5 bg-[#e4ff4e] hover:bg-white text-black text-[11px] font-medium transition-colors duration-300 overflow-hidden"
+                                        initial={{ x: -30, opacity: 0 }}
+                                        animate={phase === "split" || phase === "waiting" ? { x: 0, opacity: 1 } : { x: -30, opacity: 0 }}
+                                        transition={{ duration: 0.5, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
+                                    >
+                                        {/* Sparkle - Slides in from left */}
+                                        <div className="flex items-center justify-center opacity-0 -translate-x-2 w-0 mr-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:w-[14px] group-hover:mr-2 transition-all duration-300 ease-out">
+                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+                                                <rect width="10" height="10" rx="5" fill="#222222" />
+                                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#e4ff4e" />
+                                            </svg>
+                                        </div>
+
+                                        {/* Text - Shifts right on hover */}
+                                        <span className="transition-transform duration-300 ease-out group-hover:translate-x-1">
+                                            Enter with sound
+                                        </span>
+
+                                        {/* Arrow - Fades out and slides right */}
+                                        <div className="flex items-center justify-center ml-2 opacity-100 translate-x-0 group-hover:opacity-0 group-hover:translate-x-2 transition-all duration-300 ease-out">
+                                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+                                                <path d="M5 5V1M5 1H1M5 1L1 5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </div>
+                                    </motion.button>
+
+                                    {/* Enter without sound */}
+                                    <motion.button
+                                        onClick={() => handleInteraction(false)}
+                                        className="text-white text-[11px] font-medium px-2 py-2 hover:text-[#e4ff4e] transition-colors"
+                                        initial={{ x: 30, opacity: 0 }}
+                                        animate={phase === "split" || phase === "waiting" ? { x: 0, opacity: 1 } : { x: 30, opacity: 0 }}
+                                        transition={{ duration: 0.5, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
+                                    >
+                                        Enter without sound
+                                    </motion.button>
+                                </div>
+                            </motion.div>
+
+                            {/* === DESKTOP LAYOUT === */}
+                            {/* KUZUSHI - Desktop only */}
                             <motion.h1
-                                className="flex text-[clamp(2rem,5vw,4rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
+                                className="hidden md:flex text-[clamp(2rem,5vw,4rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
                                 animate={phase}
                                 variants={textContainer}
                             >
@@ -170,14 +259,14 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                 ))}
                             </motion.h1>
 
-                            {/* BUTTONS - Expands to separate */}
+                            {/* DESKTOP BUTTONS - Between text with full hover animations */}
                             <motion.div
+                                className="hidden md:flex z-10 flex-col justify-center overflow-hidden"
                                 initial="closed"
                                 animate={phase === "split" || phase === "waiting" ? "open" : "closed"}
                                 variants={centerContainer}
-                                className="z-10 flex flex-col justify-center overflow-hidden"
                             >
-                                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 px-4 py-2 mx-4 border border-white/10 bg-[#0a0a0a] min-w-max justify-between shadow-2xl whitespace-nowrap">
+                                <div className="flex flex-row items-center gap-6 px-4 py-2 mx-4 border border-white/10 bg-[#0a0a0a] min-w-max justify-between shadow-2xl whitespace-nowrap">
                                     <motion.button
                                         onClick={() => handleInteraction(true)}
                                         className="relative flex items-center justify-center px-6 py-2.5 min-w-[220px] h-[40px] text-black text-[12px] uppercase font-bold overflow-hidden group"
@@ -193,10 +282,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                             }}
                                             transition={{ duration: 0.3 }}
                                         />
-
-                                        {/* Content Container */}
                                         <div className="relative z-10 flex items-center justify-center w-full h-full gap-2">
-                                            {/* Sparkle Icon */}
                                             <motion.div
                                                 className="absolute left-[-16px] top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none"
                                                 variants={{
@@ -210,8 +296,6 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                                     <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#e4ff4e" />
                                                 </svg>
                                             </motion.div>
-
-                                            {/* Text */}
                                             <motion.span
                                                 className="text-black block flex items-center justify-center h-full pt-[1px]"
                                                 variants={{
@@ -222,8 +306,6 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                             >
                                                 Enter with sound
                                             </motion.span>
-
-                                            {/* Arrow (Right) */}
                                             <motion.div
                                                 className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center"
                                                 variants={{
@@ -247,9 +329,9 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                 </div>
                             </motion.div>
 
-                            {/* LABS */}
+                            {/* LABS - Desktop only */}
                             <motion.h1
-                                className="flex text-[clamp(2rem,5vw,4rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
+                                className="hidden md:flex text-[clamp(2rem,5vw,4rem)] font-bold text-white uppercase leading-none tracking-tight z-20 whitespace-nowrap"
                                 animate={phase}
                                 variants={textContainer}
                                 onAnimationComplete={(definition) => {
