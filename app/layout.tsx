@@ -24,6 +24,12 @@ export const metadata: Metadata = {
   description: "",
 };
 
+import { AudioProvider } from "@/components/providers/AudioContext";
+
+// ... existing imports ...
+
+// ... existing metadata ...
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,8 +40,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} antialiased bg-background text-foreground overflow-x-hidden`}
       >
-        <SmoothScroll />
-        <IntroGate>{children}</IntroGate>
+        <AudioProvider>
+          <SmoothScroll />
+          <IntroGate>{children}</IntroGate>
+        </AudioProvider>
       </body>
     </html>
   );

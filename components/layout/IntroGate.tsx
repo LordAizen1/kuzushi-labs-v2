@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useIntroStore } from "@/lib/store";
+import { useAudio } from "@/components/providers/AudioContext";
 import { cn } from "@/lib/utils";
 
 type IntroPhase = "flicker" | "split" | "waiting" | "undo" | "complete";
@@ -10,6 +11,7 @@ type IntroPhase = "flicker" | "split" | "waiting" | "undo" | "complete";
 export default function IntroGate({ children }: { children: React.ReactNode }) {
     const { hasIntroRun, setIntroFinished } = useIntroStore();
     const [phase, setPhase] = useState<IntroPhase>("flicker");
+    const { play } = useAudio();
 
     // If intro has already run, skip animation and correct flicker flash
     // We use a mounted check to avoid hydration mismatch if using persist
@@ -47,7 +49,8 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
         }
     }, [phase]);
 
-    const handleInteraction = () => {
+    const handleInteraction = (shouldPlay: boolean = false) => {
+        if (shouldPlay) play();
         setPhase("undo");
     };
 
@@ -109,19 +112,27 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
         waiting: { opacity: 1 },
         undo: {
             opacity: [1, 0, 1, 0, 0], // Flicker out
-            transition: { duration: 0.6 }
+            transition: { duration: 0.8 }
         }
     };
 
     // Center container expands to push text apart - SLOWER
     const centerContainer = {
-        closed: { width: 0, opacity: 0, overflow: "hidden" },
+        closed: {
+            width: 0,
+            opacity: 0,
+            overflow: "hidden",
+            transition: {
+                width: { duration: 2.5, ease: smoothEase },
+                opacity: { duration: 0.5 }
+            }
+        },
         open: {
             width: "auto",
             opacity: 1,
             transition: {
                 width: { duration: 2.5, ease: smoothEase }, // Increased to 2.5s
-                opacity: { duration: 1.0, delay: 0.5 }
+                opacity: { duration: 1.0 }
             }
         }
     };
@@ -168,7 +179,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                             >
                                 <div className="flex items-center gap-6 px-4 py-2 mx-4 border border-white/10 bg-[#0a0a0a] min-w-max justify-between shadow-2xl whitespace-nowrap">
                                     <motion.button
-                                        onClick={handleInteraction}
+                                        onClick={() => handleInteraction(true)}
                                         className="relative flex items-center justify-center px-6 py-2.5 min-w-[220px] h-[40px] text-black text-[12px] uppercase font-bold overflow-hidden group"
                                         initial="initial"
                                         whileHover="hover"
@@ -228,7 +239,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                         </div>
                                     </motion.button>
                                     <button
-                                        onClick={handleInteraction}
+                                        onClick={() => handleInteraction(false)}
                                         className="text-white text-[12px] uppercase font-bold px-4 py-2 hover:text-[#e4ff4e] underline decoration-zinc-700 hover:decoration-[#e4ff4e] underline-offset-4 transition-all"
                                     >
                                         Enter without sound
