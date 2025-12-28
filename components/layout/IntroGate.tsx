@@ -177,7 +177,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                 variants={centerContainer}
                                 className="z-10 flex flex-col justify-center overflow-hidden"
                             >
-                                <div className="flex items-center gap-6 px-4 py-2 mx-4 border border-white/10 bg-[#0a0a0a] min-w-max justify-between shadow-2xl whitespace-nowrap">
+                                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 px-4 py-2 mx-4 border border-white/10 bg-[#0a0a0a] min-w-max justify-between shadow-2xl whitespace-nowrap">
                                     <motion.button
                                         onClick={() => handleInteraction(true)}
                                         className="relative flex items-center justify-center px-6 py-2.5 min-w-[220px] h-[40px] text-black text-[12px] uppercase font-bold overflow-hidden group"

@@ -35,58 +35,64 @@ export default function Clock({ timezone, label }: ClockProps) {
     const timezoneAbbr = localDate.toLocaleTimeString("en-US", { timeZone: timezone, timeZoneName: "short" }).split(' ').pop();
 
     return (
-        <div className="w-[220px] h-[160px] border border-white/10 bg-black/20 backdrop-blur-sm p-4 relative group hover:border-white/30 transition-colors flex justify-between items-end">
-            {/* Corner Accents */}
-            <div className="absolute top-0 left-0 w-2 h-2 border-l border-t border-white/20" />
-            <div className="absolute top-0 right-0 w-2 h-2 border-r border-t border-white/20" />
-            <div className="absolute bottom-0 left-0 w-2 h-2 border-l border-b border-white/20" />
-            <div className="absolute bottom-0 right-0 w-2 h-2 border-r border-b border-white/20" />
+        <div className="w-full h-full border border-white/10 bg-[#0a0a0a] relative group hover:border-white/30 transition-colors overflow-hidden">
 
-            {/* Left Side: Info */}
-            <div className="flex flex-col justify-between h-full z-10 w-1/2">
-                <div className="text-[12px] uppercase tracking-widest text-[#888] font-bold">{label}</div>
+            {/* Grain/Starry Background Effect */}
+            <div className="absolute inset-0 z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 brightness-150 contrast-200"></div>
 
-                <div className="flex flex-col gap-1 mt-auto">
-                    <div className="text-xl text-white font-bold tracking-tight leading-none">
+            {/* Content Container */}
+            <div className="relative z-10 w-full h-full p-4 md:p-6 flex flex-col justify-between">
+
+                {/* TOP LEFT: Label & Digital Time */}
+                <div className="flex flex-col gap-1">
+                    <span className="text-[10px] md:text-[12px] xl:text-[12px] uppercase tracking-wider font-bold text-white/70">
+                        {label}
+                    </span>
+                    <span className="text-xl md:text-2xl xl:text-xl text-white font-bold leading-none tracking-tight">
                         {localDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })}
-                    </div>
-                    <div className="text-[9px] uppercase tracking-widest text-[#666] font-bold">
+                    </span>
+                </div>
+
+                {/* BOTTOM LAYER */}
+                <div className="flex justify-between items-end w-full">
+                    {/* LEFT: Timezone */}
+                    <span className="text-[10px] md:text-[12px] xl:text-[11px] font-bold text-white/50 uppercase tracking-widest">
                         {timezoneAbbr}
+                    </span>
+
+                    {/* RIGHT: Analog Clock */}
+                    <div className="relative w-16 h-16 md:w-20 md:h-20 xl:w-16 xl:h-16">
+                        {/* Ticks */}
+                        {[...Array(12)].map((_, i) => (
+                            <div
+                                key={i}
+                                className="absolute w-[1px] h-full left-1/2 -translate-x-1/2"
+                                style={{ transform: `rotate(${i * 30}deg)` }}
+                            >
+                                <div className="w-full h-[6%] bg-white"></div>
+                            </div>
+                        ))}
+
+
+                        {/* Hour Hand */}
+                        <motion.div
+                            className="absolute top-1/2 left-1/2 w-[1.5px] h-[30%] bg-white origin-bottom rounded-full"
+                            style={{ rotate: hourDegrees, y: "-100%", x: "-50%" }}
+                        />
+                        {/* Minute Hand */}
+                        <motion.div
+                            className="absolute top-1/2 left-1/2 w-[1px] h-[45%] bg-[#d4d4d4] origin-bottom rounded-full"
+                            style={{ rotate: minuteDegrees, y: "-100%", x: "-50%" }}
+                        />
+                        {/* Second Hand */}
+                        <motion.div
+                            className="absolute top-1/2 left-1/2 w-[1px] h-[45%] bg-[#e4ff4e] origin-bottom rounded-full"
+                            style={{ rotate: secondDegrees, y: "-100%", x: "-50%" }}
+                        />
+                        {/* Center Dot */}
+                        <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-white rounded-full -translate-x-1/2 -translate-y-1/2" />
                     </div>
                 </div>
-            </div>
-
-            <div className="relative w-20 h-20 flex items-center justify-center">
-                {/* Ticks (Simplified) */}
-                {[...Array(12)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="absolute w-[1px] h-[3px] bg-white"
-                        style={{
-                            top: "2px",
-                            transform: `rotate(${i * 30}deg)`,
-                            transformOrigin: "50% 38px"
-                        }}
-                    />
-                ))}
-
-                {/* Hour Hand */}
-                <motion.div
-                    className="absolute w-[1.5px] h-5 bg-white origin-bottom z-10 rounded-full"
-                    style={{ rotate: hourDegrees, bottom: "50%", x: "-50%" }}
-                />
-                {/* Minute Hand */}
-                <motion.div
-                    className="absolute w-[1px] h-7 bg-[#d4d4d4] origin-bottom z-10 rounded-full"
-                    style={{ rotate: minuteDegrees, bottom: "50%", x: "-50%" }}
-                />
-                {/* Second Hand */}
-                <motion.div
-                    className="absolute w-[1px] h-8 bg-accent origin-bottom z-10 rounded-full"
-                    style={{ rotate: secondDegrees, bottom: "50%", x: "-50%" }}
-                />
-                {/* Center Dot */}
-                <div className="absolute w-1 h-1 bg-white rounded-full z-20" />
             </div>
         </div>
     );

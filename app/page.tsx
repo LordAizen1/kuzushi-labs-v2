@@ -6,7 +6,7 @@ import Particles from "@/components/Particles";
 
 export default function Home() {
   return (
-    <main className="relative bg-background min-h-screen overflow-x-hidden">
+    <main className="relative bg-background h-[100dvh] overflow-hidden">
       {/* Particles Background */}
       <div className="absolute inset-0 z-0 h-full w-full">
         <Particles
@@ -25,10 +25,9 @@ export default function Home() {
         />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 h-full">
         <Navbar />
         <Hero />
-        <div className="h-[200vh]"></div> {/* Just for scroll testing */}
       </div>
     </main>
   );
