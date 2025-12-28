@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SMOOTH_EASE, DURATION } from "@/lib/constants";
-import GlitchText from "@/components/ui/GlitchText";
+import LiquidText from "@/components/ui/LiquidText";
 import Clock from "@/components/ui/Clock";
 import { Instagram, Twitter, Linkedin, Mail, Play, ArrowUpRight, Plus } from "lucide-react";
 import AudioToggle from "@/components/ui/AudioToggle";
@@ -14,27 +14,37 @@ export default function Hero() {
             {/* 1. Center - Main Title */}
             <div className="flex-grow flex items-center justify-center z-10">
                 <div className="flex flex-col items-center">
-                    <h1 className="flex flex-wrap justify-center gap-x-[2vw] text-[clamp(3rem,10vw,12rem)] font-bold uppercase leading-[0.85] tracking-tight text-center">
+                    <h1 className="flex flex-wrap justify-center gap-x-[1.5vw] text-[clamp(4rem,13vw,16rem)] font-bold uppercase leading-[0.85] tracking-tight text-center">
                         <motion.div
                             initial={{ y: "100%", opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: DURATION, ease: SMOOTH_EASE, delay: 0.1 }}
+                            className="relative inline-block" // Wrapper
                         >
-                            <GlitchText text="Kuzushi" />
+                            {/* Layout Holder (Invisible) */}
+                            <span className="opacity-0 select-none pointer-events-none">KUZUSHI</span>
+                            {/* 3D Liquid Layer */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%]">
+                                <LiquidText text="KUZUSHI" fontSize={300} />
+                            </div>
                         </motion.div>
                         <motion.div
                             initial={{ y: "100%", opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: DURATION, ease: SMOOTH_EASE, delay: 0.2 }}
+                            className="relative inline-block"
                         >
-                            <GlitchText text="Labs" />
+                            <span className="opacity-0 select-none pointer-events-none">LABS</span>
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%]">
+                                <LiquidText text="LABS" fontSize={300} />
+                            </div>
                         </motion.div>
                     </h1>
                 </div>
             </div>
 
             {/* 2. Bottom Flex Layout */}
-            <div className="w-full flex flex-wrap xl:flex-nowrap justify-between items-end gap-4 relative z-10 w-full px-0 pb-2">
+            <div className="w-full flex flex-wrap xl:flex-nowrap justify-between items-end gap-4 relative z-10 px-0 pb-2">
 
                 {/* Left Group: Reel + Text */}
                 <div className="flex items-end gap-4">
