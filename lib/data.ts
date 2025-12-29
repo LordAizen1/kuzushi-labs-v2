@@ -1,0 +1,133 @@
+export type WorkItem = {
+    id: string;
+    title: string;
+    code: string;
+    category: string;
+    image: string;
+    year: string;
+    description: string;
+    slug: string;
+};
+
+export const WORKS: WorkItem[] = [
+    {
+        id: "crowne-estate",
+        title: "Crowne Estate",
+        code: "SL-001",
+        category: "Real Estate | Promotional Website",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235195/youcef0823_real_retro_UGC_happy_couple_in_snow_--v_7_e5b3b797-e41b-44d9-941b-f756ac88ec9f_bvm90l.png",
+        year: "2023",
+        description: "A Luxury Community That Welcomes You Home",
+        slug: "crowne-estate",
+    },
+    {
+        id: "brophy-box",
+        title: "Brophy Box",
+        code: "SL-002",
+        category: "Logistics & Storage Solutions",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239827/u1792966772_heraldic_engraving_style_logo_a_running_alpaca_with_d489ba0a-bd19-4f35-886a-4b9123fa1693_tkfuf2.png",
+        year: "2025",
+        description: "Brophy Box – A Trust-First Identity for a Local Leader",
+        slug: "brophy-box",
+    },
+    {
+        id: "jobenetuk",
+        title: "Jobenetuk",
+        code: "SL-003",
+        category: "Creative | Portfolio Website",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239829/u9938599753_make_me_a_realistic_crowd_image_--sref_httpss.mj.ru_c8f15258-4354-40d8-a7f7-8d834c2ace81_ijy1g1.png",
+        year: "2024",
+        description: "A Motion-Focused Portfolio That Brings Digital Work to Life",
+        slug: "jobenetuk",
+    },
+    {
+        id: "quant-labs",
+        title: "Quant labs",
+        code: "SL-004",
+        category: "Crypto / AI | Token Analysis Platform",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Soar_In_Style_Designs_a_painting_of_a_woman_posing_with_a_vinta_26334b90-9dd4-4bb5-a82a-9fd140e11b9d_ldgzxs.png",
+        year: "2025",
+        description: "AI-Powered Solana Token Analysis with Data, Security, and Insights",
+        slug: "quant-labs",
+    },
+    {
+        id: "props",
+        title: "Props",
+        code: "SL-005",
+        category: "E-Commerce | Home & Furniture",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Luisa_M_vintage_engraved_postage_stamp_illustration_intaglio_st_77d7024c-d242-4508-a0ca-e8c695c86b6e_b4m7li.png",
+        year: "2023",
+        description: "A crafted digital experience that brings a modern furniture brand to life.",
+        slug: "props",
+    },
+    {
+        id: "clb-architects",
+        title: "CLB Architects",
+        code: "SL-006",
+        category: "Architecture | Company Website",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235195/youcef0823_real_retro_UGC_happy_couple_in_snow_--v_7_e5b3b797-e41b-44d9-941b-f756ac88ec9f_bvm90l.png",
+        year: "2024",
+        description: "A visual exploration of architecture through motion and design.",
+        slug: "clb-architects",
+    },
+    {
+        id: "adbc",
+        title: "ADBC",
+        code: "SL-007",
+        category: "Creative | Design Portfolio",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239827/u1792966772_heraldic_engraving_style_logo_a_running_alpaca_with_d489ba0a-bd19-4f35-886a-4b9123fa1693_tkfuf2.png",
+        year: "2024",
+        description: "A Portfolio Where Design, Interaction, and Creativity Come Alive",
+        slug: "adbc",
+    },
+    {
+        id: "monieverse-inc",
+        title: "Monieverse Inc.",
+        code: "SL-008",
+        category: "Fintech | Trade Settlement Platform",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239829/u9938599753_make_me_a_realistic_crowd_image_--sref_httpss.mj.ru_c8f15258-4354-40d8-a7f7-8d834c2ace81_ijy1g1.png",
+        year: "2023",
+        description: "Monieverse Inc. - Multi-currency wallet for cross-border money transfers",
+        slug: "monieverse-inc",
+    },
+    {
+        id: "pickt-inc",
+        title: "Pickt Inc.",
+        code: "SL-009",
+        category: "Tech | Social Platform",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Soar_In_Style_Designs_a_painting_of_a_woman_posing_with_a_vinta_26334b90-9dd4-4bb5-a82a-9fd140e11b9d_ldgzxs.png",
+        year: "2023",
+        description: "A Platform That Turns Expertise into Earnings with Ease",
+        slug: "pickt-inc",
+    },
+    {
+        id: "diana",
+        title: "Diana",
+        code: "SL-010",
+        category: "Creative | Writing Portfolio",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Luisa_M_vintage_engraved_postage_stamp_illustration_intaglio_st_77d7024c-d242-4508-a0ca-e8c695c86b6e_b4m7li.png",
+        year: "2023",
+        description: "A Minimal, Intentional Portfolio That Lets Words Shine",
+        slug: "diana",
+    },
+    {
+        id: "moniepoint-2022-yir",
+        title: "Moniepoint 2022 YIR",
+        code: "SL-011",
+        category: "Fintech | Annual Report Microsite",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235195/youcef0823_real_retro_UGC_happy_couple_in_snow_--v_7_e5b3b797-e41b-44d9-941b-f756ac88ec9f_bvm90l.png",
+        year: "2023",
+        description: "Showcasing Moniepoint Inc.’s Growth and Innovation in 2022",
+        slug: "moniepoint-2022-yir",
+    },
+    {
+        id: "aliyah-adefolake",
+        title: "Aliyah Adefolake",
+        code: "SL-012",
+        category: "Creative | Writing Portfolio",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239827/u1792966772_heraldic_engraving_style_logo_a_running_alpaca_with_d489ba0a-bd19-4f35-886a-4b9123fa1693_tkfuf2.png",
+        year: "2025",
+        description: "A Portfolio Showcasing Compelling Content and UX Writing",
+        slug: "aliyah-adefolake",
+    },
+];

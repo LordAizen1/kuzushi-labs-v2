@@ -50,3 +50,28 @@ h6 {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
   color: transparent;
 }
+
+/* Utility to hide scrollbar while allowing scroll */
+/* Global Scrollbar Hiding */
+html,
+body {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Utility for specific elements */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

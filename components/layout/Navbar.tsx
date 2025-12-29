@@ -63,7 +63,7 @@ export default function Navbar() {
 
                 {/* Works Link */}
                 <Link
-                    href="#works"
+                    href="/works"
                     className="relative flex items-center justify-center min-w-[55px] md:min-w-[80px] px-2 py-2 md:px-4 md:py-2.5 h-[28px] md:h-[36px] bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group transition-all duration-300 hover:border-white/50"
                 >
                     <div className="relative flex items-center justify-center w-auto h-full">
@@ -82,7 +82,7 @@ export default function Navbar() {
 
                 {/* Lab Link */}
                 <Link
-                    href="#lab"
+                    href="/#lab"
                     className="relative flex items-center justify-center min-w-[55px] md:min-w-[80px] px-2 py-2 md:px-4 md:py-2.5 h-[28px] md:h-[36px] bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group transition-all duration-300 hover:border-white/50"
                 >
                     <div className="relative flex items-center justify-center w-auto h-full">

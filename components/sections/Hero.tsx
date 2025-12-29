@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import LiquidText from "@/components/ui/LiquidText";
 import Clock from "@/components/ui/Clock";
 import { Instagram, Twitter, Linkedin, Mail, Play, Plus, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import AudioToggle from "@/components/ui/AudioToggle";
 import { useEffect } from "react";
 
@@ -128,58 +129,60 @@ export default function Hero() {
 
                             <div className="flex flex-col md:flex-row xl:flex-row items-center gap-1 md:gap-2 xl:gap-2 mt-auto w-full">
                                 {/* Our Work Button - With hover animations */}
-                                <motion.button
-                                    className="relative flex items-center justify-center w-full h-[24px] md:h-[48px] xl:h-[32px] text-[9px] md:text-[13px] xl:text-[10px] uppercase font-bold tracking-widest overflow-hidden text-black"
-                                    initial="initial"
-                                    whileHover="hover"
-                                >
-                                    {/* Animated Background */}
-                                    <motion.div
-                                        className="absolute inset-0 bg-white z-0"
-                                        variants={{
-                                            initial: { backgroundColor: "#FFFFFF" },
-                                            hover: { backgroundColor: "#E4FF4E" }
-                                        }}
-                                        transition={{ duration: 0.3 }}
-                                    />
-
-                                    {/* Sparkle Icon - Fades in */}
-                                    <motion.div
-                                        className="relative z-10"
-                                        variants={{
-                                            initial: { opacity: 0, x: -6 },
-                                            hover: { opacity: 1, x: 0 }
-                                        }}
-                                        transition={{ duration: 0.3 }}
+                                <Link href="/works" className="w-full">
+                                    <motion.button
+                                        className="relative flex items-center justify-center w-full h-[24px] md:h-[48px] xl:h-[32px] text-[9px] md:text-[13px] xl:text-[10px] uppercase font-bold tracking-widest overflow-hidden text-black"
+                                        initial="initial"
+                                        whileHover="hover"
                                     >
-                                        <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[10px] md:h-[10px]">
-                                            <rect width="10" height="10" rx="5" fill="#222222" />
-                                            <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#E4FF4E" />
-                                        </svg>
-                                    </motion.div>
-
-                                    {/* Text - Shifts right */}
-                                    <motion.span
-                                        className="relative z-10 flex items-center gap-1 ml-1"
-                                        variants={{
-                                            initial: { x: -4 },
-                                            hover: { x: 2 }
-                                        }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        Our Work
-                                        {/* Plus icon - Fades out */}
+                                        {/* Animated Background */}
                                         <motion.div
+                                            className="absolute inset-0 bg-white z-0"
                                             variants={{
-                                                initial: { opacity: 1, x: 0 },
-                                                hover: { opacity: 0, x: 6 }
+                                                initial: { backgroundColor: "#FFFFFF" },
+                                                hover: { backgroundColor: "#E4FF4E" }
+                                            }}
+                                            transition={{ duration: 0.3 }}
+                                        />
+
+                                        {/* Sparkle Icon - Fades in */}
+                                        <motion.div
+                                            className="relative z-10"
+                                            variants={{
+                                                initial: { opacity: 0, x: -6 },
+                                                hover: { opacity: 1, x: 0 }
                                             }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <Plus size={10} className="md:w-4 md:h-4 xl:w-[10px] xl:h-[10px]" strokeWidth={3} />
+                                            <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[10px] md:h-[10px]">
+                                                <rect width="10" height="10" rx="5" fill="#222222" />
+                                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#E4FF4E" />
+                                            </svg>
                                         </motion.div>
-                                    </motion.span>
-                                </motion.button>
+
+                                        {/* Text - Shifts right */}
+                                        <motion.span
+                                            className="relative z-10 flex items-center gap-1 ml-1"
+                                            variants={{
+                                                initial: { x: -4 },
+                                                hover: { x: 2 }
+                                            }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            Our Work
+                                            {/* Plus icon - Fades out */}
+                                            <motion.div
+                                                variants={{
+                                                    initial: { opacity: 1, x: 0 },
+                                                    hover: { opacity: 0, x: 6 }
+                                                }}
+                                                transition={{ duration: 0.3 }}
+                                            >
+                                                <Plus size={10} className="md:w-4 md:h-4 xl:w-[10px] xl:h-[10px]" strokeWidth={3} />
+                                            </motion.div>
+                                        </motion.span>
+                                    </motion.button>
+                                </Link>
 
                                 {/* Contact Button - With hover animations */}
                                 <motion.button
