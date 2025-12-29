@@ -138,8 +138,6 @@ const Scene = ({ text, fontSize = 300, fontFamily = "Oswald", color = "white" }:
     return (
         <mesh
             ref={meshRef}
-            onPointerOver={() => setHover(true)}
-            onPointerOut={() => setHover(false)}
         >
             {/* Plane fills the viewport exactly */}
             <planeGeometry args={[viewport.width, viewport.height, 32, 32]} />

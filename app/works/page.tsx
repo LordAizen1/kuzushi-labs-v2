@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Particles from "@/components/Particles";
+import FloatingLines from "@/components/FloatingLines";
 import Navbar from "@/components/layout/Navbar";
 import WorksGrid from "@/components/sections/WorksGrid";
 import WorksDynamic from "@/components/sections/WorksDynamic";
@@ -53,20 +53,10 @@ export default function WorksPage() {
 
   return (
     <main className={`relative bg-background min-h-[100dvh] ${mode === "dynamic" ? "overflow-hidden" : ""}`}>
-      {/* Starfield / particles background */}
-      <div className="absolute inset-0 z-0 h-full w-full">
-        <Particles
-          className="absolute inset-0 z-0"
-          particleCount={250}
-          particleSpread={10}
-          speed={0.08}
-          particleColors={["#ffffff", "#ffffff", "#ffffff"]}
-          moveParticlesOnHover={false}
-          alphaParticles={true}
-          particleBaseSize={70}
-          sizeRandomness={0.8}
-          cameraDistance={24}
-          disableRotation={false}
+      {/* FloatingLines background - fixed to prevent scroll repaint */}
+      <div className="fixed inset-0 z-0 h-full w-full">
+        <FloatingLines
+          linesGradient={["#1a1a2e", "#16213e", "#0f3460", "#e4ff4e"]}
         />
       </div>
 

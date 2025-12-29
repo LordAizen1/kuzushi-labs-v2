@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import LiquidText from "@/components/ui/LiquidText";
 import Clock from "@/components/ui/Clock";
 import { Instagram, Twitter, Linkedin, Mail, Play, Plus, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import AudioToggle from "@/components/ui/AudioToggle";
+import ColorBends from "@/components/ColorBends";
 import { useEffect } from "react";
 
 const DURATION = 1.0;
@@ -32,32 +32,34 @@ export default function Hero() {
         // Section: Fixed Height (100dvh prevents mobile bar issues), Overflow Hidden
         <section className="relative h-[100dvh] flex flex-col pt-24 pb-8 px-6 md:px-12 overflow-hidden items-center justify-between">
 
+            {/* Animated Background - ColorBends */}
+            <div className="absolute inset-0 z-0">
+                <ColorBends
+                    colors={["#1a1a2e", "#16213e", "#0f3460", "#e4ff4e"]}
+                />
+            </div>
+
+            {/* Dark overlay for text readability */}
+            <div className="absolute inset-0 z-[1] pointer-events-none" />
+
             {/* 1. Center - Main Title - Always grows to fill space between navbar and dashboard */}
-            <div className="flex-grow flex items-center justify-center z-10 w-full">
+            <div className="flex-grow flex items-center justify-center z-10 w-full pointer-events-none">
                 <div className="flex flex-col items-center">
-                    <h1 className="flex flex-wrap justify-center gap-x-[1.5vw] text-[clamp(3.5rem,11vw,16rem)] font-bold uppercase leading-[0.85] tracking-tight text-center">
-                        <motion.div
+                    <h1 className="flex flex-wrap justify-center gap-x-[1.5vw] text-[clamp(3.5rem,11vw,16rem)] font-bold uppercase leading-[0.85] tracking-tight text-center text-white">
+                        <motion.span
                             initial={{ y: "100%", opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: DURATION, ease: SMOOTH_EASE, delay: 0.1 }}
-                            className="relative inline-block"
                         >
-                            <span className="opacity-0 select-none pointer-events-none">KUZUSHI</span>
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%]">
-                                <LiquidText text="KUZUSHI" fontSize={300} />
-                            </div>
-                        </motion.div>
-                        <motion.div
+                            KUZUSHI
+                        </motion.span>
+                        <motion.span
                             initial={{ y: "100%", opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: DURATION, ease: SMOOTH_EASE, delay: 0.2 }}
-                            className="relative inline-block"
                         >
-                            <span className="opacity-0 select-none pointer-events-none">LABS</span>
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%]">
-                                <LiquidText text="LABS" fontSize={300} />
-                            </div>
-                        </motion.div>
+                            LABS
+                        </motion.span>
                     </h1>
                 </div>
             </div>

@@ -1,39 +1,60 @@
 export type WorkItem = {
     id: string;
     title: string;
-    code: string;
     category: string;
     image: string;
     year: string;
     description: string;
     slug: string;
+    // Extended fields for case study page
+    websiteLink?: string;
+    services?: string[];
+    industry?: string;
+    fullDescription?: string;
+    galleryItems?: string[]; // Array of image/video URLs for the gallery
 };
 
 export const WORKS: WorkItem[] = [
     {
         id: "crowne-estate",
         title: "Crowne Estate",
-        code: "SL-001",
         category: "Real Estate | Promotional Website",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235195/youcef0823_real_retro_UGC_happy_couple_in_snow_--v_7_e5b3b797-e41b-44d9-941b-f756ac88ec9f_bvm90l.png",
         year: "2023",
         description: "A Luxury Community That Welcomes You Home",
         slug: "crowne-estate",
+        websiteLink: "https://www.example.com/crowne-estate",
+        services: ["Branding", "Art Direction", "Website Design & Development", "Motion & Interaction"],
+        industry: "Real Estate | Promotional Website",
+        fullDescription: "Crowne Estate is a luxury real estate community focused on modern living and mindful design. Our goal was to build a website that reflects its elegance, sustainability and sense of possibility. We approached Crowne Estate with a clean, architectural aesthetic, intuitive navigation and interactive elements that let prospects explore at their own pace.",
+        galleryItems: [
+            "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235195/youcef0823_real_retro_UGC_happy_couple_in_snow_--v_7_e5b3b797-e41b-44d9-941b-f756ac88ec9f_bvm90l.png",
+            "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239827/u1792966772_heraldic_engraving_style_logo_a_running_alpaca_with_d489ba0a-bd19-4f35-886a-4b9123fa1693_tkfuf2.png",
+            "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239829/u9938599753_make_me_a_realistic_crowd_image_--sref_httpss.mj.ru_c8f15258-4354-40d8-a7f7-8d834c2ace81_ijy1g1.png",
+        ],
     },
     {
-        id: "brophy-box",
-        title: "Brophy Box",
-        code: "SL-002",
-        category: "Logistics & Storage Solutions",
-        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239827/u1792966772_heraldic_engraving_style_logo_a_running_alpaca_with_d489ba0a-bd19-4f35-886a-4b9123fa1693_tkfuf2.png",
+        id: "anowmly-studio",
+        title: "Anowmly.studio",
+        category: "AI | Creative Studio Website",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767016674/anowmly_xvqax7.jpg",
         year: "2025",
-        description: "Brophy Box – A Trust-First Identity for a Local Leader",
-        slug: "brophy-box",
+        description: "Where Art Collides with AI – A bold digital presence for an AI creative studio.",
+        slug: "anowmly-studio",
+        websiteLink: "https://www.anowmly.com/",
+        services: ["Website Design & Development", "Brand Identity", "Motion & Interaction", "Art Direction"],
+        industry: "AI | Creative Technology",
+        fullDescription: "Anowmly.studio is an AI-powered creative studio that fuses human craft with machine precision. We designed and developed a bold, immersive website featuring a rapid-fire image slideshow hero, grainy vintage textures, and elegant typography (Instrument Serif, DM Sans). The result: a digital presence that feels both timeless and cutting-edge, perfectly capturing the studio's ethos of redefining storytelling through AI.",
+        galleryItems: [
+            "https://res.cloudinary.com/dgplteq4r/image/upload/v1767016674/anowmly_xvqax7.jpg",
+            "https://res.cloudinary.com/dgplteq4r/image/upload/w_800,q_auto,f_auto/v1766239828/u4239914939_Ultra_realistic_RAW_cinematic_photo_of_a_30-year-ol_bd8ab2e7-3e39-41bd-a636-bfb2bd8b02df_mlrmbx.png",
+            "https://res.cloudinary.com/dgplteq4r/image/upload/w_800,q_auto,f_auto/v1766239827/bezmiar_A_realistic_cinematic_shot._A_man_and_a_woman_stand_tog_dbb1325b-fb89-4f4d-ae1f-153d3c46c19f_hr4khk.png",
+            "https://res.cloudinary.com/dgplteq4r/image/upload/w_800,q_auto,f_auto/v1766239827/jaydesigner._vintage_illustration_of_the_alcntara_hill_in_lisbo_eb12807f-f17a-4ec8-b3f0-67bb41d79bda_fhsedj.png",
+        ],
     },
     {
         id: "jobenetuk",
         title: "Jobenetuk",
-        code: "SL-003",
         category: "Creative | Portfolio Website",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239829/u9938599753_make_me_a_realistic_crowd_image_--sref_httpss.mj.ru_c8f15258-4354-40d8-a7f7-8d834c2ace81_ijy1g1.png",
         year: "2024",
@@ -43,7 +64,6 @@ export const WORKS: WorkItem[] = [
     {
         id: "quant-labs",
         title: "Quant labs",
-        code: "SL-004",
         category: "Crypto / AI | Token Analysis Platform",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Soar_In_Style_Designs_a_painting_of_a_woman_posing_with_a_vinta_26334b90-9dd4-4bb5-a82a-9fd140e11b9d_ldgzxs.png",
         year: "2025",
@@ -53,7 +73,6 @@ export const WORKS: WorkItem[] = [
     {
         id: "props",
         title: "Props",
-        code: "SL-005",
         category: "E-Commerce | Home & Furniture",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Luisa_M_vintage_engraved_postage_stamp_illustration_intaglio_st_77d7024c-d242-4508-a0ca-e8c695c86b6e_b4m7li.png",
         year: "2023",
@@ -63,7 +82,6 @@ export const WORKS: WorkItem[] = [
     {
         id: "clb-architects",
         title: "CLB Architects",
-        code: "SL-006",
         category: "Architecture | Company Website",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235195/youcef0823_real_retro_UGC_happy_couple_in_snow_--v_7_e5b3b797-e41b-44d9-941b-f756ac88ec9f_bvm90l.png",
         year: "2024",
@@ -73,7 +91,6 @@ export const WORKS: WorkItem[] = [
     {
         id: "adbc",
         title: "ADBC",
-        code: "SL-007",
         category: "Creative | Design Portfolio",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239827/u1792966772_heraldic_engraving_style_logo_a_running_alpaca_with_d489ba0a-bd19-4f35-886a-4b9123fa1693_tkfuf2.png",
         year: "2024",
@@ -83,7 +100,6 @@ export const WORKS: WorkItem[] = [
     {
         id: "monieverse-inc",
         title: "Monieverse Inc.",
-        code: "SL-008",
         category: "Fintech | Trade Settlement Platform",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239829/u9938599753_make_me_a_realistic_crowd_image_--sref_httpss.mj.ru_c8f15258-4354-40d8-a7f7-8d834c2ace81_ijy1g1.png",
         year: "2023",
@@ -93,7 +109,6 @@ export const WORKS: WorkItem[] = [
     {
         id: "pickt-inc",
         title: "Pickt Inc.",
-        code: "SL-009",
         category: "Tech | Social Platform",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Soar_In_Style_Designs_a_painting_of_a_woman_posing_with_a_vinta_26334b90-9dd4-4bb5-a82a-9fd140e11b9d_ldgzxs.png",
         year: "2023",
@@ -103,7 +118,6 @@ export const WORKS: WorkItem[] = [
     {
         id: "diana",
         title: "Diana",
-        code: "SL-010",
         category: "Creative | Writing Portfolio",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Luisa_M_vintage_engraved_postage_stamp_illustration_intaglio_st_77d7024c-d242-4508-a0ca-e8c695c86b6e_b4m7li.png",
         year: "2023",
@@ -113,7 +127,6 @@ export const WORKS: WorkItem[] = [
     {
         id: "moniepoint-2022-yir",
         title: "Moniepoint 2022 YIR",
-        code: "SL-011",
         category: "Fintech | Annual Report Microsite",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235195/youcef0823_real_retro_UGC_happy_couple_in_snow_--v_7_e5b3b797-e41b-44d9-941b-f756ac88ec9f_bvm90l.png",
         year: "2023",
@@ -123,7 +136,6 @@ export const WORKS: WorkItem[] = [
     {
         id: "aliyah-adefolake",
         title: "Aliyah Adefolake",
-        code: "SL-012",
         category: "Creative | Writing Portfolio",
         image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239827/u1792966772_heraldic_engraving_style_logo_a_running_alpaca_with_d489ba0a-bd19-4f35-886a-4b9123fa1693_tkfuf2.png",
         year: "2025",
