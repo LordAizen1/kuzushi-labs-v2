@@ -1,0 +1,143 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { colors } from "@/lib/theme";
+import { MapPin, ArrowRight } from "lucide-react";
+import Link from "next/link";
+
+export default function Contact() {
+    return (
+        <section className="relative h-full flex items-center justify-center py-6 px-6 md:px-12 overflow-hidden z-10">
+            {/* Background Gradient similar to Hero but subtle */}
+            <div className="absolute inset-0 bg-background z-0" />
+
+            <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-center relative z-10 h-full">
+                {/* Left Side: Info */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+                    className="flex flex-col gap-6 lg:gap-8 justify-center"
+                >
+                    <div>
+                        <h1 className="text-[clamp(2.5rem,5vw,5.5rem)] font-bold text-white leading-[0.9] mb-6 font-oswald uppercase tracking-tight">
+                            Build With Us<br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50" style={{ WebkitTextStroke: `1px ${colors.accent}` }}>Something Better</span>
+                        </h1>
+                        <p className="text-white/60 text-lg md:text-xl max-w-md font-geist-mono border-l-2 border-accent pl-6 py-2">
+                            Connect with Kuzushi Labs to discuss your AI and software development needs.
+                        </p>
+                    </div>
+
+                    <div className="space-y-6 mt-2">
+                        <div className="flex flex-col gap-4">
+                            <span className="text-xs uppercase tracking-[0.2em] text-white/40 font-bold">Email</span>
+                            <div className="flex flex-col gap-2">
+                                <Link
+                                    href="mailto:akshat@kuzushilabs.xyz"
+                                    className="text-lg md:text-2xl lg:text-3xl text-white hover:text-accent transition-colors flex items-center gap-4 group font-oswald font-medium"
+                                >
+                                    akshat@kuzushilabs.xyz
+                                    <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-accent" />
+                                </Link>
+                                <Link
+                                    href="mailto:arunank@kuzushilabs.xyz"
+                                    className="text-lg md:text-2xl lg:text-3xl text-white hover:text-accent transition-colors flex items-center gap-4 group font-oswald font-medium"
+                                >
+                                    arunank@kuzushilabs.xyz
+                                    <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-accent" />
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-4 pt-6 border-t border-white/10">
+                            <span className="text-xs uppercase tracking-[0.2em] text-white/40 font-bold">Our Offices</span>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <div className="flex items-center gap-2 mb-2 text-accent">
+                                        <MapPin size={18} />
+                                        <h3 className="text-white font-bold text-lg uppercase font-oswald tracking-wide">Bengaluru</h3>
+                                    </div>
+                                    <p className="text-white/50 leading-relaxed font-geist-mono text-xs uppercase tracking-wider">
+                                        Diamond District, HAL Road,<br />
+                                        Domlur, Bengaluru,<br />
+                                        Karnataka - 560008
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Right Side: Form */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
+                    className="bg-[#0a0a0a] border border-white/10 p-6 lg:p-10 relative overflow-hidden group max-h-[calc(100vh-120px)] overflow-y-auto custom-scrollbar"
+                >
+                    {/* Decorative corner accent */}
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-accent/10 blur-2xl rounded-full pointer-events-none" />
+
+                    <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 lg:mb-10 font-oswald uppercase tracking-tight">Contact Us</h2>
+                    <form className="space-y-6 lg:space-y-8" onSubmit={(e) => e.preventDefault()}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                            <div className="space-y-2 lg:space-y-3 group/input">
+                                <label htmlFor="name" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Name *</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    placeholder="JOHN DOE"
+                                    className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all font-oswald tracking-wide text-base lg:text-lg"
+                                    required
+                                />
+                            </div>
+
+                            <div className="space-y-2 lg:space-y-3 group/input">
+                                <label htmlFor="email" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Email *</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="HELLO@EXAMPLE.COM"
+                                    className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all font-oswald tracking-wide text-base lg:text-lg"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2 lg:space-y-3 group/input">
+                            <label htmlFor="phone" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Phone</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="+1 234 567 890"
+                                className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all font-oswald tracking-wide text-base lg:text-lg"
+                            />
+                        </div>
+
+                        <div className="space-y-2 lg:space-y-3 group/input">
+                            <label htmlFor="message" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Tell us more about your need</label>
+                            <textarea
+                                id="message"
+                                rows={3}
+                                placeholder="HOW CAN WE HELP YOU?"
+                                className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all resize-none font-oswald tracking-wide text-base lg:text-lg"
+                            ></textarea>
+                            <p className="text-[10px] uppercase tracking-wider text-white/30 mt-2">Note: Your idea is secured under NDA.</p>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full py-4 lg:py-5 bg-white text-black font-bold uppercase tracking-[0.2em] hover:bg-accent hover:text-white transition-all duration-300 mt-2 text-xs lg:text-sm relative overflow-hidden group/btn"
+                        >
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                                Send Message
+                                <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                            </span>
+                        </button>
+                    </form>
+                </motion.div>
+            </div>
+        </section>
+    );
+}

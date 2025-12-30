@@ -62,7 +62,7 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
 
                 {/* Studio Link */}
                 <Link
-                    href="#about"
+                    href="/about"
                     className="relative flex items-center justify-center min-w-[55px] md:min-w-[80px] px-2 py-2 md:px-4 md:py-2.5 h-[28px] md:h-[36px] bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group transition-all duration-300 hover:border-white/50"
                 >
                     <div className="relative flex items-center justify-center w-auto h-full">
@@ -100,7 +100,7 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
 
                 {/* Lab Link */}
                 <Link
-                    href="#services"
+                    href="/about"
                     className="relative flex items-center justify-center min-w-[55px] md:min-w-[80px] px-2 py-2 md:px-4 md:py-2.5 h-[28px] md:h-[36px] bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group transition-all duration-300 hover:border-white/50"
                 >
                     <div className="relative flex items-center justify-center w-auto h-full">
@@ -124,7 +124,7 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
                     whileHover="hover"
                 >
                     <Link
-                        href="#contact"
+                        href="/contact"
                         className="relative flex items-center gap-1 min-w-[55px] md:min-w-[80px] px-2 py-2 md:px-3 md:py-2.5 h-[28px] md:h-[36px] text-black text-[9px] md:text-[11px] uppercase tracking-widest font-bold rounded-none overflow-hidden"
                     >
                         {/* Animated Background */}

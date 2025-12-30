@@ -36,12 +36,11 @@ export default function Hero() {
             {/* Animated Background - ColorBends */}
             <div className="absolute inset-0 z-0">
                 <ColorBends
-                    colors={[...gradientColors]}
+                    // Toned down colors (darker/less saturated)
+                    colors={["#b33e56", "#5a3cba", "#008f75"]}
+                    transparent={false}
                 />
             </div>
-
-            {/* Dark overlay for text readability */}
-            <div className="absolute inset-0 z-[1] pointer-events-none" />
 
             {/* 1. Center - Main Title - Always grows to fill space between navbar and dashboard */}
             <div className="flex-grow flex items-center justify-center z-10 w-full pointer-events-none">
@@ -62,6 +61,14 @@ export default function Hero() {
                             LABS
                         </motion.span>
                     </h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: DURATION, ease: SMOOTH_EASE, delay: 0.3 }}
+                        className="text-white/80 text-center max-w-xl mt-6 text-sm md:text-lg font-medium leading-relaxed font-geist-sans px-4 tracking-wide"
+                    >
+                        Kuzushi Labs is an AI-native product studio building production-grade AI systems for enterprises, startups, and government agencies. We design, ship, and scale end-to-end AI products - fast, secure, and measurable.
+                    </motion.p>
                 </div>
             </div>
 
@@ -188,58 +195,60 @@ export default function Hero() {
                                 </Link>
 
                                 {/* Contact Button - With hover animations */}
-                                <motion.button
-                                    className="relative flex items-center justify-center w-full h-[24px] md:h-[48px] xl:h-[32px] text-[9px] md:text-[13px] xl:text-[10px] uppercase font-bold tracking-widest overflow-hidden text-black"
-                                    initial="initial"
-                                    whileHover="hover"
-                                >
-                                    {/* Animated Background */}
-                                    <motion.div
-                                        className="absolute inset-0 bg-accent z-0"
-                                        variants={{
-                                            initial: { backgroundColor: colors.accent },
-                                            hover: { backgroundColor: "#FFFFFF" }
-                                        }}
-                                        transition={{ duration: 0.3 }}
-                                    />
-
-                                    {/* Sparkle Icon - Fades in */}
-                                    <motion.div
-                                        className="relative z-10"
-                                        variants={{
-                                            initial: { opacity: 0, x: -6 },
-                                            hover: { opacity: 1, x: 0 }
-                                        }}
-                                        transition={{ duration: 0.3 }}
+                                <Link href="/contact" className="w-full">
+                                    <motion.button
+                                        className="relative flex items-center justify-center w-full h-[24px] md:h-[48px] xl:h-[32px] text-[9px] md:text-[13px] xl:text-[10px] uppercase font-bold tracking-widest overflow-hidden text-black"
+                                        initial="initial"
+                                        whileHover="hover"
                                     >
-                                        <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[10px] md:h-[10px]">
-                                            <rect width="10" height="10" rx="5" fill="#222222" />
-                                            <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill={colors.accent} />
-                                        </svg>
-                                    </motion.div>
-
-                                    {/* Text - Shifts right */}
-                                    <motion.span
-                                        className="relative z-10 flex items-center gap-1 ml-1"
-                                        variants={{
-                                            initial: { x: -4 },
-                                            hover: { x: 2 }
-                                        }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        Contact
-                                        {/* Arrow icon - Fades out */}
+                                        {/* Animated Background */}
                                         <motion.div
+                                            className="absolute inset-0 bg-accent z-0"
                                             variants={{
-                                                initial: { opacity: 1, x: 0 },
-                                                hover: { opacity: 0, x: 6 }
+                                                initial: { backgroundColor: colors.accent },
+                                                hover: { backgroundColor: "#FFFFFF" }
+                                            }}
+                                            transition={{ duration: 0.3 }}
+                                        />
+
+                                        {/* Sparkle Icon - Fades in */}
+                                        <motion.div
+                                            className="relative z-10"
+                                            variants={{
+                                                initial: { opacity: 0, x: -6 },
+                                                hover: { opacity: 1, x: 0 }
                                             }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <ArrowUpRight size={10} className="md:w-4 md:h-4 xl:w-[10px] xl:h-[10px]" strokeWidth={3} />
+                                            <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[10px] md:h-[10px]">
+                                                <rect width="10" height="10" rx="5" fill="#222222" />
+                                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill={colors.accent} />
+                                            </svg>
                                         </motion.div>
-                                    </motion.span>
-                                </motion.button>
+
+                                        {/* Text - Shifts right */}
+                                        <motion.span
+                                            className="relative z-10 flex items-center gap-1 ml-1"
+                                            variants={{
+                                                initial: { x: -4 },
+                                                hover: { x: 2 }
+                                            }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            Contact
+                                            {/* Arrow icon - Fades out */}
+                                            <motion.div
+                                                variants={{
+                                                    initial: { opacity: 1, x: 0 },
+                                                    hover: { opacity: 0, x: 6 }
+                                                }}
+                                                transition={{ duration: 0.3 }}
+                                            >
+                                                <ArrowUpRight size={10} className="md:w-4 md:h-4 xl:w-[10px] xl:h-[10px]" strokeWidth={3} />
+                                            </motion.div>
+                                        </motion.span>
+                                    </motion.button>
+                                </Link>
                             </div>
                         </div>
                     </motion.div>
