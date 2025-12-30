@@ -26,7 +26,7 @@ const menuVariants = {
         y: "-100%",
         transition: {
             duration: 0.4,
-            ease: [0.76, 0, 0.24, 1]
+            ease: [0.76, 0, 0.24, 1] as [number, number, number, number]
         }
     },
     open: {
@@ -34,7 +34,7 @@ const menuVariants = {
         y: "0%",
         transition: {
             duration: 0.4,
-            ease: [0.76, 0, 0.24, 1]
+            ease: [0.76, 0, 0.24, 1] as [number, number, number, number]
         }
     }
 };
