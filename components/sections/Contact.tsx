@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import { colors } from "@/lib/theme";
 import { MapPin, ArrowRight } from "lucide-react";
+import { AuroraText } from "@/components/ui/aurora-text";
+import { Highlighter } from "@/components/ui/highlighter";
 import Link from "next/link";
 
 export default function Contact() {
     return (
-        <section className="relative h-full flex items-center justify-center py-6 px-6 md:px-12 overflow-hidden z-10">
+        <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center py-12 px-6 md:px-12 z-10">
             {/* Background Gradient similar to Hero but subtle */}
             <div className="absolute inset-0 bg-background z-0" />
 
@@ -21,13 +23,13 @@ export default function Contact() {
                 >
                     <div>
                         <h1 className="text-[clamp(2.5rem,5vw,5.5rem)] font-bold text-white leading-[0.9] mb-6 font-oswald uppercase tracking-tight">
-                            Build With Us<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50" style={{ WebkitTextStroke: `1px ${colors.accent}` }}>Something Better</span>
+                            <Highlighter action="underline" color={colors.accent} isView={true}>Build</Highlighter> With <Highlighter color={colors.accent} isView={true}>Us</Highlighter><br />
+                            <AuroraText>Something Better</AuroraText>
                         </h1>
                         <p className="text-white/60 text-lg md:text-xl max-w-md font-geist-mono border-l-2 border-accent pl-6 py-2">
                             Connect with Kuzushi Labs to discuss your AI and software development needs.
                         </p>
-                    </div>
+                    </div >
 
                     <div className="space-y-6 mt-2">
                         <div className="flex flex-col gap-4">
@@ -67,17 +69,17 @@ export default function Contact() {
                             </div>
                         </div>
                     </div>
-                </motion.div>
+                </motion.div >
 
                 {/* Right Side: Form */}
-                <motion.div
+                < motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
-                    className="bg-[#0a0a0a] border border-white/10 p-6 lg:p-10 relative overflow-hidden group max-h-[calc(100vh-120px)] overflow-y-auto custom-scrollbar"
+                    className="bg-[#0a0a0a] border border-white/10 p-6 lg:p-10 relative overflow-hidden group lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto custom-scrollbar"
                 >
                     {/* Decorative corner accent */}
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-accent/10 blur-2xl rounded-full pointer-events-none" />
+                    < div className="absolute top-0 right-0 w-20 h-20 bg-accent/10 blur-2xl rounded-full pointer-events-none" />
 
                     <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 lg:mb-10 font-oswald uppercase tracking-tight">Contact Us</h2>
                     <form className="space-y-6 lg:space-y-8" onSubmit={(e) => e.preventDefault()}>
@@ -136,8 +138,8 @@ export default function Contact() {
                             </span>
                         </button>
                     </form>
-                </motion.div>
-            </div>
-        </section>
+                </motion.div >
+            </div >
+        </section >
     );
 }
