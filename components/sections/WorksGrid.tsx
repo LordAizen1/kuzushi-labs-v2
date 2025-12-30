@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FADE_IN_VARIANTS } from "@/lib/constants";
 
-import { WORKS } from "@/lib/data";
+import { worksData as WORKS } from "@/lib/works-data";
 
 export default function WorksGrid() {
   return (
@@ -19,7 +19,7 @@ export default function WorksGrid() {
           variants={FADE_IN_VARIANTS}
           transition={{ delay: 0.05 * index }}
         >
-          <Link href={`/works/${work.slug}`} className="block cursor-pointer">
+          <Link href={`/works/${work.id}`} className="block cursor-pointer">
             <div className="relative aspect-square overflow-hidden border border-white/10 bg-black/40">
               <Image
                 src={work.image}

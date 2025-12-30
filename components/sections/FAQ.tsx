@@ -62,7 +62,7 @@ export default function FAQ() {
                             >
                                 <span className="text-lg md:text-xl font-medium text-white font-geist-sans">{faq.q}</span>
                                 <Plus
-                                    className={`text-accent transition-transform duration-300 ${openIndex === i ? "rotate-45" : ""}`}
+                                    className={`text-accent shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-45" : ""}`}
                                 />
                             </button>
                             <motion.div

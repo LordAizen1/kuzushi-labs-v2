@@ -17,6 +17,11 @@
   --input: #333333;
   --ring: #8a5cff;
   --radius: 0.5rem;
+  --color-1: oklch(66.2% 0.225 25.9);
+  --color-2: oklch(60.4% 0.26 302);
+  --color-3: oklch(69.6% 0.165 251);
+  --color-4: oklch(80.2% 0.134 225);
+  --color-5: oklch(90.7% 0.231 133);
 }
 
 @theme inline {
@@ -89,6 +94,18 @@
       transform: translateY(calc(-100% - var(--gap)));
     }
   }
+
+  --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
+
+  @keyframes rainbow {
+    0% {
+      background-position: 0%;
+    }
+
+    100% {
+      background-position: 200%;
+    }
+  }
 }
 
 body {
@@ -155,4 +172,12 @@ body::-webkit-scrollbar {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.dark {
+  --color-1: oklch(66.2% 0.225 25.9);
+  --color-2: oklch(60.4% 0.26 302);
+  --color-3: oklch(69.6% 0.165 251);
+  --color-4: oklch(80.2% 0.134 225);
+  --color-5: oklch(90.7% 0.231 133);
 }

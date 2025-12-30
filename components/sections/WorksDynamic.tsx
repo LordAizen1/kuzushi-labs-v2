@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-import { WORKS, type WorkItem } from "@/lib/data";
+import { worksData as WORKS, type WorkProject as WorkItem } from "@/lib/works-data";
 import { Instagram, Twitter, Linkedin, Mail, Minus } from "lucide-react";
 import Link from "next/link";
 

@@ -14,24 +14,9 @@ const SMOOTH_EASE = [0.25, 0.4, 0.25, 1] as const; // Custom cubic-bezier for sm
 
 export default function Hero() {
 
-    // Force hide scrollbar on the entire page for the "App Mode" feel
-    useEffect(() => {
-        // Target both html and body for maximum compatibility
-        document.documentElement.style.overflow = "hidden";
-        document.body.style.overflow = "hidden";
-        document.documentElement.style.height = "100%";
-        document.body.style.height = "100%";
-        return () => {
-            document.documentElement.style.overflow = "";
-            document.body.style.overflow = "";
-            document.documentElement.style.height = "";
-            document.body.style.height = "";
-        };
-    }, []);
-
     return (
-        // Section: Fixed Height (100dvh prevents mobile bar issues), Overflow Hidden
-        <section className="relative h-[100dvh] flex flex-col pt-24 pb-8 px-6 md:px-12 overflow-hidden items-center justify-between">
+        // Section: Min Height (100dvh prevents mobile bar issues), Overflow X Hidden
+        <section className="relative min-h-[100dvh] flex flex-col pt-24 pb-8 px-6 md:px-12 overflow-x-hidden items-center justify-between">
 
             {/* Animated Background - ColorBends */}
             <div className="absolute inset-0 z-0">
