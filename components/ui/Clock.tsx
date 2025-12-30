@@ -86,7 +86,7 @@ export default function Clock({ timezone, label }: ClockProps) {
                         />
                         {/* Second Hand */}
                         <motion.div
-                            className="absolute top-1/2 left-1/2 w-[1px] h-[45%] bg-[#e4ff4e] origin-bottom rounded-full"
+                            className="absolute top-1/2 left-1/2 w-[1px] h-[45%] bg-accent origin-bottom rounded-full"
                             style={{ rotate: secondDegrees, y: "-100%", x: "-50%" }}
                         />
                         {/* Center Dot */}

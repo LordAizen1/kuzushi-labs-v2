@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SMOOTH_EASE, DURATION } from "@/lib/constants";
 import { ArrowUpRight, ArrowLeft } from "lucide-react";
+import { colors } from "@/lib/theme";
 
 const navVariants = {
     hidden: { y: -100, opacity: 0 },
@@ -61,19 +62,19 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
 
                 {/* Studio Link */}
                 <Link
-                    href="#studio"
+                    href="#about"
                     className="relative flex items-center justify-center min-w-[55px] md:min-w-[80px] px-2 py-2 md:px-4 md:py-2.5 h-[28px] md:h-[36px] bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group transition-all duration-300 hover:border-white/50"
                 >
                     <div className="relative flex items-center justify-center w-auto h-full">
                         {/* Sparkle Icon - Hover Effect */}
                         <div className="absolute left-[-10px] md:left-[-12px] top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
                             <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="10" height="10" rx="5" fill="#E4FF4E" />
+                                <rect width="10" height="10" rx="5" fill={colors.accent} />
                                 <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#222222" />
                             </svg>
                         </div>
-                        <span className="text-[9px] md:text-[11px] uppercase tracking-widest font-bold text-white group-hover:text-[#E4FF4E] group-hover:translate-x-1 transition-all duration-300 flex items-center justify-center h-full pt-[1px]">
-                            Studio
+                        <span className="text-[9px] md:text-[11px] uppercase tracking-widest font-bold text-white group-hover:text-accent group-hover:translate-x-1 transition-all duration-300 flex items-center justify-center h-full pt-[1px]">
+                            About
                         </span>
                     </div>
                 </Link>
@@ -87,11 +88,11 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
                         {/* Sparkle Icon - Hover Effect */}
                         <div className="absolute left-[-10px] md:left-[-12px] top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
                             <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="10" height="10" rx="5" fill="#E4FF4E" />
+                                <rect width="10" height="10" rx="5" fill={colors.accent} />
                                 <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#222222" />
                             </svg>
                         </div>
-                        <span className="text-[9px] md:text-[11px] uppercase tracking-widest font-bold text-white group-hover:text-[#E4FF4E] group-hover:translate-x-1 transition-all duration-300 flex items-center justify-center h-full pt-[1px]">
+                        <span className="text-[9px] md:text-[11px] uppercase tracking-widest font-bold text-white group-hover:text-accent group-hover:translate-x-1 transition-all duration-300 flex items-center justify-center h-full pt-[1px]">
                             Works
                         </span>
                     </div>
@@ -99,19 +100,19 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
 
                 {/* Lab Link */}
                 <Link
-                    href="/#lab"
+                    href="#services"
                     className="relative flex items-center justify-center min-w-[55px] md:min-w-[80px] px-2 py-2 md:px-4 md:py-2.5 h-[28px] md:h-[36px] bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group transition-all duration-300 hover:border-white/50"
                 >
                     <div className="relative flex items-center justify-center w-auto h-full">
                         {/* Sparkle Icon - Hover Effect */}
                         <div className="absolute left-[-10px] md:left-[-12px] top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
                             <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="10" height="10" rx="5" fill="#E4FF4E" />
+                                <rect width="10" height="10" rx="5" fill={colors.accent} />
                                 <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#222222" />
                             </svg>
                         </div>
-                        <span className="text-[9px] md:text-[11px] uppercase tracking-widest font-bold text-white group-hover:text-[#E4FF4E] group-hover:translate-x-1 transition-all duration-300 flex items-center justify-center h-full pt-[1px]">
-                            Lab
+                        <span className="text-[9px] md:text-[11px] uppercase tracking-widest font-bold text-white group-hover:text-accent group-hover:translate-x-1 transition-all duration-300 flex items-center justify-center h-full pt-[1px]">
+                            Services
                         </span>
                     </div>
                 </Link>
@@ -128,9 +129,9 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
                     >
                         {/* Animated Background */}
                         <motion.div
-                            className="absolute inset-0 bg-[#E4FF4E] z-0"
+                            className="absolute inset-0 bg-accent z-0"
                             variants={{
-                                initial: { backgroundColor: "#E4FF4E" },
+                                initial: { backgroundColor: colors.accent },
                                 hover: { backgroundColor: "#FFFFFF" }
                             }}
                             transition={{ duration: 0.3 }}
@@ -147,7 +148,7 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
                         >
                             <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[10px] md:h-[10px]">
                                 <rect width="10" height="10" rx="5" fill="#222222" />
-                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#E4FF4E" />
+                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill={colors.accent} />
                             </svg>
                         </motion.div>
 

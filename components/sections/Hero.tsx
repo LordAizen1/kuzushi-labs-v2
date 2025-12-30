@@ -7,6 +7,7 @@ import Link from "next/link";
 import AudioToggle from "@/components/ui/AudioToggle";
 import ColorBends from "@/components/ColorBends";
 import { useEffect } from "react";
+import { colors, gradientColors } from "@/lib/theme";
 
 const DURATION = 1.0;
 const SMOOTH_EASE = [0.25, 0.4, 0.25, 1] as const; // Custom cubic-bezier for smoothness
@@ -35,7 +36,7 @@ export default function Hero() {
             {/* Animated Background - ColorBends */}
             <div className="absolute inset-0 z-0">
                 <ColorBends
-                    colors={["#1a1a2e", "#16213e", "#0f3460", "#e4ff4e"]}
+                    colors={[...gradientColors]}
                 />
             </div>
 
@@ -142,7 +143,7 @@ export default function Hero() {
                                             className="absolute inset-0 bg-white z-0"
                                             variants={{
                                                 initial: { backgroundColor: "#FFFFFF" },
-                                                hover: { backgroundColor: "#E4FF4E" }
+                                                hover: { backgroundColor: colors.accent }
                                             }}
                                             transition={{ duration: 0.3 }}
                                         />
@@ -158,7 +159,7 @@ export default function Hero() {
                                         >
                                             <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[10px] md:h-[10px]">
                                                 <rect width="10" height="10" rx="5" fill="#222222" />
-                                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#E4FF4E" />
+                                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill={colors.accent} />
                                             </svg>
                                         </motion.div>
 
@@ -194,9 +195,9 @@ export default function Hero() {
                                 >
                                     {/* Animated Background */}
                                     <motion.div
-                                        className="absolute inset-0 bg-[#E4FF4E] z-0"
+                                        className="absolute inset-0 bg-accent z-0"
                                         variants={{
-                                            initial: { backgroundColor: "#E4FF4E" },
+                                            initial: { backgroundColor: colors.accent },
                                             hover: { backgroundColor: "#FFFFFF" }
                                         }}
                                         transition={{ duration: 0.3 }}
@@ -213,7 +214,7 @@ export default function Hero() {
                                     >
                                         <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[10px] md:h-[10px]">
                                             <rect width="10" height="10" rx="5" fill="#222222" />
-                                            <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#E4FF4E" />
+                                            <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill={colors.accent} />
                                         </svg>
                                     </motion.div>
 
@@ -256,7 +257,7 @@ export default function Hero() {
                         {/* Social Icons Group - Single Row Mobile */}
                         <div className="flex flex-1 gap-2 md:gap-4 xl:gap-2 justify-between xl:justify-start">
                             {[Instagram, Twitter, Linkedin, Mail].map((Icon, i) => (
-                                <a key={i} href="#" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-[#e4ff4e] hover:border-[#e4ff4e] transition-colors rounded-sm xl:rounded-none">
+                                <a key={i} href="#" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none">
                                     <Icon size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
                                 </a>
                             ))}
@@ -298,8 +299,6 @@ export default function Hero() {
                 </motion.div>
 
             </div>
-            {/* Grain Overlay */}
-            <div className="absolute inset-0 z-0 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
         </section>
     );
 }

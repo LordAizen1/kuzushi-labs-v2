@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useIntroStore } from "@/lib/store";
 import { useAudio } from "@/components/providers/AudioContext";
 import { cn } from "@/lib/utils";
+import { colors } from "@/lib/theme";
 
 type IntroPhase = "flicker" | "split" | "waiting" | "undo" | "complete";
 
@@ -19,10 +20,10 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         setIsMounted(true);
-        // DEV MODE: Commented out to force intro every time for testing
-        // if (useIntroStore.getState().hasIntroRun) {
-        //     setPhase("complete");
-        // }
+        // Check if intro has already run - skip to complete state
+        if (useIntroStore.getState().hasIntroRun) {
+            setPhase("complete");
+        }
     }, []);
 
     // --- PHASE 1: FLICKER (Auto) ---
@@ -65,8 +66,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
     };
 
     // If already complete, just render children
-    // DEV: Disable persistence for user testing
-    // if (isMounted && hasIntroRun) return <>{children}</>;
+    if (isMounted && hasIntroRun) return <>{children}</>;
     // Prevent flash content before hydration/check
     if (!isMounted) return null;
 
@@ -208,7 +208,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                     {/* Enter with sound - Navbar-style hover animations */}
                                     <motion.button
                                         onClick={() => handleInteraction(true)}
-                                        className="group relative flex items-center justify-center px-5 py-2.5 bg-[#e4ff4e] hover:bg-white text-black text-[11px] font-medium transition-colors duration-300 overflow-hidden"
+                                        className="group relative flex items-center justify-center px-5 py-2.5 bg-accent hover:bg-white text-black text-[11px] font-medium transition-colors duration-300 overflow-hidden"
                                         initial={{ x: -30, opacity: 0 }}
                                         animate={phase === "split" || phase === "waiting" ? { x: 0, opacity: 1 } : { x: -30, opacity: 0 }}
                                         transition={{ duration: 0.5, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
@@ -217,7 +217,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                         <div className="flex items-center justify-center opacity-0 -translate-x-2 w-0 mr-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:w-[14px] group-hover:mr-2 transition-all duration-300 ease-out">
                                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
                                                 <rect width="10" height="10" rx="5" fill="#222222" />
-                                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#e4ff4e" />
+                                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill={colors.accent} />
                                             </svg>
                                         </div>
 
@@ -237,7 +237,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                     {/* Enter without sound */}
                                     <motion.button
                                         onClick={() => handleInteraction(false)}
-                                        className="text-white text-[11px] font-medium px-2 py-2 hover:text-[#e4ff4e] transition-colors"
+                                        className="text-white text-[11px] font-medium px-2 py-2 hover:text-accent transition-colors"
                                         initial={{ x: 30, opacity: 0 }}
                                         animate={phase === "split" || phase === "waiting" ? { x: 0, opacity: 1 } : { x: 30, opacity: 0 }}
                                         transition={{ duration: 0.5, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
@@ -275,9 +275,9 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                     >
                                         {/* Animated Background */}
                                         <motion.div
-                                            className="absolute inset-0 bg-[#e4ff4e] z-0"
+                                            className="absolute inset-0 bg-accent z-0"
                                             variants={{
-                                                initial: { backgroundColor: "#e4ff4e" },
+                                                initial: { backgroundColor: colors.accent },
                                                 hover: { backgroundColor: "#ffffff" }
                                             }}
                                             transition={{ duration: 0.3 }}
@@ -293,7 +293,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                             >
                                                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <rect width="10" height="10" rx="5" fill="#222222" />
-                                                    <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#e4ff4e" />
+                                                    <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill={colors.accent} />
                                                 </svg>
                                             </motion.div>
                                             <motion.span
@@ -322,7 +322,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
                                     </motion.button>
                                     <button
                                         onClick={() => handleInteraction(false)}
-                                        className="text-white text-[12px] uppercase font-bold px-4 py-2 hover:text-[#e4ff4e] underline decoration-zinc-700 hover:decoration-[#e4ff4e] underline-offset-4 transition-all"
+                                        className="text-white text-[12px] uppercase font-bold px-4 py-2 hover:text-accent underline decoration-zinc-700 hover:decoration-accent underline-offset-4 transition-all"
                                     >
                                         Enter without sound
                                     </button>

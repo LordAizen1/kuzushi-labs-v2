@@ -3,8 +3,11 @@
 :root {
   --background: #111111;
   --foreground: #ffffff;
-  --accent: #e4ff4e;
+  --accent: #8a5cff;
+  --accent-secondary: #00ffd1;
+  --accent-tertiary: #ff5c7a;
   --muted: #d4d4d4;
+  --surface: #0a0a0a;
 
   /* Font variables are set in layout.tsx */
 }
@@ -13,7 +16,10 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-tertiary: var(--accent-tertiary);
   --color-muted: var(--muted);
+  --color-surface: var(--surface);
 
   --font-oswald: var(--font-oswald);
   --font-geist: var(--font-geist-sans);

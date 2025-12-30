@@ -3,8 +3,8 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { WORKS } from "@/lib/data";
 import Navbar from "@/components/layout/Navbar";
 import Particles from "@/components/Particles";
@@ -16,14 +16,57 @@ const FADE_IN = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const } },
 };
 
+// Directional slide variants
+const slideVariants = {
+    enter: (direction: number) => ({
+        x: direction > 0 ? 300 : -300,
+        opacity: 0,
+        scale: 0.95,
+    }),
+    center: {
+        x: 0,
+        opacity: 1,
+        scale: 1,
+        transition: { duration: 0.4, ease: [0.25, 0.4, 0.25, 1] as const },
+    },
+    exit: (direction: number) => ({
+        x: direction > 0 ? -300 : 300,
+        opacity: 0,
+        scale: 0.95,
+        transition: { duration: 0.3, ease: [0.25, 0.4, 0.25, 1] as const },
+    }),
+};
+
 export default function ProjectDetailPage() {
     const params = useParams();
     // On mobile, show About section by default
     const [showAbout, setShowAbout] = useState(true);
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [slideDirection, setSlideDirection] = useState(0);
 
     const projectId = params.id as string;
     const project = WORKS.find((w) => w.id === projectId || w.slug === projectId);
+
+    // Use galleryItems if available, otherwise just the featured image
+    const galleryImages = project?.galleryItems?.length ? project.galleryItems : [project?.image || ""];
+
+    // Navigation functions
+    const goToNextSlide = useCallback(() => {
+        if (currentSlide < galleryImages.length - 1) {
+            setSlideDirection(1);
+            setCurrentSlide((prev) => prev + 1);
+        }
+    }, [currentSlide, galleryImages.length]);
+
+    const goToPrevSlide = useCallback(() => {
+        if (currentSlide > 0) {
+            setSlideDirection(-1);
+            setCurrentSlide((prev) => prev - 1);
+        }
+    }, [currentSlide]);
+
+    // Ref for scroll container
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     // Lock scroll for this page (similar to Dynamic mode)
     useEffect(() => {
@@ -34,6 +77,11 @@ export default function ProjectDetailPage() {
         html.style.height = "100%";
         body.style.height = "100%";
 
+        // Scroll container to top on mount (fix for flex-col-reverse on mobile)
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTop = 0;
+        }
+
         return () => {
             html.style.overflow = "";
             body.style.overflow = "";
@@ -41,6 +89,20 @@ export default function ProjectDetailPage() {
             body.style.height = "";
         };
     }, []);
+
+    // Keyboard navigation
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+                goToNextSlide();
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                goToPrevSlide();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [goToNextSlide, goToPrevSlide]);
 
     if (!project) {
         return (
@@ -55,15 +117,22 @@ export default function ProjectDetailPage() {
         );
     }
 
-    // Use galleryItems if available, otherwise just the featured image
-    const galleryImages = project.galleryItems?.length ? project.galleryItems : [project.image];
-
     // Handle scroll for gallery navigation
     const handleWheel = (e: React.WheelEvent) => {
-        if (e.deltaY > 0 && currentSlide < galleryImages.length - 1) {
-            setCurrentSlide((prev) => prev + 1);
-        } else if (e.deltaY < 0 && currentSlide > 0) {
-            setCurrentSlide((prev) => prev - 1);
+        if (e.deltaY > 0) {
+            goToNextSlide();
+        } else if (e.deltaY < 0) {
+            goToPrevSlide();
+        }
+    };
+
+    // Handle swipe gestures
+    const handleDragEnd = (e: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+        const swipeThreshold = 50;
+        if (info.offset.x < -swipeThreshold) {
+            goToNextSlide();
+        } else if (info.offset.x > swipeThreshold) {
+            goToPrevSlide();
         }
     };
 
@@ -90,11 +159,14 @@ export default function ProjectDetailPage() {
                 {/* Navbar with Back Button */}
                 <Navbar showBackButton={true} />
 
-                {/* Main Content: Two Panels - Reversed order on mobile (info first, gallery below) */}
-                <div className="flex-1 flex flex-col-reverse md:flex-row items-center md:justify-center gap-8 md:gap-16 pt-24 pb-24 md:pt-20 md:pb-0 px-6 md:px-12 overflow-y-auto md:overflow-visible">
-                    {/* Left Panel: Gallery */}
+                {/* Main Content: Two Panels - Use order on mobile (info first, gallery below) */}
+                <div
+                    ref={scrollContainerRef}
+                    className="flex-1 flex flex-col md:flex-row items-center md:justify-center gap-8 md:gap-16 pt-24 pb-24 md:pt-20 md:pb-0 px-6 md:px-12 overflow-y-auto md:overflow-visible"
+                >
+                    {/* Left Panel: Gallery - shows second on mobile, first on desktop */}
                     <div
-                        className="w-full max-w-[550px] md:w-[50vw] md:max-w-[600px]"
+                        className="w-full max-w-[550px] md:w-[50vw] md:max-w-[600px] order-2 md:order-1"
                         onWheel={handleWheel}
                     >
                         <motion.div
@@ -103,20 +175,25 @@ export default function ProjectDetailPage() {
                             animate="visible"
                             variants={FADE_IN}
                         >
-                            <AnimatePresence mode="wait">
+                            <AnimatePresence mode="wait" custom={slideDirection}>
                                 <motion.div
                                     key={currentSlide}
-                                    initial={{ opacity: 0, scale: 0.98 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 1.02 }}
-                                    transition={{ duration: 0.4 }}
-                                    className="absolute inset-0"
+                                    custom={slideDirection}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    drag="x"
+                                    dragConstraints={{ left: 0, right: 0 }}
+                                    dragElastic={0.1}
+                                    onDragEnd={handleDragEnd}
+                                    className="absolute inset-0 cursor-grab active:cursor-grabbing"
                                 >
                                     <Image
                                         src={galleryImages[currentSlide]}
                                         alt={`${project.title} - Slide ${currentSlide + 1}`}
                                         fill
-                                        className="object-cover"
+                                        className="object-cover pointer-events-none"
                                         priority
                                     />
                                 </motion.div>
@@ -124,22 +201,37 @@ export default function ProjectDetailPage() {
 
                             {/* Gallery Dots */}
                             {galleryImages.length > 1 && (
-                                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                                     {galleryImages.map((_, i) => (
                                         <button
                                             key={i}
-                                            onClick={() => setCurrentSlide(i)}
+                                            onClick={() => {
+                                                setSlideDirection(i > currentSlide ? 1 : -1);
+                                                setCurrentSlide(i);
+                                            }}
                                             className={`w-2 h-2 rounded-full transition-colors ${i === currentSlide ? "bg-accent" : "bg-white/30"
                                                 }`}
                                         />
                                     ))}
                                 </div>
                             )}
+
+                            {/* Progress Bar */}
+                            {galleryImages.length > 1 && (
+                                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10">
+                                    <motion.div
+                                        className="h-full bg-accent"
+                                        initial={false}
+                                        animate={{ width: `${((currentSlide + 1) / galleryImages.length) * 100}%` }}
+                                        transition={{ duration: 0.3, ease: "easeOut" }}
+                                    />
+                                </div>
+                            )}
                         </motion.div>
                     </div>
 
                     {/* Right Panel on Desktop, Top Panel on Mobile: Project Info */}
-                    <div className="w-full md:flex-1 md:max-w-[500px] flex flex-col justify-center">
+                    <div className="w-full md:flex-1 md:max-w-[500px] flex flex-col justify-center order-1 md:order-2">
                         <motion.div
                             initial="hidden"
                             animate="visible"
@@ -220,7 +312,7 @@ export default function ProjectDetailPage() {
                             <Link
                                 key={i}
                                 href={href}
-                                className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-[#e4ff4e] hover:border-[#e4ff4e] transition-colors"
+                                className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors"
                             >
                                 <Icon size={14} className="md:w-4 md:h-4" />
                             </Link>

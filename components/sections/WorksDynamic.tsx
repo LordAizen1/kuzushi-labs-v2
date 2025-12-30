@@ -160,7 +160,7 @@ export default function WorksDynamic() {
                 {/* Thumbnail */}
                 <div
                   className={`relative w-full h-full overflow-hidden border transition-all duration-500 ${isActive
-                    ? "border-[#E4FF4E]"
+                    ? "border-accent"
                     : "border-transparent"
                     }`}
                 >
@@ -175,7 +175,7 @@ export default function WorksDynamic() {
 
                 {/* Active Indicator Line (if active) */}
                 {isActive && (
-                  <div className="absolute -right-4 top-1/2 -translate-y-1/2 w-4 h-[1px] bg-[#E4FF4E]" />
+                  <div className="absolute -right-4 top-1/2 -translate-y-1/2 w-4 h-[1px] bg-accent" />
                 )}
               </button>
             );
@@ -238,7 +238,7 @@ export default function WorksDynamic() {
               </p>
               <Link
                 href={`/works/${activeWork.id}`}
-                className="flex items-center gap-2 text-[#E4FF4E] text-[12px] uppercase tracking-wider font-bold hover:text-white transition-colors group/link"
+                className="flex items-center gap-2 text-accent text-[12px] uppercase tracking-wider font-bold hover:text-white transition-colors group/link"
               >
                 Case Study
                 <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform group-hover/link:translate-x-1">

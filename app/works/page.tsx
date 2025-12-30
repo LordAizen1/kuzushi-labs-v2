@@ -7,9 +7,10 @@ import Navbar from "@/components/layout/Navbar";
 import WorksGrid from "@/components/sections/WorksGrid";
 import WorksDynamic from "@/components/sections/WorksDynamic";
 import { FADE_IN_VARIANTS } from "@/lib/constants";
-import { Instagram, Twitter, Linkedin, Mail } from "lucide-react";
+import { InstagramIcon, TwitterIcon, LinkedInIcon, EmailIcon } from "@/components/ui/SocialIcons";
 import AudioToggle from "@/components/ui/AudioToggle";
 import Link from "next/link";
+import { gradientColors } from "@/lib/theme";
 
 type WorksMode = "grid" | "dynamic";
 
@@ -56,7 +57,7 @@ export default function WorksPage() {
       {/* FloatingLines background - fixed to prevent scroll repaint */}
       <div className="fixed inset-0 z-0 h-full w-full">
         <FloatingLines
-          linesGradient={["#1a1a2e", "#16213e", "#0f3460", "#e4ff4e"]}
+          linesGradient={[...gradientColors]}
         />
       </div>
 
@@ -116,27 +117,28 @@ export default function WorksPage() {
         </section>
 
         {/* Footer - Persists across both Grid and Dynamic modes */}
-        <footer className="fixed bottom-0 left-0 right-0 flex items-center justify-between px-6 md:px-12 pt-0 pb-6 md:pb-8 bg-transparent z-50">
-          {/* Social Icons - Bottom Left */}
+        <footer className="fixed bottom-0 left-0 right-0 flex items-center justify-start px-6 md:px-12 pt-0 pb-6 md:pb-8 bg-transparent z-50">
+          {/* Social Icons + Audio Toggle - Bottom Left */}
           <div className="flex items-center gap-2 md:gap-3">
             {[
-              { Icon: Instagram, href: "#" },
-              { Icon: Twitter, href: "#" },
-              { Icon: Linkedin, href: "#" },
-              { Icon: Mail, href: "#" },
+              { Icon: InstagramIcon, href: "#" },
+              { Icon: TwitterIcon, href: "#" },
+              { Icon: LinkedInIcon, href: "#" },
+              { Icon: EmailIcon, href: "#" },
             ].map(({ Icon, href }, i) => (
               <Link
                 key={i}
                 href={href}
-                className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-[#e4ff4e] hover:border-[#e4ff4e] transition-colors"
+                className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors"
               >
-                <Icon size={14} className="md:w-4 md:h-4" />
+                <Icon className="w-4 h-4" />
               </Link>
             ))}
-          </div>
 
-          {/* Audio Toggle - Bottom Right */}
-          <div className="pointer-events-auto">
+            {/* Separator */}
+            <div className="w-[1px] h-8 md:h-10 bg-white/20 mx-1" />
+
+            {/* Audio Toggle */}
             <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white hover:border-white/40 hover:bg-white/5 transition-colors">
               <AudioToggle />
             </div>

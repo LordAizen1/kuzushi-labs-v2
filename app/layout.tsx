@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import "./globals.css";
 import IntroGate from "@/components/layout/IntroGate";
 import SmoothScroll from "@/components/SmoothScroll";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +27,6 @@ export const metadata: Metadata = {
 
 import { AudioProvider } from "@/components/providers/AudioContext";
 
-// ... existing imports ...
-
-// ... existing metadata ...
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,6 +40,7 @@ export default function RootLayout({
         <AudioProvider>
           <SmoothScroll />
           <IntroGate>{children}</IntroGate>
+          <WhatsAppButton phoneNumber="1234567890" />
         </AudioProvider>
       </body>
     </html>

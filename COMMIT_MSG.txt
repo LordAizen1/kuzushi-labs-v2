@@ -1,0 +1,18 @@
+feat: Refactor color theming, add WhatsApp button, and UI polish
+
+🎨 Color System Refactoring:
+- Create lib/theme.ts with centralized color constants
+- Add CSS variables: --accent-secondary, --accent-tertiary, --surface
+- Replace all hardcoded hex colors with Tailwind classes (bg-accent, text-accent, etc.)
+- Change primary accent color to purple (#8a5cff)
+
+✨ New Features:
+- Add floating WhatsApp contact button (visible on all pages)
+- Create custom filled SVG social icons (Instagram, Twitter, LinkedIn, Email)
+- Re-enable IntroGate session persistence
+
+🔧 UI Improvements:
+- Rename navbar items: Studio → About, Lab → Services
+- Move audio toggle beside social icons with separator
+- Make audio toggle wave line longer (28px)
+- Remove grain overlay from Hero section
