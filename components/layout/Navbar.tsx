@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { SMOOTH_EASE, DURATION } from "@/lib/constants";
 import { ArrowLeft, Menu, X } from "lucide-react";
 import { colors } from "@/lib/theme";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 const navVariants = {
@@ -47,19 +49,10 @@ const NavLink = ({ href, label, onClick, className = "" }: { href: string, label
     <Link
         href={href}
         onClick={onClick}
-        className={`relative flex items-center justify-center min-w-[80px] px-5 py-2.5 h-[36px] bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group transition-all duration-300 hover:border-white/50 ${className}`}
     >
-        <div className="relative flex items-center justify-center w-auto h-full">
-            <div className="absolute left-[-12px] top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
-                <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="10" height="10" rx="5" fill={colors.accent} />
-                    <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill="#222222" />
-                </svg>
-            </div>
-            <span className="text-[11px] uppercase tracking-widest font-bold text-white group-hover:text-accent group-hover:translate-x-1 transition-all duration-300 flex items-center justify-center h-full pt-[1px]">
-                {label}
-            </span>
-        </div>
+        <InteractiveHoverButton className={cn("border-white/10 text-white text-[11px] uppercase tracking-widest font-bold whitespace-nowrap px-1 rounded-none", className)}>
+            {label}
+        </InteractiveHoverButton>
     </Link>
 );
 

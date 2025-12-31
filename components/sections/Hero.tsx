@@ -2,9 +2,10 @@
 
 import { motion } from "framer-motion";
 import Clock from "@/components/ui/Clock";
-import { Instagram, Twitter, Linkedin, Mail, Play, Plus, ArrowUpRight } from "lucide-react";
+import { Instagram, Twitter, Linkedin, Mail, Play } from "lucide-react";
 import Link from "next/link";
 import AudioToggle from "@/components/ui/AudioToggle";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import ColorBends from "@/components/ColorBends";
 import { useEffect } from "react";
 import { colors, gradientColors } from "@/lib/theme";
@@ -81,7 +82,7 @@ export default function Hero() {
                     >
                         <div className="relative overflow-hidden w-full transition-all duration-500 bg-[#0a0a0a] border border-white/10
                             h-[18vh] min-h-[100px]               /* Mobile: Reduced VH */
-                            md:h-full md:min-h-0                 /* Tablet */
+                            md:h-[220px] md:min-h-0              /* Tablet */
                             xl:w-[250px] xl:h-[160px]            /* Desktop */
                             flex flex-col justify-between
                         ">
@@ -113,7 +114,7 @@ export default function Hero() {
                     >
                         <div className="p-3 md:p-6 xl:p-4 border border-white/10 bg-[#0a0a0a] flex flex-col justify-between
                             h-[18vh] min-h-[100px]               /* Mobile */
-                            md:h-full md:min-h-0                 /* Tablet */
+                            md:h-[220px] md:min-h-0              /* Tablet */
                             xl:w-[250px] xl:h-[160px]            /* Desktop */
                         ">
                             <p className="text-[11px] leading-tight md:text-[24px] md:leading-[1.2] xl:text-[15px] xl:leading-snug font-medium text-white tracking-tight line-clamp-4 md:line-clamp-none">
@@ -121,116 +122,11 @@ export default function Hero() {
                             </p>
 
                             <div className="flex flex-col md:flex-row xl:flex-row items-center gap-1 md:gap-2 xl:gap-2 mt-auto w-full">
-                                {/* Our Work Button - With hover animations */}
-                                <Link href="/works" className="w-full">
-                                    <motion.button
-                                        className="relative flex items-center justify-center w-full h-[24px] md:h-[48px] xl:h-[32px] text-[9px] md:text-[13px] xl:text-[10px] uppercase font-bold tracking-widest overflow-hidden text-black"
-                                        initial="initial"
-                                        whileHover="hover"
-                                    >
-                                        {/* Animated Background */}
-                                        <motion.div
-                                            className="absolute inset-0 bg-white z-0"
-                                            variants={{
-                                                initial: { backgroundColor: "#FFFFFF" },
-                                                hover: { backgroundColor: colors.accent }
-                                            }}
-                                            transition={{ duration: 0.3 }}
-                                        />
-
-                                        {/* Sparkle Icon - Fades in */}
-                                        <motion.div
-                                            className="relative z-10"
-                                            variants={{
-                                                initial: { opacity: 0, x: -6 },
-                                                hover: { opacity: 1, x: 0 }
-                                            }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[10px] md:h-[10px]">
-                                                <rect width="10" height="10" rx="5" fill="#222222" />
-                                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill={colors.accent} />
-                                            </svg>
-                                        </motion.div>
-
-                                        {/* Text - Shifts right */}
-                                        <motion.span
-                                            className="relative z-10 flex items-center gap-1 ml-1"
-                                            variants={{
-                                                initial: { x: -4 },
-                                                hover: { x: 2 }
-                                            }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            Our Work
-                                            {/* Plus icon - Fades out */}
-                                            <motion.div
-                                                variants={{
-                                                    initial: { opacity: 1, x: 0 },
-                                                    hover: { opacity: 0, x: 6 }
-                                                }}
-                                                transition={{ duration: 0.3 }}
-                                            >
-                                                <Plus size={10} className="md:w-4 md:h-4 xl:w-[10px] xl:h-[10px]" strokeWidth={3} />
-                                            </motion.div>
-                                        </motion.span>
-                                    </motion.button>
+                                <Link href="/works" className="flex-1 w-full">
+                                    <InteractiveHoverButton className="w-full border-white/10 text-white text-[11px] uppercase tracking-widest font-bold whitespace-nowrap px-1 rounded-none">Our Work</InteractiveHoverButton>
                                 </Link>
-
-                                {/* Contact Button - With hover animations */}
-                                <Link href="/contact" className="w-full">
-                                    <motion.button
-                                        className="relative flex items-center justify-center w-full h-[24px] md:h-[48px] xl:h-[32px] text-[9px] md:text-[13px] xl:text-[10px] uppercase font-bold tracking-widest overflow-hidden text-black"
-                                        initial="initial"
-                                        whileHover="hover"
-                                    >
-                                        {/* Animated Background */}
-                                        <motion.div
-                                            className="absolute inset-0 bg-accent z-0"
-                                            variants={{
-                                                initial: { backgroundColor: colors.accent },
-                                                hover: { backgroundColor: "#FFFFFF" }
-                                            }}
-                                            transition={{ duration: 0.3 }}
-                                        />
-
-                                        {/* Sparkle Icon - Fades in */}
-                                        <motion.div
-                                            className="relative z-10"
-                                            variants={{
-                                                initial: { opacity: 0, x: -6 },
-                                                hover: { opacity: 1, x: 0 }
-                                            }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[10px] md:h-[10px]">
-                                                <rect width="10" height="10" rx="5" fill="#222222" />
-                                                <path d="M4.99935 1.66602C5.00065 3.50642 6.49227 4.99805 8.33268 4.99935C6.49227 5.00065 5.00065 6.49227 4.99935 8.33268C4.99805 6.49227 3.50642 5.00065 1.66602 4.99935C3.50642 4.99805 4.99805 3.50642 4.99935 1.66602Z" fill={colors.accent} />
-                                            </svg>
-                                        </motion.div>
-
-                                        {/* Text - Shifts right */}
-                                        <motion.span
-                                            className="relative z-10 flex items-center gap-1 ml-1"
-                                            variants={{
-                                                initial: { x: -4 },
-                                                hover: { x: 2 }
-                                            }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            Contact
-                                            {/* Arrow icon - Fades out */}
-                                            <motion.div
-                                                variants={{
-                                                    initial: { opacity: 1, x: 0 },
-                                                    hover: { opacity: 0, x: 6 }
-                                                }}
-                                                transition={{ duration: 0.3 }}
-                                            >
-                                                <ArrowUpRight size={10} className="md:w-4 md:h-4 xl:w-[10px] xl:h-[10px]" strokeWidth={3} />
-                                            </motion.div>
-                                        </motion.span>
-                                    </motion.button>
+                                <Link href="/contact" className="flex-1 w-full">
+                                    <InteractiveHoverButton className="w-full border-white/10 text-white text-[11px] uppercase tracking-widest font-bold whitespace-nowrap px-1 rounded-none">Contact</InteractiveHoverButton>
                                 </Link>
                             </div>
                         </div>
@@ -280,11 +176,11 @@ export default function Hero() {
                 >
                     <div className="grid grid-cols-2 gap-2 md:grid-cols-2 md:gap-4 xl:flex xl:flex-row xl:gap-4 xl:items-end w-full md:h-full">
                         {/* Clock 1 */}
-                        <div className="w-full h-[18vh] min-h-[100px] md:h-full xl:w-[250px] xl:h-[160px]">
+                        <div className="w-full h-[18vh] min-h-[100px] md:h-[220px] xl:w-[250px] xl:h-[160px]">
                             <Clock timezone="Asia/Kolkata" label="Kolkata, IN" />
                         </div>
                         {/* Clock 2 */}
-                        <div className="w-full h-[18vh] min-h-[100px] md:h-full xl:w-[250px] xl:h-[160px]">
+                        <div className="w-full h-[18vh] min-h-[100px] md:h-[220px] xl:w-[250px] xl:h-[160px]">
                             <Clock timezone="America/New_York" label="New York, USA" />
                         </div>
                     </div>
