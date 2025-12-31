@@ -43,6 +43,7 @@
   --font-oswald: var(--font-oswald);
   --font-geist: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-calligraphy: var(--font-calligraphy);
   --animate-aurora: aurora 3s ease-in-out infinite alternate;
 
   @keyframes aurora {

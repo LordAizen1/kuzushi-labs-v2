@@ -86,13 +86,11 @@ export default function Hero() {
                             flex flex-col justify-between
                         ">
                             <div className="absolute inset-0 bg-black opacity-100 z-0">
-                                <video
-                                    className="w-full h-full object-cover opacity-80"
-                                    src="https://r2.studiolumio.com/reel.mp4"
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
+                                <iframe
+                                    className="w-full h-full opacity-80 pointer-events-none"
+                                    src="https://player.cloudinary.com/embed/?cloud_name=dgplteq4r&public_id=Gogeta_vs_Broly_8K_720P_nqnaje&profile=cld-looping&controls=false&hide_controls=true&muted=true"
+                                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                                    style={{ border: 0 }}
                                 />
                             </div>
 

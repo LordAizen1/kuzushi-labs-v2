@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Oswald } from "next/font/google";
+import { Geist, Geist_Mono, Oswald, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import IntroGate from "@/components/layout/IntroGate";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -20,6 +20,12 @@ const oswald = Oswald({
   subsets: ["latin"],
 });
 
+const greatVibes = Great_Vibes({
+  variable: "--font-calligraphy",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 export const metadata: Metadata = {
   title: "Kuzushi Labs",
   description: "",
@@ -35,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} antialiased bg-background text-foreground overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} ${greatVibes.variable} antialiased bg-background text-foreground overflow-x-hidden`}
       >
         <AudioProvider>
           <SmoothScroll />
