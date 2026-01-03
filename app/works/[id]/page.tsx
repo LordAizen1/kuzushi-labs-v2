@@ -2,12 +2,13 @@ import { worksData } from "@/lib/works-data";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import { colors } from "@/lib/theme";
-import { Check } from "lucide-react";
+import { Check, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { AuroraText } from "@/components/ui/aurora-text";
 import { Highlighter } from "@/components/ui/highlighter";
 import DarkVeil from "@/components/DarkVeil";
 import { RainbowButton } from "@/components/ui/rainbow-button";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 export async function generateStaticParams() {
     return worksData.map((project) => ({
@@ -45,14 +46,26 @@ export default async function ProjectPage({
 
                     {/* Header Section */}
                     <header className="mb-20 md:mb-24">
-                        <div className="flex items-start gap-6 mb-8">
+                        <div className="flex items-center gap-6 mb-8">
                             <div className="p-4 rounded-xl bg-white/5 border border-white/10 shrink-0">
                                 <Icon className="w-8 h-8 md:w-10 md:h-10 text-accent" />
                             </div>
                             <div className="flex flex-col gap-2">
-                                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-oswald text-white uppercase leading-[0.9] tracking-tight">
-                                    {project.title}
-                                </h1>
+                                <div className="flex flex-wrap items-center gap-4">
+                                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-oswald text-white uppercase leading-[0.9] tracking-tight">
+                                        {project.title}
+                                    </h1>
+                                    {project.website && (
+                                        <Link
+                                            href={project.website}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="group relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 hover:bg-accent hover:border-accent transition-all duration-300"
+                                        >
+                                            <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8 text-white group-hover:text-black group-hover:rotate-45 transition-transform duration-300" />
+                                        </Link>
+                                    )}
+                                </div>
                             </div>
                         </div>
 

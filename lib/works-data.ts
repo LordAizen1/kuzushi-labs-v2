@@ -6,6 +6,7 @@ export interface WorkProject {
     description: string;
     image: string;
     year: string;
+    website?: string;
     icon: LucideIcon;
     detail: {
         whoFor: string;
@@ -17,6 +18,32 @@ export interface WorkProject {
 }
 
 export const worksData: WorkProject[] = [
+    {
+        id: "ai-content-studio",
+        title: "AI Content Generation Studio",
+        description: "Brand-consistent marketing videos and creatives produced faster. Ideal for hospitality, travel, and consumer brands.",
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767016674/anowmly_xvqax7.jpg",
+        year: "2025",
+        website: "https://www.anowmly.com/",
+        icon: Video,
+        detail: {
+            whoFor: "Hospitality and travel brands, real estate, e-commerce, automotive, and teams producing ongoing marketing content.",
+            useCases: [
+                "Paid ad creatives and short-form performance content",
+                "In-room hotel TV loop videos with monthly refreshes",
+                "Destination and offer explainers for travel agencies",
+                "Product demos and branded storytelling assets"
+            ],
+            keyFeatures: [
+                "Campaign concepts - scripts - AI-first production - final assets",
+                "Brand-consistent tone, visual style, and messaging",
+                "Rapid iterations for performance creatives",
+                "Production pipeline - plus creative team support"
+            ],
+            integrations: "Asset libraries (Drive or S3), brand guidelines, content calendars, distribution formats for web, social, and in-property screens.",
+            outcomes: "Higher content velocity, reduced turnaround time, and scalable production without scaling headcount."
+        }
+    },
     {
         id: "sales-agent",
         title: "Sales Agent - Interviewer and Evaluator",
@@ -41,31 +68,6 @@ export const worksData: WorkProject[] = [
             ],
             integrations: "ATS and HRMS, CRM, email and WhatsApp for scheduling and reminders, internal dashboards, custom APIs.",
             outcomes: "More consistent hiring decisions, faster screening cycles, and clearer coaching signals to improve team performance."
-        }
-    },
-    {
-        id: "ai-content-studio",
-        title: "AI Content Generation Studio",
-        description: "Brand-consistent marketing videos and creatives produced faster. Ideal for hospitality, travel, and consumer brands.",
-        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767016674/anowmly_xvqax7.jpg",
-        year: "2025",
-        icon: Video,
-        detail: {
-            whoFor: "Hospitality and travel brands, real estate, e-commerce, automotive, and teams producing ongoing marketing content.",
-            useCases: [
-                "Paid ad creatives and short-form performance content",
-                "In-room hotel TV loop videos with monthly refreshes",
-                "Destination and offer explainers for travel agencies",
-                "Product demos and branded storytelling assets"
-            ],
-            keyFeatures: [
-                "Campaign concepts - scripts - AI-first production - final assets",
-                "Brand-consistent tone, visual style, and messaging",
-                "Rapid iterations for performance creatives",
-                "Production pipeline - plus creative team support"
-            ],
-            integrations: "Asset libraries (Drive or S3), brand guidelines, content calendars, distribution formats for web, social, and in-property screens.",
-            outcomes: "Higher content velocity, reduced turnaround time, and scalable production without scaling headcount."
         }
     },
     {
