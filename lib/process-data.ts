@@ -1,15 +1,5 @@
 import { Brain, Database, Mic, Eye, Code, Layers } from "lucide-react";
-import {
-    SiSupabase, SiPostgresql,
-    SiOpencv, SiPython, SiFastapi, SiNodedotjs,
-    SiTypescript, SiReact, SiNextdotjs, SiFlutter,
-    SiDocker, SiKubernetes, SiTerraform, SiApachekafka, SiGrafana
-} from "react-icons/si";
-import { FaDatabase, FaMicrophone, FaEye, FaVideo, FaWaveSquare, FaFileImage } from "react-icons/fa6";
-import {
-    OpenAI, Anthropic, Gemini, Meta, Mistral, LangChain, LlamaIndex,
-    ElevenLabs, N8n, Aws, Azure, GoogleCloud
-} from "@lobehub/icons";
+import { FaDatabase, FaFileImage } from "react-icons/fa6";
 import { PipecatIcon } from "@/components/icons/PipecatIcon";
 
 export const deliverySteps = [
@@ -50,89 +40,100 @@ export const techStackTabs = [
         id: "ai-core",
         label: "AI Core",
         icon: Brain,
-        description: "Models and frameworks selected for accuracy, latency, and governance.",
+        description: "LLMs, RAG, and Agents — Models and frameworks selected for accuracy, latency, and governance.",
         logos: [
-            { name: "OpenAI", icon: OpenAI },
-            { name: "Anthropic", icon: Anthropic },
-            { name: "Google Gemini", icon: Gemini },
-            { name: "Meta Llama", icon: Meta },
-            { name: "Mistral", icon: Mistral },
-            { name: "LangChain", icon: LangChain },
-            { name: "LlamaIndex", icon: LlamaIndex }
+            { name: "OpenAI", imageSrc: "/openai-2.svg" },
+            { name: "Anthropic", imageSrc: "/anthropic-1.svg" },
+            { name: "Google Gemini", imageSrc: "/gemini-icon-logo.svg" },
+            { name: "Meta Llama", imageSrc: "/meta-color.svg" },
+            { name: "Mistral", imageSrc: "/mistral-ai-icon.svg" },
+            { name: "LangChain", imageSrc: "/Langchain--Streamline-Simple-Icons.svg" },
+            { name: "LlamaIndex", imageSrc: "/llamaindex-color.svg" }
         ]
     },
     {
         id: "retrieval",
         label: "Retrieval",
         icon: Database,
-        description: "Scalable search and knowledge systems using hybrid retrieval and vector indexes.",
+        description: "Retrieval and Vector Stack — Scalable search and knowledge systems using hybrid retrieval and vector indexes.",
         logos: [
-            { name: "Qdrant", icon: FaDatabase },
-            { name: "Pinecone", icon: Database },
-            { name: "Supabase", icon: SiSupabase },
-            { name: "pgvector", icon: SiPostgresql },
-            { name: "OpenAI Embeddings", icon: OpenAI },
-            { name: "SPLADE", icon: FaDatabase }
+            { name: "Qdrant", imageSrc: "/qdrant-new.svg" },
+            { name: "Pinecone", imageSrc: "/pinecone.svg" },
+            { name: "Supabase", imageSrc: "/supabase-icon.svg" },
+            { name: "pgvector", imageSrc: "/postgresql.svg" },
+            { name: "OpenAI Embeddings", imageSrc: "/openai-2.svg" },
+            { name: "SPLADE", imageSrc: "/splade.svg" }
         ]
     },
     {
         id: "voice",
         label: "Voice",
         icon: Mic,
-        description: "Low-latency speech pipelines for voice agents, streaming conversations, and multilingual flows.",
+        description: "Speech, Voice, and Real-Time — Low-latency speech pipelines for voice agents, streaming conversations, and multilingual flows.",
         logos: [
-            { name: "Whisper", icon: OpenAI },
-            { name: "Deepgram", icon: FaWaveSquare },
-            { name: "ElevenLabs", icon: ElevenLabs },
-            { name: "Pipecat", icon: PipecatIcon },
-            { name: "Bolna", icon: FaDatabase },
-            { name: "Voice Cloning", icon: FaMicrophone }
+            { name: "Whisper", imageSrc: "/openai-2.svg" },
+            { name: "Deepgram", imageSrc: "/Deepgram.svg" },
+            { name: "ElevenLabs", imageSrc: "/elevenlabs-ai-icon.svg" },
+            { name: "Pipecat", icon: PipecatIcon }
         ]
     },
     {
         id: "vision",
         label: "Vision",
         icon: Eye,
-        description: "Visual intelligence for extraction, verification, and automation across images, documents, and video.",
+        description: "Vision, OCR, and Multimodal — Visual intelligence for extraction, verification, and automation across images, documents, and video.",
         logos: [
-            { name: "OpenCV", icon: SiOpencv },
-            { name: "YOLO", icon: FaEye },
-            { name: "Detectron2", icon: FaEye },
-            { name: "Tesseract", icon: FaFileImage },
-            { name: "PyVision", icon: SiPython },
-            { name: "Frame Analysis", icon: FaVideo }
+            { name: "OpenCV", imageSrc: "/opencv-svgrepo-com.svg" },
+            { name: "YOLO", imageSrc: "/Ultralytics Icon.svg" },
+            { name: "Detectron2", imageSrc: "/Detectron2-Logo-Horz.svg" },
+            { name: "Tesseract", icon: FaFileImage }
         ]
     },
     {
         id: "product",
         label: "Product",
         icon: Code,
-        description: "Full-stack development for AI products with clean APIs, reliable workflows, and modern UX.",
+        description: "Product Engineering (Web, Mobile, Backend) — Full-stack development for AI products with clean APIs, reliable workflows, and modern UX.",
         logos: [
-            { name: "Python", icon: SiPython },
-            { name: "FastAPI", icon: SiFastapi },
-            { name: "Node.js", icon: SiNodedotjs },
-            { name: "TypeScript", icon: SiTypescript },
-            { name: "React", icon: SiReact },
-            { name: "Next.js", icon: SiNextdotjs },
-            { name: "Flutter", icon: SiFlutter },
-            { name: "n8n", icon: N8n }
+            { name: "Python", imageSrc: "/python-5.svg" },
+            { name: "FastAPI", imageSrc: "/fastapi-1.svg" },
+            { name: "Flask", imageSrc: "/Flask--Streamline-Simple-Icons.svg" },
+            { name: "Node.js", imageSrc: "/Nodejs-Icon--Streamline-Svg-Logos.svg" },
+            { name: "TypeScript", imageSrc: "/typescript.svg" },
+            { name: "n8n", imageSrc: "/n8n-icon.svg" },
+            { name: "Celery", imageSrc: "/celery_512.svg" },
+            { name: "React", imageSrc: "/react-js-icon.svg" },
+            { name: "Next.js", imageSrc: "/nextjs-icon.svg" },
+            { name: "Angular", imageSrc: "/angular-icon-1.svg" },
+            { name: "Vue", imageSrc: "/vue-9.svg" },
+            { name: "Flutter", imageSrc: "/flutter.svg" }
         ]
     },
     {
         id: "infra",
         label: "Infra",
         icon: Layers,
-        description: "Secure deployments, observability, and integration with enterprise systems and business workflows.",
+        description: "Cloud, DevOps, and Enterprise Integrations — Secure deployments, observability, and integration with enterprise systems and business workflows.",
         logos: [
-            { name: "AWS", icon: Aws },
-            { name: "Azure", icon: Azure },
-            { name: "Google Cloud", icon: GoogleCloud },
-            { name: "Docker", icon: SiDocker },
-            { name: "Kubernetes", icon: SiKubernetes },
-            { name: "Terraform", icon: SiTerraform },
-            { name: "Kafka", icon: SiApachekafka },
-            { name: "Grafana", icon: SiGrafana }
+            { name: "AWS", imageSrc: "/aws-2.svg" },
+            { name: "Azure", imageSrc: "/azure-2.svg" },
+            { name: "Google Cloud", imageSrc: "/google-cloud-1.svg" },
+            { name: "Docker", imageSrc: "/docker-4.svg" },
+            { name: "Kubernetes", imageSrc: "/kubernets.svg" },
+            { name: "Terraform", imageSrc: "/terraform-software-icon.svg" },
+            { name: "GitHub Actions", imageSrc: "/GitHub Actions.svg" },
+            { name: "Jenkins", imageSrc: "/jenkins-1.svg" },
+            { name: "Azure DevOps", imageSrc: "/azure-devops-icon.svg" },
+            { name: "Kafka", imageSrc: "/kafka.svg" },
+            { name: "Prometheus", imageSrc: "/prometheus.svg" },
+            { name: "Grafana", imageSrc: "/grafana.svg" },
+            { name: "Postman", imageSrc: "/postman.svg" },
+            { name: "SAP", imageSrc: "/sap-3.svg" },
+            { name: "MuleSoft", imageSrc: "/mulesoft-new.svg" },
+            { name: "Dell Boomi", imageSrc: "/boomi-1.svg" },
+            { name: "HubSpot", imageSrc: "/hubspot-1.svg" },
+            { name: "Shopify", imageSrc: "/shopify.svg" },
+            { name: "Magento", imageSrc: "/magento-icon.svg" }
         ]
     }
 ];

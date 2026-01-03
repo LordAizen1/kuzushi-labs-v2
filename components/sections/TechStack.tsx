@@ -73,11 +73,17 @@ export default function TechStack() {
                                     return (
                                         <div
                                             key={i}
-                                            className="h-24 px-2 flex flex-col items-center justify-center gap-2 bg-white/[0.02] border border-white/5 rounded-lg text-center hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 group/item"
+                                            className="h-24 px-2 flex flex-col items-center justify-center gap-2 bg-white/[0.02] border border-white/5 rounded-lg text-center hover:bg-gradient-to-br hover:from-accent/10 hover:to-transparent hover:border-accent/30 transition-all duration-300 group/item"
                                         >
-                                            {Icon && (
-                                                <Icon className="w-8 h-8 text-white/40 group-hover/item:text-accent transition-colors duration-300" />
-                                            )}
+                                            {logo.imageSrc ? (
+                                                <img
+                                                    src={logo.imageSrc}
+                                                    alt={logo.name}
+                                                    className="w-12 h-10 object-contain"
+                                                />
+                                            ) : Icon ? (
+                                                <Icon className="w-8 h-8 text-white/60" />
+                                            ) : null}
                                             <span className="text-white/60 group-hover/item:text-white transition-colors duration-300 font-geist-mono text-xs font-medium">
                                                 {logo.name}
                                             </span>

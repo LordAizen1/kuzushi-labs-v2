@@ -44,6 +44,7 @@
   --font-geist: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-calligraphy: var(--font-calligraphy);
+  --font-pixel: var(--font-pixel);
   --animate-aurora: aurora 3s ease-in-out infinite alternate;
 
   @keyframes aurora {
@@ -129,6 +130,10 @@ h6 {
   text-transform: uppercase;
   letter-spacing: -0.02em;
   line-height: 0.9;
+}
+
+@utility font-pixel {
+  font-family: var(--font-pixel);
 }
 
 @utility container-fluid {

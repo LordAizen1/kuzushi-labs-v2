@@ -240,7 +240,7 @@ export default function WorksDynamic() {
                 href={`/works/${activeWork.id}`}
                 className="flex items-center gap-2 text-accent text-[12px] uppercase tracking-wider font-bold hover:text-white transition-colors group/link"
               >
-                Case Study
+                More Details
                 <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform group-hover/link:translate-x-1">
                   <path d="M1 5H11M11 5L7 1M11 5L7 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

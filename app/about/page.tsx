@@ -26,7 +26,7 @@ export default function About() {
                         transition={{ duration: 0.8 }}
                         className="text-[clamp(3.5rem,10vw,8rem)] font-bold text-white uppercase leading-[0.8] tracking-tight font-oswald mb-8"
                     >
-                        We Are <AuroraText>Kuzushi</AuroraText>
+                        We Are <AuroraText>Kuzushi Labs</AuroraText>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -34,7 +34,7 @@ export default function About() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="max-w-3xl text-white/70 text-lg md:text-xl font-geist-sans leading-relaxed"
                     >
-                        Here at Kuzushi Labs we engineer AI native solutions. We are committed to <span className="font-calligraphy text-accent text-4xl md:text-5xl mx-1 font-normal">creating</span> innovative and inspiring world-class products. Come <span className="font-calligraphy text-accent text-4xl md:text-5xl mx-1 font-normal">transform</span> your ideas into powerful realities.
+                        Here at Kuzushi Labs we engineer AI native solutions. We are committed to <span className="font-pixel text-accent text-sm md:text-base mx-1">creating</span> innovative and inspiring world-class products. Come <span className="font-pixel text-accent text-sm md:text-base mx-1">transform</span> your ideas into powerful realities.
                     </motion.p>
                 </section>
 

@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import Clock from "@/components/ui/Clock";
-import { Instagram, Twitter, Linkedin, Mail, Play } from "lucide-react";
+import CountUp from "@/components/CountUp";
+import { Instagram, Twitter, Mail, Play } from "lucide-react";
+import { FaLinkedinIn } from "react-icons/fa6";
 import Link from "next/link";
 import AudioToggle from "@/components/ui/AudioToggle";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
@@ -20,7 +22,7 @@ export default function Hero() {
         <section className="relative min-h-[100dvh] flex flex-col pt-24 pb-8 px-6 md:px-12 overflow-x-hidden items-center justify-between">
 
             {/* Animated Background - ColorBends */}
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0 opacity-50">
                 <ColorBends
                     // Toned down colors (darker/less saturated)
                     colors={["#b33e56", "#5a3cba", "#008f75"]}
@@ -87,16 +89,18 @@ export default function Hero() {
                             flex flex-col justify-between
                         ">
                             <div className="absolute inset-0 bg-black opacity-100 z-0">
-                                <iframe
-                                    className="w-full h-full opacity-80 pointer-events-none"
-                                    src="https://player.cloudinary.com/embed/?cloud_name=dgplteq4r&public_id=Gogeta_vs_Broly_8K_720P_nqnaje&profile=cld-looping&controls=false&hide_controls=true&muted=true"
-                                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                                    style={{ border: 0 }}
+                                <video
+                                    className="w-full h-full object-cover opacity-80"
+                                    src="https://res.cloudinary.com/dgplteq4r/video/upload/q_auto:good,f_auto/v1767440972/anowmly_-_Made_with_Clipchamp_uovtvz.mp4"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
                                 />
                             </div>
 
                             <div className="relative z-10 p-3 md:p-4 flex justify-between items-start text-white mix-blend-difference">
-                                <span className="text-[10px] md:text-[14px] xl:text-[10px] uppercase font-bold tracking-wider">Curated<br />Stories</span>
+                                <span className="text-[10px] md:text-[14px] xl:text-[10px] uppercase font-bold tracking-wider">Curated<br />Projects</span>
                             </div>
 
                             <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 xl:bottom-2 xl:right-2 flex items-center gap-1 md:gap-2 xl:gap-1 text-white text-[10px] md:text-[14px] xl:text-[10px] font-bold uppercase z-10 pt-2 pl-2 bg-gradient-to-tr from-black/50 to-transparent">
@@ -144,11 +148,18 @@ export default function Hero() {
 
                         {/* Social Icons Group - Single Row Mobile */}
                         <div className="flex flex-1 gap-2 md:gap-4 xl:gap-2 justify-between xl:justify-start">
-                            {[Instagram, Twitter, Linkedin, Mail].map((Icon, i) => (
-                                <a key={i} href="#" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none">
-                                    <Icon size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
-                                </a>
-                            ))}
+                            <a href="#" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="Instagram (Coming Soon)">
+                                <Instagram size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
+                            </a>
+                            <a href="https://x.com/arunanksharan" target="_blank" rel="noopener noreferrer" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="X (Twitter)">
+                                <Twitter size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
+                            </a>
+                            <a href="https://www.linkedin.com/company/kuzushilabs/" target="_blank" rel="noopener noreferrer" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="LinkedIn">
+                                <FaLinkedinIn size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
+                            </a>
+                            <a href="mailto:arunank@kuzushilabs.xyz" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="Email">
+                                <Mail size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
+                            </a>
                         </div>
 
                         {/* Separator */}
@@ -179,9 +190,13 @@ export default function Hero() {
                         <div className="w-full h-[18vh] min-h-[100px] md:h-[220px] xl:w-[250px] xl:h-[160px]">
                             <Clock timezone="Asia/Kolkata" label="Kolkata, IN" />
                         </div>
-                        {/* Clock 2 */}
-                        <div className="w-full h-[18vh] min-h-[100px] md:h-[220px] xl:w-[250px] xl:h-[160px]">
-                            <Clock timezone="America/New_York" label="New York, USA" />
+                        {/* Project Counter */}
+                        <div className="w-full h-[18vh] min-h-[100px] md:h-[220px] xl:w-[250px] xl:h-[160px] border border-white/10 bg-white/[0.02] backdrop-blur-sm flex flex-col items-center justify-center gap-2">
+                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-white/50 font-geist-mono">Projects</span>
+                            <div className="text-4xl md:text-5xl xl:text-6xl font-bold text-white font-oswald">
+                                <CountUp to={10} duration={2} />
+                            </div>
+                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-accent font-geist-mono">& Counting</span>
                         </div>
                     </div>
                 </motion.div>
