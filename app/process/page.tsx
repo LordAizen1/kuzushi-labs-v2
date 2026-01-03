@@ -29,7 +29,7 @@ export default function ProcessPage() {
                 >
                     Scientific <TextGif
                         text="Delivery"
-                        gifUrl="https://media.giphy.com/media/3zvbrvbRe7wxBofOBI/giphy.gif"
+                        gifUrl="https://media.giphy.com/media/fnglNFjBGiyAFtm6ke/giphy.gif"
                         size="custom"
                         className="text-[clamp(3rem,8vw,6rem)] font-bold font-oswald uppercase !leading-[0.85] tracking-tight pb-0 md:pb-0"
                     />

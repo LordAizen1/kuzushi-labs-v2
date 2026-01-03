@@ -45,8 +45,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                             className="flex justify-start pt-10 md:pt-40 md:gap-10"
                         >
                             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-                                <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:border-accent/30 transition-colors duration-500">
-                                    <div className="h-3 w-3 rounded-full bg-accent border border-white/20 shadow-inner" />
+                                <div className="h-6 w-6 absolute left-5 md:left-5 rounded-sm rotate-45 bg-black border border-white/20 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.1)] z-50">
+                                    <div className="h-2 w-2 rounded-[1px] bg-accent shadow-inner" />
                                 </div>
                                 <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-neutral-500/50">
                                     {item.title}
