@@ -2,13 +2,16 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { DURATION } from "@/lib/constants";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll() {
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.2, // Slightly longer than our animation duration for a floaty feel
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Default easing
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: "vertical",
             gestureOrientation: "vertical",
             smoothWheel: true,
@@ -16,15 +19,20 @@ export default function SmoothScroll() {
             touchMultiplier: 2,
         });
 
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+        // Valid GSAP integration for ScrollTrigger
+        lenis.on("scroll", ScrollTrigger.update);
 
-        requestAnimationFrame(raf);
+        // Use GSAP ticker for performance and sync
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+
+        // Disable lag smoothing to prevent jumps
+        gsap.ticker.lagSmoothing(0);
 
         return () => {
             lenis.destroy();
+            gsap.ticker.remove(lenis.raf);
         };
     }, []);
 

@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@lobehub/icons": "^4.0.2",
     "@lobehub/ui": "^4.4.5",
     "@radix-ui/react-slot": "^1.2.4",

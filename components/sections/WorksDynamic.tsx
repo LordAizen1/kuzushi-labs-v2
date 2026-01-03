@@ -3,166 +3,146 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-import { worksData as WORKS, type WorkProject as WorkItem } from "@/lib/works-data";
-import { Instagram, Twitter, Linkedin, Mail, Minus } from "lucide-react";
+import { worksData as WORKS } from "@/lib/works-data";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import Lenis from "lenis";
+
+// Register outside to ensure it runs once
+gsap.registerPlugin(ScrollTrigger);
 
 export default function WorksDynamic() {
   const [activeIndex, setActiveIndex] = useState(0);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
 
-  // Create 3 sets of works for infinite loop effect
-  // [Set 1: Buffer Top] [Set 2: Main] [Set 3: Buffer Bottom]
-  const extendedWorks = [...WORKS, ...WORKS, ...WORKS];
-
-  // Initialize scroll to the middle set
+  // Hydration check to ensure GSAP runs on client with populated DOM
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    const el = sidebarRef.current;
-    if (!el) return;
-
-    // Wait for layout to be ready
-    const initScroll = () => {
-      // Find the start of the middle set (index = WORKS.length)
-      const middleStartIndex = WORKS.length;
-      const targetItem = el.querySelector(`[data-global-index="${middleStartIndex}"]`) as HTMLElement;
-
-      if (targetItem) {
-        const itemTop = targetItem.offsetTop;
-        const containerHeight = el.clientHeight;
-        const itemHeight = targetItem.offsetHeight;
-
-        // Center the first item of the middle set
-        // Or better: center the item corresponding to activeIndex (0 -> WORKS.length)
-        el.scrollTop = itemTop - (containerHeight / 2) + (itemHeight / 2);
-      }
-    };
-
-    // Small timeout to ensure DOM is rendered
-    setTimeout(initScroll, 50);
+    setMounted(true);
   }, []);
 
-  // Handle Scroll (Infinite Loop + Active Index) with Lenis
-  useEffect(() => {
+  // Buffer: 3 sets for infinite loop
+  const extendedWorks = [...WORKS, ...WORKS, ...WORKS];
+
+  useGSAP(() => {
+    // Only run if mounted and ref exists
+    if (!mounted) return;
     const el = sidebarRef.current;
     if (!el) return;
 
-    // Initialize Lenis on the sidebar container
+
+
+    // 1. Initialize Lenis for Smooth Momentum
     const lenis = new Lenis({
-      wrapper: el, // The scrollable element
-      content: el.firstElementChild as HTMLElement, // The content wrapper
+      wrapper: el,
+      content: el.firstElementChild as HTMLElement,
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth visual ease
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
     });
-
     lenisRef.current = lenis;
 
-    // RAF Loop
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
+    // Sync ScrollTrigger with Lenis
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
 
-    // Scroll End Detection for Magnetic Snap
-    let scrollTimeout: NodeJS.Timeout;
+    // 2. Initial Scroll Position & Infinite Logic
+    const totalHeight = el.scrollHeight;
+    const singleSetHeight = totalHeight / 3;
 
-    const scrollHandler = (e: any) => {
-      if (WORKS.length === 0) return;
+    // Start at middle set
+    lenis.scrollTo(singleSetHeight, { immediate: true });
 
-      const totalHeight = el.scrollHeight;
-      const singleSetHeight = totalHeight / 3;
-      const scrollTop = e.scroll;
-
-      // Infinite Scroll Logic
-      if (scrollTop < singleSetHeight * 0.5) {
-        lenis.scrollTo(scrollTop + singleSetHeight, { immediate: true });
-        return;
-      } else if (scrollTop > singleSetHeight * 2.5) {
-        lenis.scrollTo(scrollTop - singleSetHeight, { immediate: true });
-        return;
+    // Infinite Jump Logic
+    lenis.on('scroll', (e: any) => {
+      const scroll = e.scroll;
+      if (scroll < singleSetHeight * 0.5) {
+        lenis.scrollTo(scroll + singleSetHeight, { immediate: true });
+      } else if (scroll > singleSetHeight * 2.5) {
+        lenis.scrollTo(scroll - singleSetHeight, { immediate: true });
       }
+    });
 
-      // Check for active item
-      const items = el.querySelectorAll('[data-global-index]');
-      if (items.length === 0) return;
+    // 3. Setup ScrollTriggers for Items (Active Detection)
+    const items = gsap.utils.toArray<HTMLElement>('.work-item');
 
-      const viewportHeight = el.clientHeight;
-      const viewportCenter = scrollTop + viewportHeight / 2;
+    items.forEach((item, i) => {
+      ScrollTrigger.create({
+        trigger: item,
+        scroller: el,
+        // center center triggers when item center passes viewport center
+        start: "top 50%",
+        end: "bottom 50%",
 
-      let closestGlobalIndex = 0;
-      let closestDistance = Infinity;
-      let closestItemCenter = 0;
-
-      items.forEach((item) => {
-        const globalIndex = parseInt((item as HTMLElement).dataset.globalIndex || "0");
-        const itemTop = (item as HTMLElement).offsetTop;
-        const itemHeight = (item as HTMLElement).offsetHeight;
-        const itemCenter = itemTop + itemHeight / 2;
-        const distance = Math.abs(viewportCenter - itemCenter);
-
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestGlobalIndex = globalIndex;
-          closestItemCenter = itemCenter;
-        }
+        onEnter: () => setActiveIndex(i % WORKS.length),
+        onEnterBack: () => setActiveIndex(i % WORKS.length),
       });
+    });
 
-      // Update active index
-      const projectIndex = closestGlobalIndex % WORKS.length;
-      setActiveIndex((prev) => (prev !== projectIndex ? projectIndex : prev));
+    // 4. Snapping Logic (GSAP Physics)
+    let snapTimeout: NodeJS.Timeout;
 
-      // Magnetic Snap Logic
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        if (closestDistance > 1) {
-          const targetScroll = closestItemCenter - (viewportHeight / 2);
-          lenis.scrollTo(targetScroll, { duration: 0.1, easing: (t) => 1 - Math.pow(1 - t, 4) });
+    lenis.on('scroll', () => {
+      clearTimeout(snapTimeout);
+      snapTimeout = setTimeout(() => {
+        // Find closest item center relative to viewport center
+        const center = el.clientHeight / 2;
+        const currentScroll = lenis.scroll;
+
+        let closest: number | null = null;
+        let minDiff = Infinity;
+
+        items.forEach((item) => {
+          const itemCenter = item.offsetTop + item.offsetHeight / 2;
+          // Distance from visual center: abs(itemCenter - (scroll + viewportHeight/2))
+          // Wait, itemCenter is absolute in scroll space? Yes.
+          // Viewport Center in Scroll Space = currentScroll + containerHeight/2
+          const diff = Math.abs(itemCenter - (currentScroll + center));
+
+          if (diff < minDiff) {
+            minDiff = diff;
+            closest = itemCenter - center;
+          }
+        });
+
+        if (closest !== null && Math.abs(closest - currentScroll) > 1) {
+          lenis.scrollTo(closest, { duration: 0.6, easing: (t) => 1 - Math.pow(1 - t, 2) });
         }
-      }, 10);
-    };
+      }, 50);
+    });
 
-    lenis.on('scroll', scrollHandler);
+    // Refresh ScrollTrigger after setup to ensure positions are calc'd
+    ScrollTrigger.refresh();
 
     return () => {
       lenis.destroy();
-      cancelAnimationFrame(rafId);
-      clearTimeout(scrollTimeout);
+      gsap.ticker.remove(lenis.raf);
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, []);
+  }, { scope: sidebarRef, dependencies: [mounted] });
 
   const handleThumbnailClick = (originalIndex: number) => {
-    setActiveIndex(originalIndex);
+    if (!lenisRef.current || !sidebarRef.current) return;
 
-    const el = sidebarRef.current;
-    if (!el) return;
-
-    // Always scroll to the item in the Middle Set (Set 2) to ensure continuity
-    // Middle set indices range from [WORKS.length] to [2*WORKS.length - 1]
+    // Find target in Middle Set (Set 2)
     const targetGlobalIndex = WORKS.length + originalIndex;
+    const items = sidebarRef.current.querySelectorAll('.work-item');
+    const targetItem = items[targetGlobalIndex] as HTMLElement;
 
-    const item = el.querySelector(`[data-global-index="${targetGlobalIndex}"]`) as HTMLElement;
-    if (item) {
-      const itemTop = item.offsetTop;
-      const containerHeight = el.clientHeight;
-      const itemHeight = item.offsetHeight;
-      const targetScroll = itemTop - (containerHeight / 2) + (itemHeight / 2);
-
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(targetScroll, { duration: 1.2 });
-      } else {
-        el.scrollTo({
-          top: targetScroll,
-          behavior: "smooth",
-        });
-      }
+    if (targetItem) {
+      const containerHeight = sidebarRef.current.clientHeight;
+      const targetScroll = targetItem.offsetTop - containerHeight / 2 + targetItem.offsetHeight / 2;
+      lenisRef.current.scrollTo(targetScroll, { duration: 1.0 });
     }
   };
 
@@ -175,14 +155,13 @@ export default function WorksDynamic() {
         ref={sidebarRef}
         className="works_dynamic-left dynamic-left fixed left-0 top-0 bottom-0 w-[120px] md:w-[140px] lg:w-[160px] overflow-y-auto overflow-x-hidden scrollbar-hide z-20 pl-4 md:pl-6 pr-4 md:pr-6"
         style={{
-          // Use padding to push content towards center but allow scrolling
           paddingTop: 'calc(50vh - 60px)',
           paddingBottom: 'calc(50vh - 60px)',
           maskImage: 'linear-gradient(to bottom, transparent 0%, black 35%, black 65%, transparent 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 35%, black 65%, transparent 100%)',
         }}
       >
-        <div className="flex flex-col gap-3 md:gap-4">
+        <div className="flex flex-col gap-3 md:gap-4 pb-20">
           {extendedWorks.map((work, i) => {
             const originalIndex = i % WORKS.length;
             const isActive = originalIndex === activeIndex;
@@ -191,9 +170,8 @@ export default function WorksDynamic() {
               <button
                 key={`${work.id}-${i}`}
                 data-global-index={i}
-                data-project-index={originalIndex}
                 onClick={() => handleThumbnailClick(originalIndex)}
-                className={`relative flex items-center justify-center w-full aspect-square transition-all duration-500 ease-out ${isActive
+                className={`work-item relative flex items-center justify-center w-full aspect-square transition-all duration-500 ease-out ${isActive
                   ? "opacity-100 scale-110"
                   : "opacity-30 hover:opacity-60 scale-90"
                   }`}
