@@ -6,10 +6,12 @@ import { useState, useRef, useEffect } from "react";
 import { worksData as WORKS, type WorkProject as WorkItem } from "@/lib/works-data";
 import { Instagram, Twitter, Linkedin, Mail, Minus } from "lucide-react";
 import Link from "next/link";
+import Lenis from "lenis";
 
 export default function WorksDynamic() {
   const [activeIndex, setActiveIndex] = useState(0);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   // Create 3 sets of works for infinite loop effect
   // [Set 1: Buffer Top] [Set 2: Main] [Set 3: Buffer Bottom]
@@ -41,28 +43,51 @@ export default function WorksDynamic() {
     setTimeout(initScroll, 50);
   }, []);
 
-  // Handle Scroll (Infinite Loop + Active Index)
+  // Handle Scroll (Infinite Loop + Active Index) with Lenis
   useEffect(() => {
     const el = sidebarRef.current;
     if (!el) return;
 
-    const scrollHandler = () => {
+    // Initialize Lenis on the sidebar container
+    const lenis = new Lenis({
+      wrapper: el, // The scrollable element
+      content: el.firstElementChild as HTMLElement, // The content wrapper
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth visual ease
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+    });
+
+    lenisRef.current = lenis;
+
+    // RAF Loop
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    // Scroll End Detection for Magnetic Snap
+    let scrollTimeout: NodeJS.Timeout;
+
+    const scrollHandler = (e: any) => {
       if (WORKS.length === 0) return;
 
       const totalHeight = el.scrollHeight;
       const singleSetHeight = totalHeight / 3;
-      const scrollTop = el.scrollTop;
+      const scrollTop = e.scroll;
 
-      // Infinite Scroll Logic: Jump when near edges
-      // If scrolled too far up (into Set 1), jump down to Set 2
+      // Infinite Scroll Logic
       if (scrollTop < singleSetHeight * 0.5) {
-        el.scrollTop += singleSetHeight;
-        return; // Skip rest of handler this frame
-      }
-      // If scrolled too far down (into Set 3), jump up to Set 2
-      else if (scrollTop > singleSetHeight * 2.5) {
-        el.scrollTop -= singleSetHeight;
-        return; // Skip rest of handler this frame
+        lenis.scrollTo(scrollTop + singleSetHeight, { immediate: true });
+        return;
+      } else if (scrollTop > singleSetHeight * 2.5) {
+        lenis.scrollTo(scrollTop - singleSetHeight, { immediate: true });
+        return;
       }
 
       // Check for active item
@@ -74,6 +99,7 @@ export default function WorksDynamic() {
 
       let closestGlobalIndex = 0;
       let closestDistance = Infinity;
+      let closestItemCenter = 0;
 
       items.forEach((item) => {
         const globalIndex = parseInt((item as HTMLElement).dataset.globalIndex || "0");
@@ -85,20 +111,31 @@ export default function WorksDynamic() {
         if (distance < closestDistance) {
           closestDistance = distance;
           closestGlobalIndex = globalIndex;
+          closestItemCenter = itemCenter;
         }
       });
 
-      // Update active index (project index) based on global index
+      // Update active index
       const projectIndex = closestGlobalIndex % WORKS.length;
+      setActiveIndex((prev) => (prev !== projectIndex ? projectIndex : prev));
 
-      setActiveIndex((prev) => {
-        if (prev !== projectIndex) return projectIndex;
-        return prev;
-      });
+      // Magnetic Snap Logic
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (closestDistance > 1) {
+          const targetScroll = closestItemCenter - (viewportHeight / 2);
+          lenis.scrollTo(targetScroll, { duration: 0.1, easing: (t) => 1 - Math.pow(1 - t, 4) });
+        }
+      }, 10);
     };
 
-    el.addEventListener('scroll', scrollHandler, { passive: true });
-    return () => el.removeEventListener('scroll', scrollHandler);
+    lenis.on('scroll', scrollHandler);
+
+    return () => {
+      lenis.destroy();
+      cancelAnimationFrame(rafId);
+      clearTimeout(scrollTimeout);
+    };
   }, []);
 
   const handleThumbnailClick = (originalIndex: number) => {
@@ -116,11 +153,16 @@ export default function WorksDynamic() {
       const itemTop = item.offsetTop;
       const containerHeight = el.clientHeight;
       const itemHeight = item.offsetHeight;
+      const targetScroll = itemTop - (containerHeight / 2) + (itemHeight / 2);
 
-      el.scrollTo({
-        top: itemTop - (containerHeight / 2) + (itemHeight / 2),
-        behavior: "smooth",
-      });
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(targetScroll, { duration: 1.2 });
+      } else {
+        el.scrollTo({
+          top: targetScroll,
+          behavior: "smooth",
+        });
+      }
     }
   };
 
@@ -131,14 +173,13 @@ export default function WorksDynamic() {
       {/* Left Sidebar - Thumbnails (scrollable) */}
       <div
         ref={sidebarRef}
-        data-lenis-prevent
-        className="works_dynamic-left dynamic-left fixed left-0 top-0 bottom-0 w-[120px] md:w-[140px] lg:w-[160px] overflow-y-auto overflow-x-hidden scrollbar-hide z-20 pl-4 md:pl-6 pr-4 md:pr-6 snap-y snap-mandatory"
+        className="works_dynamic-left dynamic-left fixed left-0 top-0 bottom-0 w-[120px] md:w-[140px] lg:w-[160px] overflow-y-auto overflow-x-hidden scrollbar-hide z-20 pl-4 md:pl-6 pr-4 md:pr-6"
         style={{
           // Use padding to push content towards center but allow scrolling
-          paddingTop: '35vh',
-          paddingBottom: '35vh',
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%)',
+          paddingTop: 'calc(50vh - 60px)',
+          paddingBottom: 'calc(50vh - 60px)',
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 35%, black 65%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 35%, black 65%, transparent 100%)',
         }}
       >
         <div className="flex flex-col gap-3 md:gap-4">
@@ -152,7 +193,7 @@ export default function WorksDynamic() {
                 data-global-index={i}
                 data-project-index={originalIndex}
                 onClick={() => handleThumbnailClick(originalIndex)}
-                className={`relative flex items-center justify-center w-full aspect-square transition-all duration-500 ease-out snap-center ${isActive
+                className={`relative flex items-center justify-center w-full aspect-square transition-all duration-500 ease-out ${isActive
                   ? "opacity-100 scale-110"
                   : "opacity-30 hover:opacity-60 scale-90"
                   }`}
