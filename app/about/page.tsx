@@ -19,7 +19,7 @@ export default function About() {
 
             <div className="relative z-10">
                 {/* Simple About Hero */}
-                <section className="pt-32 pb-12 px-6 md:px-12 flex flex-col items-center justify-center text-center">
+                <section className="min-h-[100dvh] flex flex-col items-center justify-center text-center px-6 md:px-12">
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
