@@ -3,7 +3,7 @@
 import FloatingLines from "@/components/FloatingLines";
 import Navbar from "@/components/layout/Navbar";
 import WorksGrid from "@/components/sections/WorksGrid";
-import ProductsGrid from "@/components/sections/ProductsGrid";
+import StackedProducts from "@/components/sections/StackedProducts";
 import { AuroraText } from "@/components/ui/aurora-text";
 import { products, caseStudies } from "@/lib/works-data";
 import { gradientColors } from "@/lib/theme";
@@ -40,7 +40,7 @@ export default function ProductsPage() {
               </p>
             </motion.div>
 
-            <ProductsGrid items={products} basePath="/products" />
+            <StackedProducts items={products} />
           </section>
 
           {/* Separator / Divider */}
