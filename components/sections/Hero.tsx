@@ -121,12 +121,12 @@ export default function Hero() {
                             xl:w-[250px] xl:h-[160px]            /* Desktop */
                         ">
                             <p className="text-[11px] leading-tight md:text-[24px] md:leading-[1.2] xl:text-[15px] xl:leading-snug font-medium text-white tracking-tight line-clamp-4 md:line-clamp-none">
-                                Kuzushi Labs crafts custom websites.
+                                Kuzushi Labs crafts delightful AI products.
                             </p>
 
                             <div className="flex flex-col md:flex-row xl:flex-row items-center gap-1 md:gap-2 xl:gap-2 mt-auto w-full">
-                                <Link href="/works" className="flex-1 w-full">
-                                    <InteractiveHoverButton className="w-full border-white/10 text-white text-[11px] uppercase tracking-widest font-bold whitespace-nowrap px-1 rounded-none">Our Work</InteractiveHoverButton>
+                                <Link href="/products" className="flex-1 w-full">
+                                    <InteractiveHoverButton className="w-full border-white/10 text-white text-[11px] uppercase tracking-widest font-bold whitespace-nowrap px-1 rounded-none">Products</InteractiveHoverButton>
                                 </Link>
                                 <Link href="/contact" className="flex-1 w-full">
                                     <InteractiveHoverButton className="w-full border-white/10 text-white text-[11px] uppercase tracking-widest font-bold whitespace-nowrap px-1 rounded-none">Contact</InteractiveHoverButton>

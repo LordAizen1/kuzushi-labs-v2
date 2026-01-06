@@ -56,7 +56,7 @@ export default function RootLayout({
         <AudioProvider>
           <SmoothScroll />
           <IntroGate>{children}</IntroGate>
-          <WhatsAppButton phoneNumber="1234567890" />
+          <WhatsAppButton phoneNumber="+918105053983" />
         </AudioProvider>
       </body>
     </html>
