@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/layout/Navbar";
 import Solutions from "@/components/sections/Solutions";
-import Testimonials from "@/components/sections/Testimonials";
+
 import FAQ from "@/components/sections/FAQ";
 import GridMotion from "@/components/GridMotion";
 import { AuroraText } from "@/components/ui/aurora-text";
@@ -41,7 +41,7 @@ export default function Services() {
 
                 {/* Migrated Sections */}
                 <Solutions />
-                <Testimonials />
+
                 <FAQ />
             </div>
         </main>
