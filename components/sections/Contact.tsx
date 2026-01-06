@@ -2,12 +2,69 @@
 
 import { motion } from "framer-motion";
 import { colors } from "@/lib/theme";
-import { PiMapPinDuotone, PiArrowRightBold } from "react-icons/pi";
+import { PiMapPinDuotone, PiArrowRightBold, PiCheckCircleDuotone, PiSpinnerGapBold } from "react-icons/pi"; // Added icons
 import { AuroraText } from "@/components/ui/aurora-text";
 import { Highlighter } from "@/components/ui/highlighter";
 import Link from "next/link";
+import { useState } from "react";
+
+// Replace this with your deployed Google Apps Script URL
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJJwTaC_li1EXOSEGlzjMzWtlXuWa9sgdLaylRu0gkwfmnV9DFDg-f_ZQv4cjmPoiSnA/exec";
 
 export default function Contact() {
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError("");
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            message: formData.get("message"),
+        };
+
+        try {
+            // Note: Google Apps Script Web Apps require 'no-cors' needed if not handling OPTIONS correctly, 
+            // but standard JSON POST usually works if the script handles it. 
+            // However, for simple setups, 'no-cors' is often robust but returns opaque response.
+            // We'll try standard fetch. If CORS issues arise, we can switch to no-cors or JSONP.
+            // Actually, best practice for these scripts is to rely on the redirect.
+
+            // Using 'no-cors' implies we can't read the response, but the request goes through.
+            // Checking response is better.
+
+            // Ensure you update the URL constant above!
+            if (GOOGLE_SCRIPT_URL.includes("YOUR_SCRIPT_ID")) {
+                throw new Error("Please configure the Google Script URL in the code.");
+            }
+
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors", // Crucial for calling GAS from client-side without complex CORS setup
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            // With no-cors, we assume success if no network error thrown
+            setIsSuccess(true);
+            (e.target as HTMLFormElement).reset();
+
+        } catch (err) {
+            console.error("Submission Error:", err);
+            setError("Something went wrong. Please try again or email us directly.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center py-12 px-6 md:px-12 z-10">
             {/* Background Gradient similar to Hero but subtle */}
@@ -82,62 +139,107 @@ export default function Contact() {
                     < div className="absolute top-0 right-0 w-20 h-20 bg-accent/10 blur-2xl rounded-full pointer-events-none" />
 
                     <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 lg:mb-10 font-oswald uppercase tracking-tight">Contact Us</h2>
-                    <form className="space-y-6 lg:space-y-8" onSubmit={(e) => e.preventDefault()}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                            <div className="space-y-2 lg:space-y-3 group/input">
-                                <label htmlFor="name" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Name *</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    placeholder="JOHN DOE"
-                                    className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all font-oswald tracking-wide text-base lg:text-lg"
-                                    required
-                                />
-                            </div>
 
-                            <div className="space-y-2 lg:space-y-3 group/input">
-                                <label htmlFor="email" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Email *</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    placeholder="HELLO@EXAMPLE.COM"
-                                    className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all font-oswald tracking-wide text-base lg:text-lg"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="space-y-2 lg:space-y-3 group/input">
-                            <label htmlFor="phone" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Phone</label>
-                            <input
-                                type="tel"
-                                id="phone"
-                                placeholder="+1 234 567 890"
-                                className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all font-oswald tracking-wide text-base lg:text-lg"
-                            />
-                        </div>
-
-                        <div className="space-y-2 lg:space-y-3 group/input">
-                            <label htmlFor="message" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Tell us more about your need</label>
-                            <textarea
-                                id="message"
-                                rows={3}
-                                placeholder="HOW CAN WE HELP YOU?"
-                                className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all resize-none font-oswald tracking-wide text-base lg:text-lg"
-                            ></textarea>
-                            <p className="text-[10px] uppercase tracking-wider text-white/30 mt-2">Note: Your idea is secured under NDA.</p>
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="w-full py-4 lg:py-5 bg-white text-black font-bold uppercase tracking-[0.2em] hover:bg-accent hover:text-white transition-all duration-300 mt-2 text-xs lg:text-sm relative overflow-hidden group/btn"
+                    {isSuccess ? (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="flex flex-col items-center justify-center py-12 text-center"
                         >
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                                Send Message
-                                <PiArrowRightBold size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                            </span>
-                        </button>
-                    </form>
+                            <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center text-accent mb-6">
+                                <PiCheckCircleDuotone size={32} />
+                            </div>
+                            <h3 className="text-2xl font-bold text-white uppercase font-oswald mb-3">Message Received</h3>
+                            <p className="text-white/60 font-geist-sans max-w-xs">
+                                Thanks for reaching out. We've received your inquiry and will get back to you shortly.
+                            </p>
+                            <button
+                                onClick={() => setIsSuccess(false)}
+                                className="mt-8 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors"
+                            >
+                                Send another message
+                            </button>
+                        </motion.div>
+                    ) : (
+                        <form className="space-y-6 lg:space-y-8" onSubmit={handleSubmit}>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                                <div className="space-y-2 lg:space-y-3 group/input">
+                                    <label htmlFor="name" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Name *</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        placeholder="JOHN DOE"
+                                        className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all font-oswald tracking-wide text-base lg:text-lg"
+                                        required
+                                        disabled={isLoading}
+                                    />
+                                </div>
+
+                                <div className="space-y-2 lg:space-y-3 group/input">
+                                    <label htmlFor="email" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Email *</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        placeholder="HELLO@EXAMPLE.COM"
+                                        className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all font-oswald tracking-wide text-base lg:text-lg"
+                                        required
+                                        disabled={isLoading}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2 lg:space-y-3 group/input">
+                                <label htmlFor="phone" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Phone</label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="+1 234 567 890"
+                                    className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all font-oswald tracking-wide text-base lg:text-lg"
+                                    disabled={isLoading}
+                                />
+                            </div>
+
+                            <div className="space-y-2 lg:space-y-3 group/input">
+                                <label htmlFor="message" className="text-xs font-bold text-white/40 uppercase tracking-[0.1em] group-focus-within/input:text-accent transition-colors">Tell us more about your need</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows={3}
+                                    placeholder="HOW CAN WE HELP YOU?"
+                                    className="w-full bg-transparent border-b border-white/10 py-2 lg:py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-all resize-none font-oswald tracking-wide text-base lg:text-lg"
+                                    disabled={isLoading}
+                                ></textarea>
+                                <p className="text-[10px] uppercase tracking-wider text-white/30 mt-2">Note: Your idea is secured under NDA.</p>
+                            </div>
+
+                            {error && (
+                                <p className="text-red-500 text-xs uppercase tracking-wider font-bold">{error}</p>
+                            )}
+
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="w-full py-4 lg:py-5 bg-white text-black font-bold uppercase tracking-[0.2em] hover:bg-accent hover:text-white transition-all duration-300 mt-2 text-xs lg:text-sm relative overflow-hidden group/btn disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <span className="relative z-10 flex items-center justify-center gap-2">
+                                    {isLoading ? (
+                                        <>
+                                            Sending...
+                                            <PiSpinnerGapBold size={16} className="animate-spin" />
+                                        </>
+                                    ) : (
+                                        <>
+                                            Send Message
+                                            <PiArrowRightBold size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                                        </>
+                                    )}
+                                </span>
+                            </button>
+                        </form>
+                    )}
                 </motion.div >
             </div >
         </section >
