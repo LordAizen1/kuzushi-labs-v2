@@ -1,29 +1,48 @@
-import { 
-    Brain, Video, Phone, MessageSquare, HeartPulse, Stethoscope, LucideIcon, 
-    Plane, Activity, Mic, Car, User, TrendingUp, Shield, MessageCircle, GraduationCap, 
-    Hammer, Target, Smartphone, Database, UserCheck
-} from "lucide-react";
+import { IconType } from "react-icons";
+import {
+    PiBrainDuotone, PiVideoCameraDuotone, PiPhoneCallDuotone, PiChatTeardropTextDuotone,
+    PiHeartbeatDuotone, PiStethoscopeDuotone, PiAirplaneTiltDuotone, PiPulseDuotone,
+    PiMicrophoneDuotone, PiCarDuotone, PiUserDuotone, PiTrendUpDuotone, PiShieldCheckDuotone,
+    PiWhatsappLogoDuotone, PiGraduationCapDuotone, PiHammerDuotone, PiTargetDuotone,
+    PiDeviceMobileDuotone, PiDatabaseDuotone, PiUserCheckDuotone, PiBriefcaseDuotone,
+    PiLightningDuotone, PiGlobeDuotone, PiChatCircleDuotone
+} from "react-icons/pi";
 
-export interface WorkProject {
+// --- Types ---
+
+export interface Product {
+    id: string;
+    title: string;
+    description: string; // One-liner
+    image: string;
+    website?: string;
+    icon: IconType;
+    detail: {
+        whoFor: string;
+        useCases: string[];
+        keyFeatures: string[];
+        integrations: string;
+        outcomes: string;
+    };
+}
+
+export interface CaseStudy {
     id: string;
     title: string;
     description: string;
     image: string;
     year: string;
     website?: string;
-    icon: LucideIcon;
+    icon: IconType;
     detail: {
-        whoFor?: string; // Optional/Legacy
         problem: string[];
-        solution: string[]; // Maps to Key Features
-        impact: string[]; // Maps to Outcomes
-        technical: string; // New
-        
-        // Legacy fields for backward compatibility or synthesis
-        useCases?: string[]; 
-        integrations?: string;
+        solution: string[];
+        impact: string[];
+        technical: string;
     };
 }
+
+// --- Images ---
 
 const IMAGES = [
     "https://res.cloudinary.com/dgplteq4r/image/upload/v1767016674/anowmly_xvqax7.jpg",
@@ -36,14 +55,172 @@ const IMAGES = [
 
 const getImage = (index: number) => IMAGES[index % IMAGES.length];
 
-export const worksData: WorkProject[] = [
+
+// --- Products ---
+
+export const products: Product[] = [
+    {
+        id: "sales-agent",
+        title: "Sales Agent - Interviewer and Evaluator",
+        description: "Automated sales interviews and AI scorecards to hire, benchmark, and upskill teams consistently at scale.",
+        image: getImage(0),
+        icon: PiUserCheckDuotone,
+        detail: {
+            whoFor: "Sales leaders, HR and recruiting teams, and training managers running high-volume hiring or ongoing performance programs.",
+            useCases: [
+                "Candidate screening and role-fit interviews",
+                "Partner and channel sales benchmarking",
+                "Ongoing capability assessment (monthly or quarterly)",
+                "Training needs identification through skill-gap mapping"
+            ],
+            keyFeatures: [
+                "Multi-channel interviews (phone and web)",
+                "Role-specific scripts and scenario-based objection handling",
+                "AI evaluation for communication, product understanding, empathy, and objection handling",
+                "Structured summaries and recommendations (hire, train, reject)",
+                "Cohort insights by region, campaign, or partner"
+            ],
+            integrations: "ATS and HRMS, CRM, email and WhatsApp for scheduling and reminders, internal dashboards, custom APIs.",
+            outcomes: "More consistent hiring decisions, faster screening cycles, and clearer coaching signals to improve team performance."
+        }
+    },
+    {
+        id: "ai-content-studio",
+        title: "AI Content Generation Studio",
+        description: "Brand-consistent marketing videos and creatives produced faster. Ideal for hospitality, travel, and consumer brands.",
+        image: getImage(1),
+        icon: PiVideoCameraDuotone,
+        detail: {
+            whoFor: "Hospitality and travel brands, real estate, e-commerce, automotive, and teams producing ongoing marketing content.",
+            useCases: [
+                "Paid ad creatives and short-form performance content",
+                "In-room hotel TV loop videos with monthly refreshes",
+                "Destination and offer explainers for travel agencies",
+                "Product demos and branded storytelling assets"
+            ],
+            keyFeatures: [
+                "Campaign concepts - scripts - AI-first production - final assets",
+                "Brand-consistent tone, visual style, and messaging",
+                "Rapid iterations for performance creatives",
+                "Production pipeline - plus creative team support"
+            ],
+            integrations: "Asset libraries (Drive or S3), brand guidelines, content calendars, distribution formats for web, social, and in-property screens.",
+            outcomes: "Higher content velocity, reduced turnaround time, and scalable production without scaling headcount."
+        }
+    },
+    {
+        id: "zoice-platform",
+        title: "Zoice AI - Voice Telephony Platform",
+        description: "Production-ready AI voice agents for inbound and outbound calls, integrated with your CRM and internal APIs.",
+        image: getImage(2),
+        icon: PiPhoneCallDuotone,
+        detail: {
+            whoFor: "Sales, support, and operations teams that run high-volume calling or appointment workflows.",
+            useCases: [
+                "Lead qualification and callback automation",
+                "Appointment booking, confirmations, and reminders",
+                "Support triage and FAQ resolution",
+                "Collections, renewals, and operational follow-ups"
+            ],
+            keyFeatures: [
+                "Inbound and outbound calling at scale",
+                "Human-like, low-latency conversations",
+                "Multi-turn dialogue flows - with escalation to humans",
+                "Integration-ready event and webhook architecture",
+                "Analytics for call outcomes, drop-offs, and QA"
+            ],
+            integrations: "SIP and Twilio (as applicable), CRM (HubSpot, Salesforce, or custom), ticketing tools, calendars, internal APIs, WhatsApp, SMS, and email notifications.",
+            outcomes: "Lower handling time, faster speed-to-lead, consistent customer experience, and improved conversion without added headcount."
+        }
+    },
+    {
+        id: "whatsapp-assistant",
+        title: "WhatsApp Brand Assistant - RAG Chatbot",
+        description: "A dedicated WhatsApp assistant grounded in your website, documents, and FAQs that answers accurately and drives actions.",
+        image: getImage(3),
+        icon: PiWhatsappLogoDuotone,
+        detail: {
+            whoFor: "Consumer brands and service businesses that want a WhatsApp-first customer assistant for discovery, support, and lead conversion.",
+            useCases: [
+                "Product discovery and recommendations",
+                "FAQs, policies, pricing, and availability queries",
+                "Order support - tracking, returns, and issue intake",
+                "Lead capture and qualification"
+            ],
+            keyFeatures: [
+                "Ingests website, FAQs, and documents into a grounded knowledge system",
+                "Brand-voice responses - with controlled accuracy",
+                "Optional structured data support - SKU, price, stock",
+                "Dedicated WhatsApp number - brand-owned deployment",
+                "Admin dashboard - content updates and monitoring"
+            ],
+            integrations: "Catalog and inventory systems, Shopify, Magento, custom databases, CRM, ticketing tools, payment or booking flows where applicable.",
+            outcomes: "Faster customer responses, higher lead capture, reduced support load, and improved conversion from WhatsApp conversations."
+        }
+    },
+    {
+        id: "healthcare-prm-product",
+        title: "Healthcare - Patient Relationship Manager (PRM)",
+        description: "Voice and WhatsApp automation for appointments, reminders, follow-ups, and patient support.",
+        image: getImage(4),
+        icon: PiHeartbeatDuotone,
+        detail: {
+            whoFor: "Clinics and hospitals seeking to reduce no-shows and admin overhead while improving patient engagement.",
+            useCases: [
+                "Appointment booking and rescheduling",
+                "Reminders for visits, medication, and follow-ups",
+                "Basic inbound support - timings, location, preparation instructions",
+                "Post-visit check-ins and careplan nudges"
+            ],
+            keyFeatures: [
+                "Voice and WhatsApp as primary patient channels",
+                "Structured intake and history collection",
+                "Integration with clinic scheduling and patient systems",
+                "Automated reminders and follow-up workflows",
+                "Escalation paths to staff when needed"
+            ],
+            integrations: "Clinic systems where available, calendars, WhatsApp, SMS, email, internal operations dashboards.",
+            outcomes: "Lower no-show rates, faster scheduling, reduced staff workload, and more consistent patient communication."
+        }
+    },
+    {
+        id: "clinical-tools",
+        title: "Clinical Tools - Cardiology and Beyond",
+        description: "Clinical workflow tools for structured capture, scoring support, and AI-assisted documentation, built to extend across specialties.",
+        image: getImage(5),
+        icon: PiStethoscopeDuotone,
+        detail: {
+            whoFor: "Clinical teams that need lightweight decision-support and workflow tools to reduce documentation burden.",
+            useCases: [
+                "Structured clinical data capture during consults",
+                "Scoring aids and guideline-based prompts",
+                "AI-assisted documentation and follow-up summaries",
+                "Extensible modules for additional specialties"
+            ],
+            keyFeatures: [
+                "Modular tool design - specialty-by-specialty expansion",
+                "Structured prompts and scoring workflows",
+                "Assistive documentation support",
+                "Governance-friendly implementation - access controls and auditability as needed"
+            ],
+            integrations: "Clinical systems where feasible, internal clinical dashboards, secure storage and access-control layers.",
+            outcomes: "Reduced admin load, improved consistency in clinical workflows, and faster, more structured documentation."
+        }
+    }
+];
+
+
+// --- Case Studies ---
+// (Previously `worksData`)
+
+export const caseStudies: CaseStudy[] = [
     {
         id: "prm-healthcare",
         title: "Healthcare - Agentic Patient Relationship Management (PRM)",
         description: "AI receptionist and workflow agents that cut scheduling time and reduce no-shows for clinics.",
         image: getImage(0),
         year: "2025",
-        icon: HeartPulse,
+        icon: PiHeartbeatDuotone,
         detail: {
             problem: [
                 "20 to 30 percent capacity lost due to busy lines and no-shows",
@@ -70,7 +247,7 @@ export const worksData: WorkProject[] = [
         description: "One-chat itinerary planning across flights, hotels, and packages that improves conversion.",
         image: getImage(1),
         year: "2025",
-        icon: Plane,
+        icon: PiAirplaneTiltDuotone,
         detail: {
             problem: [
                 "Fragmented booking journeys across multiple systems",
@@ -95,7 +272,7 @@ export const worksData: WorkProject[] = [
         description: "Agents convert live telemetry feeds into dashboards and commentary-ready insights.",
         image: getImage(2),
         year: "2025",
-        icon: Activity,
+        icon: PiPulseDuotone,
         detail: {
             problem: [
                 "Broadcast teams spend hours cleaning feeds and building dashboards",
@@ -118,7 +295,7 @@ export const worksData: WorkProject[] = [
         description: "Production voice agents for inbound and outbound calling with real-time orchestration and analytics.",
         image: getImage(3),
         year: "2024",
-        icon: Phone,
+        icon: PiPhoneCallDuotone,
         detail: {
             problem: [
                 "Businesses need scalable phone support without human headcount growth",
@@ -142,7 +319,7 @@ export const worksData: WorkProject[] = [
         description: "Multilingual transcription, diarization, and structured summaries from field conversations.",
         image: getImage(4),
         year: "2025",
-        icon: Mic,
+        icon: PiMicrophoneDuotone,
         detail: {
             problem: [
                 "Field teams record conversations but need structured outputs",
@@ -167,7 +344,7 @@ export const worksData: WorkProject[] = [
         description: "Telephony AI that books test drives, sends reminders, and escalates to humans when needed.",
         image: getImage(5),
         year: "2025",
-        icon: Car,
+        icon: PiCarDuotone,
         detail: {
             problem: [
                 "Slow callbacks reduce lead conversion",
@@ -194,7 +371,7 @@ export const worksData: WorkProject[] = [
         description: "Scalable text-to-video and image-to-video pipeline optimized for realism and reproducibility.",
         image: getImage(0),
         year: "2025",
-        icon: Video,
+        icon: PiVideoCameraDuotone,
         detail: {
             problem: [
                 "Existing pipelines struggle with realism and temporal consistency",
@@ -217,7 +394,7 @@ export const worksData: WorkProject[] = [
         description: "Personalized anime-style avatars that increase engagement and in-app purchases.",
         image: getImage(1),
         year: "2025",
-        icon: User,
+        icon: PiUserDuotone,
         detail: {
             problem: [
                 "Telecom app needs higher engagement in anime-heavy markets",
@@ -241,7 +418,7 @@ export const worksData: WorkProject[] = [
         description: "Lip-synced, gesture-aware tutor avatars that improve learner engagement.",
         image: getImage(2),
         year: "2025",
-        icon: User,
+        icon: PiUserDuotone,
         detail: {
             problem: [
                 "Passive video content reduces engagement",
@@ -265,7 +442,7 @@ export const worksData: WorkProject[] = [
         description: "Enterprise search over 1M+ filings to reduce analyst research time from hours to minutes.",
         image: getImage(3),
         year: "2025",
-        icon: TrendingUp,
+        icon: PiTrendUpDuotone,
         detail: {
             problem: [
                 "Manual reading and summarization slows research",
@@ -289,7 +466,7 @@ export const worksData: WorkProject[] = [
         description: "Hybrid RAG + Text-to-SQL assistant with permissions for 1,500+ enterprise users.",
         image: getImage(4),
         year: "2025",
-        icon: Shield,
+        icon: PiShieldCheckDuotone,
         detail: {
             problem: [
                 "Seven departments working in silos",
@@ -315,7 +492,7 @@ export const worksData: WorkProject[] = [
         description: "Multilingual, multimodal training assistant on WhatsApp with feedback loops and analytics.",
         image: getImage(5),
         year: "2025",
-        icon: MessageCircle,
+        icon: PiWhatsappLogoDuotone,
         detail: {
             problem: [
                 "Training materials are static and hard to access in the field",
@@ -340,7 +517,7 @@ export const worksData: WorkProject[] = [
         description: "Real-time tutoring with citations and adaptive pedagogy, delivered via WebRTC.",
         image: getImage(0),
         year: "2025",
-        icon: GraduationCap,
+        icon: PiGraduationCapDuotone,
         detail: {
             problem: [
                 "Limited 1:1 attention and after-hours support",
@@ -366,7 +543,7 @@ export const worksData: WorkProject[] = [
         description: "Satellite-driven construction detection with POI mapping for faster rural verification.",
         image: getImage(1),
         year: "2025",
-        icon: Hammer,
+        icon: PiHammerDuotone,
         detail: {
             problem: [
                 "Manual satellite analysis is too slow for scale",
@@ -390,7 +567,7 @@ export const worksData: WorkProject[] = [
         description: "Regulatory-safe prediction product that increased DAU and session duration in a telecom super app.",
         image: getImage(2),
         year: "2024",
-        icon: Target,
+        icon: PiTargetDuotone,
         detail: {
             problem: [
                 "Need higher retention and engagement",
@@ -417,7 +594,7 @@ export const worksData: WorkProject[] = [
         description: "Two mobile apps operationalizing ONEST flows for verified hiring at scale.",
         image: getImage(3),
         year: "2025",
-        icon: Smartphone,
+        icon: PiDeviceMobileDuotone,
         detail: {
             problem: [
                 "Candidates in tier-2/3 towns face language and literacy barriers",
@@ -444,7 +621,7 @@ export const worksData: WorkProject[] = [
         description: "Multilingual chatbot with handoff, guardrails, and journey analytics for 100+ intents.",
         image: getImage(4),
         year: "2025",
-        icon: MessageSquare,
+        icon: PiChatCircleDuotone,
         detail: {
             problem: [
                 "Need scalable support across text and voice",
@@ -469,7 +646,7 @@ export const worksData: WorkProject[] = [
         description: "Automation toolkit converting legacy ETL to DBT templates with audit and validation.",
         image: getImage(5),
         year: "2025",
-        icon: Database,
+        icon: PiDatabaseDuotone,
         detail: {
             problem: [
                 "Legacy ETL is hard to maintain and slow to migrate",
@@ -493,7 +670,7 @@ export const worksData: WorkProject[] = [
         description: "Privacy-first assistant using Gmail, Calendar, and Canvas to deliver proactive nudges and actions.",
         image: getImage(0),
         year: "2025",
-        icon: UserCheck,
+        icon: PiUserCheckDuotone,
         detail: {
             problem: [
                 "Missed deadlines and follow-ups due to scattered context",
@@ -513,3 +690,6 @@ export const worksData: WorkProject[] = [
         }
     }
 ];
+
+// Re-export for compatibility if needed, though we prefer distinct
+export const worksData = caseStudies; // Transitional

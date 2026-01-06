@@ -1,16 +1,18 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FADE_IN_VARIANTS } from "@/lib/constants";
+import { Product, CaseStudy } from "@/lib/works-data";
 
-import { worksData as WORKS } from "@/lib/works-data";
+interface WorksGridProps {
+  items: (Product | CaseStudy)[];
+  basePath?: string;
+}
 
-export default function WorksGrid() {
+export default function WorksGrid({ items, basePath = "/products" }: WorksGridProps) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-12 md:gap-y-16">
-      {WORKS.map((work, index) => (
+      {items.map((work, index) => (
         <motion.article
           key={work.id}
           className="relative group w-full max-w-[240px] md:max-w-[320px] mx-auto"
@@ -19,7 +21,7 @@ export default function WorksGrid() {
           variants={FADE_IN_VARIANTS}
           transition={{ delay: 0.05 * index }}
         >
-          <Link href={`/works/${work.id}`} className="block cursor-pointer">
+          <Link href={`${basePath}/${work.id}`} className="block cursor-pointer">
             <div className="relative aspect-square overflow-hidden border border-white/10 bg-black/40">
               <Image
                 src={work.image}
@@ -30,10 +32,17 @@ export default function WorksGrid() {
 
               {/* subtle grain overlay */}
               <div className="absolute inset-0 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 mix-blend-soft-light" />
+
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+                <p className="text-white/90 text-xs md:text-sm text-center font-geist-sans line-clamp-3">
+                  {work.description}
+                </p>
+              </div>
+
             </div>
 
             <div className="mt-3 flex items-center justify-between text-xs text-white/70">
-              <span className="font-medium uppercase tracking-[0.18em]">
+              <span className="font-medium uppercase tracking-[0.18em] line-clamp-1">
                 {work.title}
               </span>
             </div>
@@ -43,3 +52,4 @@ export default function WorksGrid() {
     </div>
   );
 }
+

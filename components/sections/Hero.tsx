@@ -3,8 +3,7 @@
 import { motion } from "framer-motion";
 import Clock from "@/components/ui/Clock";
 import CountUp from "@/components/CountUp";
-import { Instagram, Twitter, Mail, Play } from "lucide-react";
-import { FaLinkedinIn } from "react-icons/fa6";
+import { PiInstagramLogoDuotone, PiXLogoDuotone, PiEnvelopeSimpleDuotone, PiPlayDuotone, PiLinkedinLogoDuotone } from "react-icons/pi";
 import Link from "next/link";
 import AudioToggle from "@/components/ui/AudioToggle";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
@@ -104,7 +103,7 @@ export default function Hero() {
                             </div>
 
                             <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 xl:bottom-2 xl:right-2 flex items-center gap-1 md:gap-2 xl:gap-1 text-white text-[10px] md:text-[14px] xl:text-[10px] font-bold uppercase z-10 pt-2 pl-2 bg-gradient-to-tr from-black/50 to-transparent">
-                                Play <Play size={10} className="md:w-4 md:h-4 xl:w-[10px] xl:h-[10px]" fill="currentColor" />
+                                Play <PiPlayDuotone size={10} className="md:w-4 md:h-4 xl:w-[10px] xl:h-[10px]" fill="currentColor" />
                             </div>
                         </div>
                     </motion.div>
@@ -149,16 +148,16 @@ export default function Hero() {
                         {/* Social Icons Group - Single Row Mobile */}
                         <div className="flex flex-1 gap-2 md:gap-4 xl:gap-2 justify-between xl:justify-start">
                             <a href="#" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="Instagram (Coming Soon)">
-                                <Instagram size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
+                                <PiInstagramLogoDuotone size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
                             </a>
                             <a href="https://x.com/arunanksharan" target="_blank" rel="noopener noreferrer" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="X (Twitter)">
-                                <Twitter size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
+                                <PiXLogoDuotone size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
                             </a>
                             <a href="https://www.linkedin.com/company/kuzushilabs/" target="_blank" rel="noopener noreferrer" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="LinkedIn">
-                                <FaLinkedinIn size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
+                                <PiLinkedinLogoDuotone size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
                             </a>
                             <a href="mailto:arunank@kuzushilabs.xyz" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="Email">
-                                <Mail size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
+                                <PiEnvelopeSimpleDuotone size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
                             </a>
                         </div>
 

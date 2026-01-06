@@ -2,54 +2,54 @@
 
 import { motion } from "framer-motion";
 import { colors } from "@/lib/theme";
-import { Brain, Database, Mic, Bot, Scan, Video, Smartphone, Network, Cloud } from "lucide-react";
+import { PiBrainDuotone, PiDatabaseDuotone, PiMicrophoneDuotone, PiRobotDuotone, PiScanDuotone, PiVideoCameraDuotone, PiDeviceMobileDuotone, PiShareNetworkDuotone, PiCloudDuotone } from "react-icons/pi";
 import { MagicCard } from "@/components/ui/magic-card";
 
 const solutions = [
     {
         title: "Generative AI and LLM Consulting",
         description: "Design, evaluate, and improve LLM systems with strong prompt engineering, model fine-tuning, guardrails, and observability. Built for reliability, cost control, and measurable performance.",
-        icon: Brain
+        icon: PiBrainDuotone
     },
     {
         title: "RAG and Enterprise Knowledge Systems",
         description: "Build large-scale retrieval systems that ingest and index millions of documents for search, summarization, and insights. Secure, governed, and designed for real enterprise usage.",
-        icon: Database
+        icon: PiDatabaseDuotone
     },
     {
         title: "Voice AI and Conversational Agents",
         description: "Deploy voice and chat assistants that handle real customer workflows end-to-end. From speech pipelines to multi-turn dialogs, integrations, and human handoff, built for low latency and production stability.",
-        icon: Mic
+        icon: PiMicrophoneDuotone
     },
     {
         title: "AI Automation and Multi-Agent Workflows",
         description: "Automate complex business processes using intelligent agents and orchestration. We design workflows that connect tools, enforce rules, and execute actions across teams and systems.",
-        icon: Bot
+        icon: PiRobotDuotone
     },
     {
         title: "Computer Vision and OCR",
         description: "Extract structured intelligence from images, scans, videos, and satellite imagery. Use cases include document automation, visual verification, analytics, and real-time vision-driven workflows.",
-        icon: Scan
+        icon: PiScanDuotone
     },
     {
         title: "Generative Video and Multimodal Pipelines",
         description: "Build end-to-end text-to-video and image-to-video pipelines for ads, avatars, explainers, and narrative content. Designed for scalability, reproducibility, and production delivery.",
-        icon: Video
+        icon: PiVideoCameraDuotone
     },
     {
         title: "Custom AI Product Engineering",
         description: "End-to-end product development for AI-powered web and mobile applications. We combine UX/UI, backend engineering, and AI systems into cohesive products that ship.",
-        icon: Smartphone
+        icon: PiDeviceMobileDuotone
     },
     {
         title: "Enterprise Integrations",
         description: "Integrate AI solutions with enterprise systems like SAP, MuleSoft, Dell Boomi, HubSpot, and e-commerce platforms. We focus on clean data flows, reliability, and operational fit.",
-        icon: Network
+        icon: PiShareNetworkDuotone
     },
     {
         title: "Cloud, DevOps, and Data Governance",
         description: "Production infrastructure for AI at scale, including Kubernetes, CI/CD, monitoring, secure ETL, and governance. Built to meet enterprise security, compliance, and reliability expectations.",
-        icon: Cloud
+        icon: PiCloudDuotone
     }
 ];
 

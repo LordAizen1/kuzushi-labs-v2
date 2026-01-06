@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Plus } from "lucide-react";
+import { PiPlusBold } from "react-icons/pi";
 import { useState } from "react";
 import { colors } from "@/lib/theme";
 import { Highlighter } from "@/components/ui/highlighter";
@@ -61,7 +61,7 @@ export default function FAQ() {
                                 className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors"
                             >
                                 <span className="text-lg md:text-xl font-medium text-white font-geist-sans">{faq.q}</span>
-                                <Plus
+                                <PiPlusBold
                                     className={`text-accent shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-45" : ""}`}
                                 />
                             </button>

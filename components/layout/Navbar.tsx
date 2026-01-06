@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SMOOTH_EASE, DURATION } from "@/lib/constants";
-import { ArrowLeft, Menu, X } from "lucide-react";
+import { PiArrowLeftBold, PiListBold, PiXBold } from "react-icons/pi";
 import { colors } from "@/lib/theme";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { cn } from "@/lib/utils";
@@ -75,7 +75,7 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
                             onClick={() => router.back()}
                             className="group flex items-center gap-2 text-white/70 hover:text-white transition-colors text-[11px] uppercase tracking-widest font-bold"
                         >
-                            <ArrowLeft size={16} className="w-5 h-5" />
+                            <PiArrowLeftBold size={16} className="w-5 h-5" />
                             <span className="hidden md:inline">Back</span>
                         </button>
                     ) : (
@@ -93,13 +93,13 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
                         onClick={() => setIsOpen(!isOpen)}
                         className="md:hidden relative z-50 p-2 text-white hover:text-accent transition-colors"
                     >
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isOpen ? <PiXBold size={24} /> : <PiListBold size={24} />}
                     </button>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-2">
                         <NavLink href="/about" label="About" />
-                        <NavLink href="/works" label="Works" />
+                        <NavLink href="/products" label="Products" />
                         <NavLink href="/process" label="Process" />
                         <NavLink href="/services" label="Services" />
 
@@ -177,7 +177,7 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
                     >
                         <div className="flex flex-col gap-6 items-center">
                             <NavLink href="/about" label="About" onClick={() => setIsOpen(false)} className="w-64 h-12 text-lg" />
-                            <NavLink href="/works" label="Works" onClick={() => setIsOpen(false)} className="w-64 h-12 text-lg" />
+                            <NavLink href="/products" label="Products" onClick={() => setIsOpen(false)} className="w-64 h-12 text-lg" />
                             <NavLink href="/process" label="Process" onClick={() => setIsOpen(false)} className="w-64 h-12 text-lg" />
                             <NavLink href="/services" label="Services" onClick={() => setIsOpen(false)} className="w-64 h-12 text-lg" />
                             <Link

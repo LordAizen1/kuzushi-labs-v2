@@ -1,7 +1,7 @@
 "use client";
 
 import { Marquee } from "@/components/ui/marquee";
-import { Quote } from "lucide-react";
+import { PiQuotesFill } from "react-icons/pi";
 import { cn } from "@/lib/utils";
 
 const testimonials = [
@@ -46,7 +46,7 @@ const ReviewCard = ({
             "relative w-80 cursor-pointer overflow-hidden rounded-xl border border-white/10 p-8",
             "bg-[#0a0a0a] hover:bg-white/5 transition-colors duration-300",
         )}>
-            <Quote size={32} className="text-accent/20 mb-4" />
+            <PiQuotesFill size={32} className="text-accent/20 mb-4" />
             <p className="text-white/80 font-geist-sans text-sm md:text-base mb-6 leading-relaxed">
                 "{quote}"
             </p>

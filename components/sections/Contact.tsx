@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { colors } from "@/lib/theme";
-import { MapPin, ArrowRight } from "lucide-react";
+import { PiMapPinDuotone, PiArrowRightBold } from "react-icons/pi";
 import { AuroraText } from "@/components/ui/aurora-text";
 import { Highlighter } from "@/components/ui/highlighter";
 import Link from "next/link";
@@ -40,14 +40,14 @@ export default function Contact() {
                                     className="text-lg md:text-2xl lg:text-3xl text-white hover:text-accent transition-colors flex items-center gap-4 group font-oswald font-medium"
                                 >
                                     akshat@kuzushilabs.xyz
-                                    <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-accent" />
+                                    <PiArrowRightBold className="w-5 h-5 lg:w-6 lg:h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-accent" />
                                 </Link>
                                 <Link
                                     href="mailto:arunank@kuzushilabs.xyz"
                                     className="text-lg md:text-2xl lg:text-3xl text-white hover:text-accent transition-colors flex items-center gap-4 group font-oswald font-medium"
                                 >
                                     arunank@kuzushilabs.xyz
-                                    <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-accent" />
+                                    <PiArrowRightBold className="w-5 h-5 lg:w-6 lg:h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-accent" />
                                 </Link>
                             </div>
                         </div>
@@ -57,7 +57,7 @@ export default function Contact() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div>
                                     <div className="flex items-center gap-2 mb-2 text-accent">
-                                        <MapPin size={18} />
+                                        <PiMapPinDuotone size={18} />
                                         <h3 className="text-white font-bold text-lg uppercase font-oswald tracking-wide">Bengaluru</h3>
                                     </div>
                                     <p className="text-white/50 leading-relaxed font-geist-mono text-xs uppercase tracking-wider">
@@ -134,7 +134,7 @@ export default function Contact() {
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 Send Message
-                                <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                                <PiArrowRightBold size={16} className="group-hover/btn:translate-x-1 transition-transform" />
                             </span>
                         </button>
                     </form>

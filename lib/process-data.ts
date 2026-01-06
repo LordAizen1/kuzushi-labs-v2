@@ -1,5 +1,4 @@
-import { Brain, Database, Mic, Eye, Code, Layers } from "lucide-react";
-import { FaDatabase, FaFileImage } from "react-icons/fa6";
+import { PiBrainDuotone, PiDatabaseDuotone, PiMicrophoneDuotone, PiEyeDuotone, PiCodeDuotone, PiStackDuotone, PiFileImageDuotone } from "react-icons/pi";
 import { PipecatIcon } from "@/components/icons/PipecatIcon";
 
 export const deliverySteps = [
@@ -39,7 +38,7 @@ export const techStackTabs = [
     {
         id: "ai-core",
         label: "AI Core",
-        icon: Brain,
+        icon: PiBrainDuotone,
         description: "LLMs, RAG, and Agents — Models and frameworks selected for accuracy, latency, and governance.",
         logos: [
             { name: "OpenAI", imageSrc: "/openai-2.svg" },
@@ -54,7 +53,7 @@ export const techStackTabs = [
     {
         id: "retrieval",
         label: "Retrieval",
-        icon: Database,
+        icon: PiDatabaseDuotone,
         description: "Retrieval and Vector Stack — Scalable search and knowledge systems using hybrid retrieval and vector indexes.",
         logos: [
             { name: "Qdrant", imageSrc: "/qdrant-new.svg" },
@@ -68,7 +67,7 @@ export const techStackTabs = [
     {
         id: "voice",
         label: "Voice",
-        icon: Mic,
+        icon: PiMicrophoneDuotone,
         description: "Speech, Voice, and Real-Time — Low-latency speech pipelines for voice agents, streaming conversations, and multilingual flows.",
         logos: [
             { name: "Whisper", imageSrc: "/openai-2.svg" },
@@ -80,19 +79,19 @@ export const techStackTabs = [
     {
         id: "vision",
         label: "Vision",
-        icon: Eye,
+        icon: PiEyeDuotone,
         description: "Vision, OCR, and Multimodal — Visual intelligence for extraction, verification, and automation across images, documents, and video.",
         logos: [
             { name: "OpenCV", imageSrc: "/opencv-svgrepo-com.svg" },
             { name: "YOLO", imageSrc: "/Ultralytics Icon.svg" },
             { name: "Detectron2", imageSrc: "/Detectron2-Logo-Horz.svg" },
-            { name: "Tesseract", icon: FaFileImage }
+            { name: "Tesseract", icon: PiFileImageDuotone }
         ]
     },
     {
         id: "product",
         label: "Product",
-        icon: Code,
+        icon: PiCodeDuotone,
         description: "Product Engineering (Web, Mobile, Backend) — Full-stack development for AI products with clean APIs, reliable workflows, and modern UX.",
         logos: [
             { name: "Python", imageSrc: "/python-5.svg" },
@@ -112,7 +111,7 @@ export const techStackTabs = [
     {
         id: "infra",
         label: "Infra",
-        icon: Layers,
+        icon: PiStackDuotone,
         description: "Cloud, DevOps, and Enterprise Integrations — Secure deployments, observability, and integration with enterprise systems and business workflows.",
         logos: [
             { name: "AWS", imageSrc: "/aws-2.svg" },
