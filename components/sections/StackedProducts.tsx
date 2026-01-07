@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { Product } from "@/lib/works-data";
 import { PiArrowUpRightBold } from "react-icons/pi";
 import { cn } from "@/lib/utils";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 interface StackedProductsProps {
     items: Product[];
@@ -68,7 +69,7 @@ const Card = ({
                     {/* Image Section - 40% on mobile, 50% on desktop */}
                     <div className="w-full md:w-1/2 h-[40%] md:h-full relative overflow-hidden border-b md:border-b-0 md:border-r border-white/5">
                         <Image
-                            src={item.image}
+                            src={getCloudinaryUrl(item.image, 1200)}
                             alt={item.title}
                             fill
                             className="object-cover transition-transform duration-700 hover:scale-105"

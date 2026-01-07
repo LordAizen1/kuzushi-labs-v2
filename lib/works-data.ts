@@ -44,16 +44,7 @@ export interface CaseStudy {
 
 // --- Images ---
 
-const IMAGES = [
-    "https://res.cloudinary.com/dgplteq4r/image/upload/v1767016674/anowmly_xvqax7.jpg",
-    "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235195/youcef0823_real_retro_UGC_happy_couple_in_snow_--v_7_e5b3b797-e41b-44d9-941b-f756ac88ec9f_bvm90l.png",
-    "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239829/u9938599753_make_me_a_realistic_crowd_image_--sref_httpss.mj.ru_c8f15258-4354-40d8-a7f7-8d834c2ace81_ijy1g1.png",
-    "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Soar_In_Style_Designs_a_painting_of_a_woman_posing_with_a_vinta_26334b90-9dd4-4bb5-a82a-9fd140e11b9d_ldgzxs.png",
-    "https://res.cloudinary.com/dgplteq4r/image/upload/v1766235193/Luisa_M_vintage_engraved_postage_stamp_illustration_intaglio_st_77d7024c-d242-4508-a0ca-e8c695c86b6e_b4m7li.png",
-    "https://res.cloudinary.com/dgplteq4r/image/upload/v1766239827/u1792966772_heraldic_engraving_style_logo_a_running_alpaca_with_d489ba0a-bd19-4f35-886a-4b9123fa1693_tkfuf2.png"
-];
 
-const getImage = (index: number) => IMAGES[index % IMAGES.length];
 
 
 // --- Products ---
@@ -63,7 +54,7 @@ export const products: Product[] = [
         id: "sales-agent",
         title: "Sales Agent - Interviewer and Evaluator",
         description: "Automated sales interviews and AI scorecards to hire, benchmark, and upskill teams consistently at scale.",
-        image: getImage(0),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767770594/salesagent_gwdqgo.jpg",
         icon: PiUserCheckDuotone,
         detail: {
             whoFor: "Sales leaders, HR and recruiting teams, and training managers running high-volume hiring or ongoing performance programs.",
@@ -88,7 +79,7 @@ export const products: Product[] = [
         id: "ai-content-studio",
         title: "AI Content Generation Studio",
         description: "Brand-consistent marketing videos and creatives produced faster. Ideal for hospitality, travel, and consumer brands.",
-        image: getImage(1),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767016674/anowmly_xvqax7.jpg",
         icon: PiVideoCameraDuotone,
         detail: {
             whoFor: "Hospitality and travel brands, real estate, e-commerce, automotive, and teams producing ongoing marketing content.",
@@ -112,7 +103,7 @@ export const products: Product[] = [
         id: "zoice-platform",
         title: "Zoice AI - Voice Telephony Platform",
         description: "Production-ready AI voice agents for inbound and outbound calls, integrated with your CRM and internal APIs.",
-        image: getImage(2),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767770595/zoice_r3vr6u.jpg",
         icon: PiPhoneCallDuotone,
         detail: {
             whoFor: "Sales, support, and operations teams that run high-volume calling or appointment workflows.",
@@ -137,7 +128,7 @@ export const products: Product[] = [
         id: "whatsapp-assistant",
         title: "WhatsApp Brand Assistant - RAG Chatbot",
         description: "A dedicated WhatsApp assistant grounded in your website, documents, and FAQs that answers accurately and drives actions.",
-        image: getImage(3),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767770594/whatsappbot_uuf3ct.jpg",
         icon: PiWhatsappLogoDuotone,
         detail: {
             whoFor: "Consumer brands and service businesses that want a WhatsApp-first customer assistant for discovery, support, and lead conversion.",
@@ -162,7 +153,7 @@ export const products: Product[] = [
         id: "healthcare-prm-product",
         title: "Healthcare - Patient Relationship Manager (PRM)",
         description: "Voice and WhatsApp automation for appointments, reminders, follow-ups, and patient support.",
-        image: getImage(4),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767770594/prm_odzjvp.jpg",
         icon: PiHeartbeatDuotone,
         detail: {
             whoFor: "Clinics and hospitals seeking to reduce no-shows and admin overhead while improving patient engagement.",
@@ -187,7 +178,7 @@ export const products: Product[] = [
         id: "clinical-tools",
         title: "Clinical Tools - Cardiology and Beyond",
         description: "Clinical workflow tools for structured capture, scoring support, and AI-assisted documentation, built to extend across specialties.",
-        image: getImage(5),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767771206/clinicaltools_ju1v4d.jpg",
         icon: PiStethoscopeDuotone,
         detail: {
             whoFor: "Clinical teams that need lightweight decision-support and workflow tools to reduce documentation burden.",
@@ -218,7 +209,7 @@ export const caseStudies: CaseStudy[] = [
         id: "prm-healthcare",
         title: "Healthcare - Agentic Patient Relationship Management (PRM)",
         description: "AI receptionist and workflow agents that cut scheduling time and reduce no-shows for clinics.",
-        image: getImage(0),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767770594/prm_odzjvp.jpg",
         year: "2025",
         icon: PiHeartbeatDuotone,
         detail: {
@@ -245,7 +236,7 @@ export const caseStudies: CaseStudy[] = [
         id: "travel-itinerary",
         title: "Travel - Multi-Object Itinerary Builder",
         description: "One-chat itinerary planning across flights, hotels, and packages that improves conversion.",
-        image: getImage(1),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767775382/travel_lgoubd.jpg",
         year: "2025",
         icon: PiAirplaneTiltDuotone,
         detail: {
@@ -270,7 +261,7 @@ export const caseStudies: CaseStudy[] = [
         id: "sports-analytics",
         title: "Sports Analytics - Real-Time Insights Engine",
         description: "Agents convert live telemetry feeds into dashboards and commentary-ready insights.",
-        image: getImage(2),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767774496/sportsanalytics_zfjvg3.jpg",
         year: "2025",
         icon: PiPulseDuotone,
         detail: {
@@ -293,7 +284,7 @@ export const caseStudies: CaseStudy[] = [
         id: "zoice-ai",
         title: "Zoice - Voice AI Platform",
         description: "Production voice agents for inbound and outbound calling with real-time orchestration and analytics.",
-        image: getImage(3),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767770595/zoice_r3vr6u.jpg",
         year: "2024",
         icon: PiPhoneCallDuotone,
         detail: {
@@ -317,7 +308,7 @@ export const caseStudies: CaseStudy[] = [
         id: "field-audio",
         title: "Field Audio - Personal Discussion Bot",
         description: "Multilingual transcription, diarization, and structured summaries from field conversations.",
-        image: getImage(4),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767774496/fieldaudio_rb1tox.jpg",
         year: "2025",
         icon: PiMicrophoneDuotone,
         detail: {
@@ -342,7 +333,7 @@ export const caseStudies: CaseStudy[] = [
         id: "auto-dealership",
         title: "Auto Dealership - Test Drive Scheduling AI (Demo)",
         description: "Telephony AI that books test drives, sends reminders, and escalates to humans when needed.",
-        image: getImage(5),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767770595/zoice_r3vr6u.jpg",
         year: "2025",
         icon: PiCarDuotone,
         detail: {
@@ -369,7 +360,7 @@ export const caseStudies: CaseStudy[] = [
         id: "xgen",
         title: "XGen - Video Generation Platform",
         description: "Scalable text-to-video and image-to-video pipeline optimized for realism and reproducibility.",
-        image: getImage(0),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767016674/anowmly_xvqax7.jpg",
         year: "2025",
         icon: PiVideoCameraDuotone,
         detail: {
@@ -392,7 +383,7 @@ export const caseStudies: CaseStudy[] = [
         id: "interactive-avatars-sg",
         title: "Interactive Avatars - Telecom Engagement (Singapore)",
         description: "Personalized anime-style avatars that increase engagement and in-app purchases.",
-        image: getImage(1),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767775381/interactiveavatarstelecom_ugbjvs.jpg",
         year: "2025",
         icon: PiUserDuotone,
         detail: {
@@ -416,7 +407,7 @@ export const caseStudies: CaseStudy[] = [
         id: "interactive-avatars-learning",
         title: "Interactive Avatars - Learning Experience",
         description: "Lip-synced, gesture-aware tutor avatars that improve learner engagement.",
-        image: getImage(2),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767775738/interactiveavatarslearning_vgh0j9.jpg",
         year: "2025",
         icon: PiUserDuotone,
         detail: {
@@ -440,7 +431,7 @@ export const caseStudies: CaseStudy[] = [
         id: "equity-research",
         title: "Equity Research - RAG Chatbot (US)",
         description: "Enterprise search over 1M+ filings to reduce analyst research time from hours to minutes.",
-        image: getImage(3),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767774497/equityresearch_ofd8er.jpg",
         year: "2025",
         icon: PiTrendUpDuotone,
         detail: {
@@ -464,7 +455,7 @@ export const caseStudies: CaseStudy[] = [
         id: "governed-knowledge",
         title: "Governed Knowledge Assistant - Azure Teams (Dubai)",
         description: "Hybrid RAG + Text-to-SQL assistant with permissions for 1,500+ enterprise users.",
-        image: getImage(4),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767774497/governedknowledgeassistant_d1obe2.jpg",
         year: "2025",
         icon: PiShieldCheckDuotone,
         detail: {
@@ -490,7 +481,7 @@ export const caseStudies: CaseStudy[] = [
         id: "whatsapp-training",
         title: "WhatsApp Training Bot - NBFC/Home Finance",
         description: "Multilingual, multimodal training assistant on WhatsApp with feedback loops and analytics.",
-        image: getImage(5),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767770594/whatsappbot_uuf3ct.jpg",
         year: "2025",
         icon: PiWhatsappLogoDuotone,
         detail: {
@@ -515,7 +506,7 @@ export const caseStudies: CaseStudy[] = [
         id: "ai-tutor",
         title: "AI Tutor - K-12 and Higher Ed (PoC)",
         description: "Real-time tutoring with citations and adaptive pedagogy, delivered via WebRTC.",
-        image: getImage(0),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767775381/personalai_yyzldd.jpg",
         year: "2025",
         icon: PiGraduationCapDuotone,
         detail: {
@@ -541,7 +532,7 @@ export const caseStudies: CaseStudy[] = [
         id: "construction-site",
         title: "Construction Site Detection - Satellite + Vision LLMs",
         description: "Satellite-driven construction detection with POI mapping for faster rural verification.",
-        image: getImage(1),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767774496/constructionsitedetection_gathpq.jpg",
         year: "2025",
         icon: PiHammerDuotone,
         detail: {
@@ -565,7 +556,7 @@ export const caseStudies: CaseStudy[] = [
         id: "bullseye",
         title: "Bullseye - Token-Based Prediction Marketplace",
         description: "Regulatory-safe prediction product that increased DAU and session duration in a telecom super app.",
-        image: getImage(2),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767774497/bullseye_bz5bmc.jpg",
         year: "2024",
         icon: PiTargetDuotone,
         detail: {
@@ -592,7 +583,7 @@ export const caseStudies: CaseStudy[] = [
         id: "onest-mobile",
         title: "ONEST Mobile Apps - Candidate and Employer",
         description: "Two mobile apps operationalizing ONEST flows for verified hiring at scale.",
-        image: getImage(3),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767775381/onestmobileapps_mwtpkm.jpg",
         year: "2025",
         icon: PiDeviceMobileDuotone,
         detail: {
@@ -619,7 +610,7 @@ export const caseStudies: CaseStudy[] = [
         id: "genai-chatbot",
         title: "GenAI Omnichannel Chatbot - Telecom",
         description: "Multilingual chatbot with handoff, guardrails, and journey analytics for 100+ intents.",
-        image: getImage(4),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767770594/whatsappbot_uuf3ct.jpg",
         year: "2025",
         icon: PiChatCircleDuotone,
         detail: {
@@ -644,7 +635,7 @@ export const caseStudies: CaseStudy[] = [
         id: "genai-migration",
         title: "GenAI Migration Toolkit - DataStage/Teradata to DBT",
         description: "Automation toolkit converting legacy ETL to DBT templates with audit and validation.",
-        image: getImage(5),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767774496/genai_cqs0hh.jpg",
         year: "2025",
         icon: PiDatabaseDuotone,
         detail: {
@@ -668,7 +659,7 @@ export const caseStudies: CaseStudy[] = [
         id: "personal-ai",
         title: "Personal AI - Students and Professionals",
         description: "Privacy-first assistant using Gmail, Calendar, and Canvas to deliver proactive nudges and actions.",
-        image: getImage(0),
+        image: "https://res.cloudinary.com/dgplteq4r/image/upload/v1767775381/personalai_yyzldd.jpg",
         year: "2025",
         icon: PiUserCheckDuotone,
         detail: {

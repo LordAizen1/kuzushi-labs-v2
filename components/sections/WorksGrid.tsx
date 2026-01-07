@@ -3,6 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FADE_IN_VARIANTS } from "@/lib/constants";
 import { Product, CaseStudy } from "@/lib/works-data";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 interface WorksGridProps {
   items: (Product | CaseStudy)[];
@@ -24,7 +25,7 @@ export default function WorksGrid({ items, basePath = "/products" }: WorksGridPr
           <Link href={`${basePath}/${work.id}`} className="block cursor-pointer">
             <div className="relative aspect-square overflow-hidden border border-white/10 bg-black/40">
               <Image
-                src={work.image}
+                src={getCloudinaryUrl(work.image, 800)}
                 alt={work.title}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -52,4 +53,3 @@ export default function WorksGrid({ items, basePath = "/products" }: WorksGridPr
     </div>
   );
 }
-
