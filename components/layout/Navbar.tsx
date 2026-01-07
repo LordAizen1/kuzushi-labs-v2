@@ -73,7 +73,7 @@ export default function Navbar({ showBackButton = false }: NavbarProps) {
                     {showBackButton ? (
                         <button
                             onClick={() => router.back()}
-                            className="group flex items-center gap-2 text-white/70 hover:text-white transition-colors text-[11px] uppercase tracking-widest font-bold"
+                            className="group flex items-center gap-2 text-white/80 hover:text-white transition-colors text-[11px] uppercase tracking-widest font-bold"
                         >
                             <PiArrowLeftBold size={16} className="w-5 h-5" />
                             <span className="hidden md:inline">Back</span>

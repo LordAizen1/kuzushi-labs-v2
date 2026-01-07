@@ -5,7 +5,6 @@ import Clock from "@/components/ui/Clock";
 import CountUp from "@/components/CountUp";
 import { PiInstagramLogoDuotone, PiXLogoDuotone, PiEnvelopeSimpleDuotone, PiPlayDuotone, PiLinkedinLogoDuotone } from "react-icons/pi";
 import Link from "next/link";
-import AudioToggle from "@/components/ui/AudioToggle";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import ColorBends from "@/components/ColorBends";
 import { useEffect } from "react";
@@ -147,30 +146,18 @@ export default function Hero() {
 
                         {/* Social Icons Group - Single Row Mobile */}
                         <div className="flex flex-1 gap-2 md:gap-4 xl:gap-2 justify-between xl:justify-start">
-                            <a href="#" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="Instagram (Coming Soon)">
+                            <a href="#" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/80 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="Instagram (Coming Soon)">
                                 <PiInstagramLogoDuotone size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
                             </a>
-                            <a href="https://x.com/arunanksharan" target="_blank" rel="noopener noreferrer" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="X (Twitter)">
+                            <a href="https://x.com/arunanksharan" target="_blank" rel="noopener noreferrer" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/80 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="X (Twitter)">
                                 <PiXLogoDuotone size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
                             </a>
-                            <a href="https://www.linkedin.com/company/kuzushilabs/" target="_blank" rel="noopener noreferrer" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="LinkedIn">
+                            <a href="https://www.linkedin.com/company/kuzushilabs/" target="_blank" rel="noopener noreferrer" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/80 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="LinkedIn">
                                 <PiLinkedinLogoDuotone size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
                             </a>
-                            <a href="mailto:arunank@kuzushilabs.xyz" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/60 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="Email">
+                            <a href="mailto:arunank@kuzushilabs.xyz" className="flex-1 xl:flex-none w-12 h-12 md:w-20 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white/80 hover:text-black hover:bg-accent hover:border-accent transition-colors rounded-sm xl:rounded-none" title="Email">
                                 <PiEnvelopeSimpleDuotone size={14} className="md:w-5 md:h-5 xl:w-4 xl:h-4" />
                             </a>
-                        </div>
-
-                        {/* Separator */}
-                        <div className="hidden xl:flex items-center">
-                            <div className="w-px h-6 bg-white/20"></div>
-                        </div>
-
-                        {/* Toggle */}
-                        <div className="flex w-auto md:w-auto xl:w-auto">
-                            <div className="w-12 md:w-20 h-12 md:h-20 xl:w-12 xl:h-12 flex items-center justify-center border border-white/10 bg-transparent text-white hover:border-white/40 hover:bg-white/5 transition-colors rounded-sm xl:rounded-none">
-                                <AudioToggle />
-                            </div>
                         </div>
 
                     </div>
@@ -191,9 +178,9 @@ export default function Hero() {
                         </div>
                         {/* Project Counter */}
                         <div className="w-full h-[18vh] min-h-[100px] md:h-[220px] xl:w-[250px] xl:h-[160px] border border-white/10 bg-white/[0.02] backdrop-blur-sm flex flex-col items-center justify-center gap-2">
-                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-white/50 font-geist-mono">Projects</span>
+                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-white/80 font-geist-mono">Projects</span>
                             <div className="text-4xl md:text-5xl xl:text-6xl font-bold text-white font-oswald">
-                                <CountUp to={10} duration={2} />
+                                <CountUp to={40} duration={2} />
                             </div>
                             <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-accent font-geist-mono">& Counting</span>
                         </div>

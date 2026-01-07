@@ -172,8 +172,8 @@ export default function WorksDynamic() {
                 data-global-index={i}
                 onClick={() => handleThumbnailClick(originalIndex)}
                 className={`work-item relative flex items-center justify-center w-full aspect-square transition-all duration-500 ease-out ${isActive
-                  ? "opacity-100 scale-110"
-                  : "opacity-30 hover:opacity-60 scale-90"
+                  ? "opacity-100"
+                  : "opacity-30 hover:opacity-60"
                   }`}
               >
                 {/* Thumbnail */}
@@ -215,7 +215,7 @@ export default function WorksDynamic() {
             {activeWork.title}
           </h2>
           {activeWork.year && (
-            <span className="text-[12px] text-white/50 tracking-wider">
+            <span className="text-[12px] text-white/80 tracking-wider">
               {activeWork.year}
             </span>
           )}
@@ -238,7 +238,7 @@ export default function WorksDynamic() {
               src={activeWork.image}
               alt={activeWork.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              className="object-cover transition-transform duration-700"
             />
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/20 to-transparent" />
           </div>
@@ -246,7 +246,7 @@ export default function WorksDynamic() {
           {/* Bottom Details Row */}
           <div className="flex items-end justify-between w-full mt-4">
             {/* Pagination */}
-            <p className="text-[12px] text-white/50 tracking-widest font-mono">
+            <p className="text-[12px] text-white/80 tracking-widest font-mono">
               {String(activeIndex + 1).padStart(2, "0")}/{String(WORKS.length).padStart(2, "0")}
             </p>
 

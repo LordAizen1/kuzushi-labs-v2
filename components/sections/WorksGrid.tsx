@@ -28,7 +28,7 @@ export default function WorksGrid({ items, basePath = "/products" }: WorksGridPr
                 src={getCloudinaryUrl(work.image, 800)}
                 alt={work.title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="object-cover transition-transform duration-500"
               />
 
               {/* subtle grain overlay */}

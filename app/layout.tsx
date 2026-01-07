@@ -42,6 +42,7 @@ export const metadata: Metadata = {
 };
 
 import { AudioProvider } from "@/components/providers/AudioContext";
+import AudioToggle from "@/components/ui/AudioToggle";
 
 export default function RootLayout({
   children,
@@ -57,6 +58,13 @@ export default function RootLayout({
           <SmoothScroll />
           <IntroGate>{children}</IntroGate>
           <WhatsAppButton phoneNumber="+918105053983" />
+
+          {/* Global Audio Toggle */}
+          <div className="fixed bottom-6 left-6 z-50 w-12 h-12 flex items-center justify-center bg-black/20 backdrop-blur-md border border-white/10 rounded-full text-white hover:bg-black/40 transition-all">
+            <div className="w-8 h-8">
+              <AudioToggle />
+            </div>
+          </div>
         </AudioProvider>
       </body>
     </html>

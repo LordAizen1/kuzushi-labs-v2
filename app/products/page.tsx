@@ -1,6 +1,6 @@
 "use client";
 
-import FloatingLines from "@/components/FloatingLines";
+import { GridScan } from "@/components/GridScan";
 import Navbar from "@/components/layout/Navbar";
 import WorksGrid from "@/components/sections/WorksGrid";
 import StackedProducts from "@/components/sections/StackedProducts";
@@ -12,10 +12,19 @@ import { motion } from "framer-motion";
 export default function ProductsPage() {
   return (
     <main className="relative bg-background min-h-[100dvh]">
-      {/* FloatingLines background */}
+      {/* GridScan background */}
       <div className="fixed inset-0 z-0 h-full w-full pointer-events-none">
-        <FloatingLines
-          linesGradient={[...gradientColors]}
+        <GridScan
+          sensitivity={0.55}
+          lineThickness={1}
+          linesColor="#392e4e"
+          gridScale={0.1}
+          scanColor="#FF9FFC"
+          scanOpacity={0.4}
+          enablePost
+          bloomIntensity={0.6}
+          chromaticAberration={0.002}
+          noiseIntensity={0.01}
         />
       </div>
 
