@@ -50,6 +50,16 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
         }
     }, [phase]);
 
+    // --- PHASE 3: AUTO-ENTER (3s Timeout) ---
+    useEffect(() => {
+        if (phase === "waiting") {
+            const timer = setTimeout(() => {
+                handleInteraction(false); // Enter without sound
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [phase]);
+
     const handleInteraction = (shouldPlay: boolean = false) => {
         if (shouldPlay) play();
         setPhase("undo");
