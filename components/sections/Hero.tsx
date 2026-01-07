@@ -53,7 +53,7 @@ export default function Hero() {
                         transition={{ duration: DURATION, ease: SMOOTH_EASE, delay: 0.3 }}
                         className="text-white/80 text-center max-w-xl mt-6 text-sm md:text-lg font-medium leading-relaxed font-geist-sans px-4 tracking-wide"
                     >
-                        Kuzushi Labs is an AI-native product studio building production-grade AI systems for enterprises, startups, and government agencies. We design, ship, and scale end-to-end AI products - fast, secure, and measurable.
+                        We design, ship, and scale end-to-end AI products - fast, secure, and measurable.
                     </motion.p>
                 </div>
             </div>
